@@ -9,12 +9,12 @@ export const metadata: Metadata = {
 
 const BLOCOS = [
   {
-    t: "Direito de arrependimento",
-    d: "Você tem até 7 dias corridos após o recebimento para desistir da compra, conforme o Código de Defesa do Consumidor — sem precisar justificar.",
+    t: "Prazo de devolução",
+    d: "Você tem até 30 dias corridos após o recebimento para solicitar a troca ou a devolução — sem precisar justificar.",
   },
   {
     t: "Trocas por defeito",
-    d: "Se algum item chegar com defeito de impressão ou avaria no transporte, cuidamos de tudo: reenviamos uma nova peça sem custo, em até 30 dias do recebimento.",
+    d: "Se algum item chegar com defeito de impressão ou avaria no transporte, cuidamos de tudo: reenviamos uma nova peça sem custo, dentro dos 30 dias do recebimento.",
   },
   {
     t: "Condições",
@@ -22,7 +22,7 @@ const BLOCOS = [
   },
   {
     t: "Como solicitar",
-    d: "Escreva para nós em oi@niwa.com com o número do pedido e uma foto do item. Respondemos em até 2 dias úteis com o passo a passo e a etiqueta de devolução.",
+    d: "Escreva para nós em hello@niwa.com com o número do pedido e uma foto do item. Respondemos em até 2 dias úteis com o passo a passo e a etiqueta de devolução.",
   },
 ];
 

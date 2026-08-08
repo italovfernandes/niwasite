@@ -2,10 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function CuideSe() {
-  const videoRef = useRef<HTMLVideoElement>(null);
   const [useVideo, setUseVideo] = useState(true);
 
   // reduced motion / data saver → static poster
@@ -16,54 +15,6 @@ export default function CuideSe() {
     if (reduce || conn?.saveData) setUseVideo(false);
   }, []);
 
-  // ping-pong: play forward to the end, then rewind to the start, repeat
-  useEffect(() => {
-    if (!useVideo) return;
-    const v = videoRef.current;
-    if (!v) return;
-
-    let raf = 0;
-    let dir: 1 | -1 = 1;
-    let last = performance.now();
-    const EPS = 0.05;
-
-    const goForward = () => {
-      dir = 1;
-      v.play().catch(() => {});
-    };
-
-    const tick = (now: number) => {
-      const dt = Math.min(0.05, (now - last) / 1000);
-      last = now;
-      if (v.duration) {
-        if (dir === 1) {
-          if (v.currentTime >= v.duration - EPS) {
-            dir = -1;
-            v.pause();
-          }
-        } else {
-          const t = v.currentTime - dt;
-          if (t <= 0) {
-            v.currentTime = 0;
-            goForward();
-          } else {
-            v.currentTime = t;
-          }
-        }
-      }
-      raf = requestAnimationFrame(tick);
-    };
-
-    if (v.readyState >= 2) goForward();
-    else v.addEventListener("loadeddata", goForward, { once: true });
-    raf = requestAnimationFrame(tick);
-
-    return () => {
-      cancelAnimationFrame(raf);
-      v.removeEventListener("loadeddata", goForward);
-    };
-  }, [useVideo]);
-
   return (
     <section
       data-nav-dark
@@ -72,9 +23,9 @@ export default function CuideSe() {
       {useVideo ? (
         // eslint-disable-next-line jsx-a11y/media-has-caption
         <video
-          ref={videoRef}
-          src="/cuide-se/cuide.mp4"
-          poster="/cuide-se/poster.jpg"
+          src="/cuide-se/cuide-2.mp4"
+          poster="/cuide-se/cuide-2.jpg"
+          autoPlay
           muted
           playsInline
           preload="auto"
@@ -82,7 +33,7 @@ export default function CuideSe() {
         />
       ) : (
         <Image
-          src="/cuide-se/poster.jpg"
+          src="/cuide-se/cuide-2.jpg"
           alt="Mulher em um campo florido diante de um espelho"
           fill
           sizes="100vw"

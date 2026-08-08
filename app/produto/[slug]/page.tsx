@@ -12,8 +12,8 @@ import {
   SEASONS,
   collectionById,
   formatBRL,
-  paletteFor,
   productBySlug,
+  seasonById,
 } from "@/lib/catalog";
 
 export function generateStaticParams() {
@@ -38,9 +38,13 @@ export default async function ProductPage(props: PageProps<"/produto/[slug]">) {
   if (product.landing === "cartelas") return <CartelasLanding />;
 
   const collection = collectionById(product.collection);
-  const palette = paletteFor(product);
-  // se o produto é uma cartela sazonal, mostra as miniaturas da estação
-  const season = SEASONS.find((s) => product.slug === `cartela-${s.id}`);
+  // cartela individual → mostra as 3 cartelas da sua estação (irmãs)
+  const season = product.season ? seasonById(product.season) : undefined;
+  // combo com todas as cartelas → mostra todas as cartelas das 4 estações
+  const isComboCartelas =
+    product.slug === "combo-cartelas-guia" ||
+    product.slug === "cartela-sazonal-12-subtons";
+  const allCartelas = SEASONS.flatMap((s) => s.cartelas);
   const related = PRODUCTS.filter(
     (p) => p.collection === product.collection && p.slug !== product.slug
   ).slice(0, 4);
@@ -100,46 +104,68 @@ export default async function ProductPage(props: PageProps<"/produto/[slug]">) {
               {product.excerpt}
             </p>
 
-            {/* cartelas da estação (miniaturas) — ou swatches para outros produtos */}
+            {/* cartelas — só quando o produto é sobre cartelas (estação ou combo) */}
             {season ? (
               <div className="mt-6">
                 <p className="text-[0.56rem] uppercase tracking-[0.24em] text-ink-mute">
-                  Cartelas da estação
+                  As 3 cartelas de {season.name}
                 </p>
-                <div className="mt-2.5 flex gap-2">
-                  {season.cartelas.map((c) => (
-                    <div
-                      key={c.src}
-                      className="relative aspect-square w-16 overflow-hidden rounded-md ring-1 ring-line"
+                <div className="mt-2.5 flex flex-wrap gap-2">
+                  {season.cartelas.map((c) => {
+                    const current = c.slug === product.slug;
+                    return (
+                      <Link
+                        key={c.slug}
+                        href={`/produto/${c.slug}`}
+                        title={c.name}
+                        aria-current={current ? "page" : undefined}
+                        className={`relative aspect-square w-16 overflow-hidden rounded-md ring-1 transition-[transform,box-shadow] hover:-translate-y-0.5 ${
+                          current ? "ring-2 ring-marsala" : "ring-line hover:ring-ink"
+                        }`}
+                      >
+                        <Image
+                          src={c.src}
+                          alt={c.name}
+                          fill
+                          sizes="64px"
+                          className="object-cover"
+                        />
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            ) : isComboCartelas ? (
+              <div className="mt-6">
+                <p className="text-[0.56rem] uppercase tracking-[0.24em] text-ink-mute">
+                  As cartelas incluídas
+                </p>
+                <div className="mt-2.5 flex flex-wrap gap-2">
+                  {allCartelas.map((c) => (
+                    <Link
+                      key={c.slug}
+                      href={`/produto/${c.slug}`}
+                      title={c.name}
+                      className="relative aspect-square w-14 overflow-hidden rounded-md ring-1 ring-line transition-[transform,box-shadow] hover:-translate-y-0.5 hover:ring-ink"
                     >
                       <Image
                         src={c.src}
                         alt={c.name}
                         fill
-                        sizes="64px"
+                        sizes="56px"
                         className="object-cover"
                       />
-                    </div>
+                    </Link>
                   ))}
                 </div>
               </div>
-            ) : (
-              <div className="mt-6 flex gap-1.5">
-                {palette.map((c, i) => (
-                  <span
-                    key={i}
-                    className="h-6 w-6 rounded-full ring-1 ring-line"
-                    style={{ background: c }}
-                  />
-                ))}
-              </div>
-            )}
+            ) : null}
 
             {/* CTA */}
             <div className="mt-8">
               <AddToCartButton product={product} className="w-full" />
               <p className="mt-3 text-[0.58rem] uppercase tracking-[0.18em] text-ink-mute">
-                Frete cortesia acima de R$ 600
+                Frete calculado na finalização
               </p>
             </div>
 

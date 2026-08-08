@@ -1,14 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import Reveal from "@/components/Reveal";
+import { useEffect, useRef } from "react";
 
 /**
- * "Os 4 pilares da rotina" — texto em cima + faixa horizontal de cartões
- * (landscape) que desliza para o lado conforme se rola verticalmente.
- * Desktop: seção sticky + translateX imperativo (rAF + getBoundingClientRect —
- * o padrão confiável nesta stack). Mobile: carrossel de swipe nativo.
+ * "Os 4 pilares da rotina" — texto em cima + faixa horizontal de cartões que
+ * desliza para o lado conforme se rola verticalmente (scroll-linked, em TODOS os
+ * tamanhos). Seção sticky + translateX imperativo (rAF + getBoundingClientRect).
  */
 const MODOS = [
   { name: "Day Out", img: "/modos/day-out.jpg" },
@@ -46,11 +44,11 @@ function Card({ m, i }: { m: (typeof MODOS)[number]; i: number }) {
 function Intro() {
   return (
     <>
-      <p className="u-eyebrow !text-[#C295D9]/70">Os 4 pilares da rotina</p>
+      <p className="u-eyebrow !text-[#C295D9]/70">Momentos do seu dia</p>
       <h2 className="u-display mt-4 text-5xl leading-[1.05] md:text-6xl">
-        Não existem mais desculpas,
+        Combinações de cores
         <br />
-        apenas <em className="font-light italic u-accent">possibilidades.</em>
+        muito <em className="font-light italic u-accent">além do comum.</em>
       </h2>
     </>
   );
@@ -60,20 +58,9 @@ export default function ModosRotina() {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const rowRef = useRef<HTMLDivElement>(null);
-  const [desktop, setDesktop] = useState(false);
 
-  // detecta viewport (evita scroll-jack no touch — ver CLAUDE.md §7)
+  // scroll vertical → translateX da fita (rAF + getBoundingClientRect)
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)");
-    const apply = () => setDesktop(mq.matches);
-    apply();
-    mq.addEventListener("change", apply);
-    return () => mq.removeEventListener("change", apply);
-  }, []);
-
-  // scroll vertical → translateX da fita (só no desktop)
-  useEffect(() => {
-    if (!desktop) return;
     const section = sectionRef.current;
     const track = trackRef.current;
     const row = rowRef.current;
@@ -100,60 +87,36 @@ export default function ModosRotina() {
       window.removeEventListener("resize", onScroll);
       if (raf) cancelAnimationFrame(raf);
     };
-  }, [desktop]);
+  }, []);
 
-  // ===== DESKTOP — texto em cima, fita horizontal embaixo (sticky) =====
-  if (desktop) {
-    return (
-      <section
-        ref={sectionRef}
-        data-nav-dark
-        className="relative bg-plum text-paper"
-        style={{ height: `${100 + MODOS.length * 58}vh` }}
-      >
-        <div className="sticky top-0 flex h-screen flex-col overflow-hidden border-t border-paper/15">
-          {/* TEXTO — em cima */}
-          <div className="u-container shrink-0 pb-8 pt-14 md:pt-16">
-            <div className="max-w-4xl">
-              <Intro />
-            </div>
-          </div>
-
-          {/* FITA — landscape, desliza no scroll */}
-          <div ref={trackRef} className="min-h-0 flex-1 overflow-hidden pb-10">
-            <div
-              ref={rowRef}
-              className="flex h-full gap-4 pl-6 pr-6 will-change-transform md:pl-10"
-            >
-              {MODOS.map((m, i) => (
-                <div key={m.name} className="aspect-[3/2] h-full shrink-0">
-                  <Card m={m} i={i} />
-                </div>
-              ))}
-            </div>
+  return (
+    <section
+      ref={sectionRef}
+      data-nav-dark
+      className="relative bg-plum text-paper"
+      style={{ height: `${100 + MODOS.length * 58}vh` }}
+    >
+      <div className="sticky top-0 flex h-screen flex-col overflow-hidden border-t border-paper/15">
+        {/* TEXTO — em cima */}
+        <div className="u-container shrink-0 pb-8 pt-14 md:pt-16">
+          <div className="max-w-4xl">
+            <Intro />
           </div>
         </div>
-      </section>
-    );
-  }
 
-  // ===== MOBILE / baseline — texto + carrossel de swipe nativo =====
-  return (
-    <section data-nav-dark className="border-t border-paper/15 bg-plum text-paper">
-      <div className="u-container py-16">
-        <Reveal className="max-w-md">
-          <Intro />
-        </Reveal>
-      </div>
-      <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-16 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {MODOS.map((m, i) => (
+        {/* FITA — landscape, desliza no scroll */}
+        <div ref={trackRef} className="min-h-0 flex-1 overflow-hidden pb-10">
           <div
-            key={m.name}
-            className="aspect-[3/2] w-[86vw] shrink-0 snap-center overflow-hidden"
+            ref={rowRef}
+            className="flex h-full gap-4 pl-6 pr-6 will-change-transform md:pl-10"
           >
-            <Card m={m} i={i} />
+            {MODOS.map((m, i) => (
+              <div key={m.name} className="aspect-[3/2] h-full shrink-0">
+                <Card m={m} i={i} />
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </section>
   );

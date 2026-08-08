@@ -4,7 +4,8 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import GuiasConvite from "@/components/GuiasConvite";
 import GuiasSequence from "@/components/GuiasSequence";
-import PingPongVideo from "@/components/PingPongVideo";
+import GuiasImersao from "@/components/GuiasImersao";
+import GuiasFeatures from "@/components/GuiasFeatures";
 
 export const metadata: Metadata = {
   title: "Guias de Estilo — Niwa",
@@ -20,16 +21,20 @@ export default function GuiasPage() {
         data-nav-sky
         className="relative -mt-[62px] flex min-h-screen items-center overflow-hidden bg-plum pt-[62px] text-paper"
       >
-        <PingPongVideo
-          src="/guia/hero.mp4"
-          poster="/guia/hero-dark.jpg"
+        {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+        <video
+          src="/guia/se-aprofunde-3.mp4"
+          poster="/guia/se-aprofunde-3.jpg"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-hidden
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
-        {/* scrim escuro à esquerda — legibilidade do texto claro */}
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-transparent"
-        />
+        {/* scrim contínuo — preto uniforme sobre todo o vídeo */}
+        <div aria-hidden className="absolute inset-0 bg-black/50" />
         <div className="u-container relative py-24 md:py-0">
           <Reveal className="max-w-2xl">
             <p className="u-eyebrow !text-[#C295D9]/80">Guias de estilo</p>
@@ -50,8 +55,14 @@ export default function GuiasPage() {
       {/* ===== MANIFESTO — o convite (revelado frase a frase, sem imagem) ===== */}
       <GuiasConvite />
 
+      {/* ===== IMERSÃO — capas dos dossiês em fita horizontal ===== */}
+      <GuiasImersao />
+
       {/* ===== AUGE — sequência scrollytelling "da cabeça aos pés" ===== */}
       <GuiasSequence />
+
+      {/* ===== FEATURES — o que você recebe (seção clara de respiro) ===== */}
+      <GuiasFeatures />
 
       {/* ===== FECHO — escute as cores (imagem do guia no BG) ===== */}
       <section
@@ -80,7 +91,7 @@ export default function GuiasPage() {
               </em>
             </h2>
             <Link
-              href="/loja?c=guias"
+              href="/produto/guia-metodo-4-estacoes"
               className="mt-10 inline-block rounded-xs bg-paper px-10 py-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-marsala transition-colors hover:bg-[#C295D9] hover:text-plum"
             >
               Comprar meu guia

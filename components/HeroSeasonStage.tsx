@@ -33,16 +33,22 @@ const PHRASES: Record<string, string> = {
   inverno: "Nosso calor de cores, para a estação mais fria",
 };
 
-const SLIDES = SEASONS.map((s) => ({
-  id: s.id,
-  label: s.name,
-  icon: s.icon,
-  accent: s.accent,
-  video: `/estacoes/${s.id}.mp4`,
-  poster: `/estacoes/${s.id}.jpg`,
-  phrase: PHRASES[s.id],
-  href: `/produto/cartela-${s.id}`,
-}));
+// ordem de exibição da galeria (a paleta não segue a estação do ano):
+// Verão → Outono → Inverno → Primavera
+const SEASON_ORDER = ["verao", "outono", "inverno", "primavera"] as const;
+const SLIDES = SEASON_ORDER.map((id) => {
+  const s = SEASONS.find((x) => x.id === id)!;
+  return {
+    id: s.id,
+    label: s.name,
+    icon: s.icon,
+    accent: s.accent,
+    video: `/estacoes/${s.id}.mp4`,
+    poster: `/estacoes/${s.id}.jpg`,
+    phrase: PHRASES[s.id],
+    href: `/loja?c=ferramentas`,
+  };
+});
 
 type Mode = "full" | "lite" | "reduce";
 
@@ -123,8 +129,7 @@ function SeasonIndicator({ active, visible }: { active: number; visible: boolean
 function HeroHeadline() {
   return (
     <div className="anim-rise max-w-xl">
-      <p className="u-eyebrow text-ink-soft">Coloração pessoal</p>
-      <h1 className="u-display mt-5 text-[3rem] leading-[0.98] text-ink sm:text-6xl md:text-7xl">
+      <h1 className="u-display text-[3rem] leading-[0.98] text-ink sm:text-6xl md:text-7xl">
         Desperte o jardim
         <br />
         que <em className="font-light italic u-accent">há em você.</em>

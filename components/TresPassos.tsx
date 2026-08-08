@@ -52,7 +52,7 @@ export default function TresPassos() {
     useTransform(scrollYProgress, [0.66, 0.76], [0, 1])
   );
   const btnRef = useOpacityRef<HTMLDivElement>(
-    useTransform(scrollYProgress, [0.5, 0.6], [0, 1])
+    useTransform(scrollYProgress, [0.8, 0.9], [0, 1])
   );
 
   // progress bars between the words (scaleX — transforms are reliable)
@@ -70,11 +70,11 @@ export default function TresPassos() {
       style={{ height: "300vh" }}
     >
       <div className="sticky top-0 h-screen overflow-hidden bg-plum text-paper">
-        {/* floating collage (top) — same images/treatment as Combinações */}
+        {/* floating collage (top) — imagens próprias da seção (lavanda) */}
         <div ref={topRef} style={{ opacity: 0 }} className="absolute inset-0 hidden md:block">
-          <FloatImg src="/combinacao/foto-5.png" style={{ left: "5%", top: "9%", width: 178, height: 126 }} />
-          <FloatImg src="/combinacao/foto-7.png" style={{ left: "16%", top: "19%", width: 150, height: 112 }} />
-          <FloatImg src="/combinacao/foto-3.png" style={{ left: "78%", top: "9%", width: 186, height: 122 }} />
+          <FloatImg src="/passos/passos-1.jpg" style={{ left: "5%", top: "9%", width: 178, height: 126 }} />
+          <FloatImg src="/passos/passos-4.jpg" style={{ left: "16%", top: "19%", width: 150, height: 112 }} />
+          <FloatImg src="/passos/passos-2.jpg" style={{ left: "78%", top: "9%", width: 186, height: 122 }} />
         </div>
 
         {/* phrase */}
@@ -89,7 +89,7 @@ export default function TresPassos() {
         </div>
 
         {/* words + progress bars */}
-        <div className="u-container absolute inset-x-0 top-1/2 flex -translate-y-1/2 flex-col items-center gap-6 md:flex-row md:gap-8">
+        <div className="u-container absolute inset-x-0 top-1/2 flex -translate-y-1/2 flex-col items-center gap-10 md:flex-row md:gap-8">
           <span ref={cartelasRef} style={{ opacity: 0 }} className={word}>
             Cartelas
           </span>
@@ -111,10 +111,10 @@ export default function TresPassos() {
 
         {/* images below the outer words */}
         <div ref={foto6Ref} style={{ opacity: 0 }} className="hidden md:block">
-          <FloatImg src="/combinacao/foto-6.png" style={{ left: "20%", top: "60%", width: 128, height: 176 }} />
+          <FloatImg src="/passos/passos-3.jpg" style={{ left: "20%", top: "60%", width: 128, height: 176 }} />
         </div>
         <div ref={foto2Ref} style={{ opacity: 0 }} className="hidden md:block">
-          <FloatImg src="/combinacao/foto-2.png" style={{ left: "66%", top: "58%", width: 132, height: 182 }} />
+          <FloatImg src="/passos/passos-5.jpg" style={{ left: "66%", top: "58%", width: 132, height: 182 }} />
         </div>
 
         {/* central button */}

@@ -7,6 +7,7 @@ import TresPassos from "@/components/TresPassos";
 import CuideSe from "@/components/CuideSe";
 import HeroSeasonStage from "@/components/HeroSeasonStage";
 import GuiaEstilo from "@/components/GuiaEstilo";
+import Reviews from "@/components/Reviews";
 
 export default function Home() {
   return (
@@ -85,13 +86,14 @@ export default function Home() {
         {/* scrim para legibilidade do texto centralizado */}
         <div aria-hidden className="absolute inset-0 bg-black/40" />
 
-        <Reveal className="relative max-w-lg text-center text-paper">
+        <Reveal className="relative max-w-2xl text-center text-paper">
           <p className="u-eyebrow !text-paper/70">
-            Consultoras de estilo e moda
+            Consultoras de cor e estilo
           </p>
           <h2 className="u-display mt-5 text-5xl md:text-6xl">
-            A dica infalível
+            A oportunidade
             <br />
+            definitiva{" "}
             <em className="font-light italic u-accent">chegou.</em>
           </h2>
           <p className="mx-auto mt-5 max-w-sm leading-relaxed text-paper/85">
@@ -106,6 +108,9 @@ export default function Home() {
           </Link>
         </Reveal>
       </section>
+
+      {/* ========================= REVIEWS ============================= */}
+      <Reviews />
 
       {/* ========================= CUIDE-SE (vídeo) ===================== */}
       <CuideSe />

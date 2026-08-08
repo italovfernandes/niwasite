@@ -12,9 +12,9 @@ export default function Footer() {
           <div>
             <p className="u-eyebrow !text-paper/55">A carta das estações</p>
             <h2 className="u-display mt-4 text-4xl md:text-5xl">
-              Receba cada nova
+              Receba as novidades
               <br />
-              <em className="font-light italic u-accent">paleta</em> antes de todos.
+              da <em className="font-light italic u-accent">Niwa Seasons.</em>
             </h2>
           </div>
           <form

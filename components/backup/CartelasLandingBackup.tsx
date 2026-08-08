@@ -7,7 +7,12 @@ import CartelasJourney from "@/components/backup/CartelasJourneyBackup";
 import ModosRotina from "@/components/backup/ModosRotina";
 import { SEASONS, productBySlug } from "@/lib/catalog";
 
-type CenarioIconName = "utensils" | "basket" | "package" | "shirt" | "tag";
+type CenarioIconName =
+  | "palette"
+  | "makeup"
+  | "lips"
+  | "accessories"
+  | "travel";
 
 function CenarioIcon({
   name,
@@ -24,46 +29,32 @@ function CenarioIcon({
     strokeLinejoin: "round" as const,
   };
   const paths: Record<CenarioIconName, React.ReactNode> = {
-    utensils: (
+    palette: (
+      <path d="M12 3s6 5.5 6 10a6 6 0 0 1-12 0c0-4.5 6-10 6-10Z" {...p} />
+    ),
+    makeup: (
       <>
-        <path d="M3 2v7c0 1.1.9 2 2 2a2 2 0 0 0 2-2V2" {...p} />
-        <path d="M7 2v20" {...p} />
-        <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" {...p} />
+        <path d="M9.06 11.9l8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08" {...p} />
+        <path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z" {...p} />
       </>
     ),
-    basket: (
+    lips: (
       <>
-        <path d="m5 11 4-7M19 11l-4-7M2 11h20" {...p} />
-        <path
-          d="m4 11 1.6 7.4a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L20 11"
-          {...p}
-        />
-        <path d="M9 15v2M15 15v2" {...p} />
+        <path d="M3 9c2-2 5-2 9 0 4-2 7-2 9 0-2 4-5 6-9 6S5 13 3 9Z" {...p} />
+        <path d="M3 9h18" {...p} />
       </>
     ),
-    package: (
+    accessories: (
       <>
-        <path d="m7.5 4.3 9 5.2" {...p} />
-        <path
-          d="M21 8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"
-          {...p}
-        />
-        <path d="M3.3 7 12 12l8.7-5M12 22V12" {...p} />
+        <path d="M6 8h12l-1 12.5H7L6 8Z" {...p} />
+        <path d="M9 8.5V6a3 3 0 0 1 6 0v2.5" {...p} />
       </>
     ),
-    shirt: (
-      <path
-        d="M20.4 3.5 16 2a4 4 0 0 1-8 0L3.6 3.5a2 2 0 0 0-1.3 2.2l.6 3.5a1 1 0 0 0 1 .8H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.1a1 1 0 0 0 1-.8l.6-3.5a2 2 0 0 0-1.3-2.2Z"
-        {...p}
-      />
-    ),
-    tag: (
+    travel: (
       <>
-        <path
-          d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4Z"
-          {...p}
-        />
-        <circle cx="7.5" cy="7.5" r="1" fill="currentColor" />
+        <rect x="4" y="7" width="16" height="13" rx="2" {...p} />
+        <path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" {...p} />
+        <path d="M9 11v5M15 11v5" {...p} />
       </>
     ),
   };
@@ -89,10 +80,6 @@ const RECURSOS = [
     title: "Compartilhe",
     text: "Ajude suas amigas a descobrirem as próprias cores e combinações.",
   },
-  {
-    title: "Ajude quem você ama",
-    text: "Filhos, marido e família também aprendem com você.",
-  },
 ];
 
 const ECON_RECURSOS = [
@@ -106,12 +93,20 @@ const ECON_TEMPO = [
   "Compras mais objetivas, menos indecisão",
 ];
 
-const CENARIOS: { label: string; icon: CenarioIconName }[] = [
-  { label: "Jantar de última hora", icon: "utensils" },
-  { label: "Looks preferidos no cesto", icon: "basket" },
-  { label: "A compra online não chegou", icon: "package" },
-  { label: "Closet cheio, nada pra usar", icon: "shirt" },
-  { label: "Vale a pena a promoção?", icon: "tag" },
+const CENARIOS: { label: string; desc?: string; icon: CenarioIconName }[] = [
+  { label: "+ de 80 cores por estação", icon: "palette" },
+  { label: "Cabelos & Maquiagem", icon: "makeup" },
+  {
+    label: "ColorKiss",
+    desc: "Teste em acrílico de batom — exclusividade Niwa.",
+    icon: "lips",
+  },
+  { label: "Acessórios & Estampas", icon: "accessories" },
+  {
+    label: "SmartTravel",
+    desc: "Looks e checklist de viagem.",
+    icon: "travel",
+  },
 ];
 
 // bento: mobile = coluna única; md = 1 box largo em cima + 3 embaixo (grid de 6)
@@ -169,29 +164,6 @@ export default function CartelasLandingBackup() {
         </div>
       </section>
 
-      {/* ===== LEVEZA — foto full-bleed + wordmark gigante ===== */}
-      <section className="relative overflow-hidden bg-[#efeae4]">
-        <Image
-          src="/cartelas/leveza.jpg"
-          alt="Mulher em vestido esvoaçante de tons pastel entre flores"
-          width={3632}
-          height={2000}
-          sizes="100vw"
-          className="h-auto w-full"
-        />
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 bottom-[5%] text-center font-display font-light italic u-accent"
-          style={{
-            fontSize: "40vw",
-            lineHeight: 1.02,
-            letterSpacing: "-0.015em",
-          }}
-        >
-          Leveza
-        </span>
-      </section>
-
       {/* ===== MAIS RECURSOS — plum, numerado ===== */}
       <section data-nav-dark className="u-section bg-plum text-paper">
         <div className="u-container">
@@ -204,7 +176,7 @@ export default function CartelasLandingBackup() {
               <em className="font-light italic u-accent">viver.</em>
             </h2>
           </Reveal>
-          <div className="mt-16 grid gap-x-10 gap-y-12 md:grid-cols-3">
+          <div className="mt-16 grid gap-x-10 gap-y-12 md:grid-cols-2">
             {RECURSOS.map((r, i) => (
               <Reveal key={r.title} delay={i * 90}>
                 <div className="border-t border-paper/15 pt-6">
@@ -222,11 +194,11 @@ export default function CartelasLandingBackup() {
         </div>
       </section>
 
-      {/* ===== PRODUTO — as 4 cartelas ===== */}
+      {/* ===== PRODUTO — as 12 cartelas, agrupadas por estação ===== */}
       <section id="cartelas-sazonais" className="u-section scroll-mt-24">
         <div className="u-container">
           <Reveal className="max-w-2xl">
-            <p className="u-eyebrow">As 4 cartelas</p>
+            <p className="u-eyebrow">As 12 cartelas</p>
             <h2 className="u-display mt-4 text-5xl md:text-6xl">
               Esteja com elas em
               <br />
@@ -234,31 +206,47 @@ export default function CartelasLandingBackup() {
             </h2>
           </Reveal>
 
-          <div className="mt-14 grid gap-x-5 gap-y-10 sm:grid-cols-2 md:grid-cols-4">
-            {SEASONS.map((season, i) => {
-              const product = productBySlug(`cartela-${season.id}`);
-              if (!product) return null;
-              return (
-                <Reveal key={season.id} delay={(i % 4) * 80}>
-                  <ProductCard product={product} />
-                </Reveal>
-              );
-            })}
+          <div className="mt-14 space-y-14">
+            {SEASONS.map((season) => (
+              <div key={season.id}>
+                <div className="flex items-baseline justify-between border-b border-line pb-3">
+                  <h3 className="u-display text-2xl md:text-3xl">{season.name}</h3>
+                  <span className="text-[0.58rem] uppercase tracking-[0.2em] text-ink-mute">
+                    {season.temp} · 3 cartelas
+                  </span>
+                </div>
+                <div className="-mx-6 mt-7 flex snap-x gap-5 overflow-x-auto px-6 pb-4 [scrollbar-width:none] md:mx-0 md:px-0 [&::-webkit-scrollbar]:hidden">
+                  {season.cartelas.map((c, i) => {
+                    const product = productBySlug(c.slug);
+                    if (!product) return null;
+                    return (
+                      <Reveal
+                        key={c.slug}
+                        delay={(i % 3) * 80}
+                        className="w-[64vw] shrink-0 snap-start sm:w-[300px]"
+                      >
+                        <ProductCard product={product} />
+                      </Reveal>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ===== BANDA ESCURA — como funciona (foto + marca tom sobre tom) ===== */}
+      {/* ===== BANDA ESCURA — como funciona (mobile: preto sólido; desktop: foto) ===== */}
       <section
         data-nav-dark
-        className="u-section relative overflow-hidden bg-plum text-paper"
+        className="u-section relative overflow-hidden bg-black text-paper"
       >
         <Image
           src="/cartelas/como-funciona.jpg"
           alt=""
           fill
           sizes="100vw"
-          className="object-cover object-center"
+          className="hidden object-cover object-center md:block"
         />
         {/* overlay preto — contraste do texto */}
         <div aria-hidden className="absolute inset-0 bg-black/60" />
@@ -302,13 +290,10 @@ export default function CartelasLandingBackup() {
       <section data-nav-dark className="u-section bg-plum text-paper">
         <div className="u-container">
           <Reveal className="max-w-2xl">
-            <p className="u-eyebrow !text-[#C295D9]/70">Cenários do dia a dia</p>
+            <p className="u-eyebrow !text-[#C295D9]/70">Recursos</p>
             <h2 className="u-display mt-4 text-5xl md:text-6xl">
-              Em qualquer ocasião,
-              <br />a{" "}
-              <em className="font-light italic u-accent">
-                liberdade te chama.
-              </em>
+              Cartelas únicas
+              <br />e <em className="font-light italic u-accent">práticas.</em>
             </h2>
           </Reveal>
 
@@ -325,9 +310,16 @@ export default function CartelasLandingBackup() {
                     name={c.icon}
                     className="h-8 w-8 text-[#C295D9] md:h-9 md:w-9"
                   />
-                  <span className="text-base font-medium leading-snug text-paper md:text-lg">
-                    {c.label}
-                  </span>
+                  <div>
+                    <span className="block text-base font-medium leading-snug text-paper md:text-lg">
+                      {c.label}
+                    </span>
+                    {c.desc && (
+                      <span className="mt-1.5 block text-sm leading-relaxed text-paper/55">
+                        {c.desc}
+                      </span>
+                    )}
+                  </div>
                 </div>
               </Reveal>
             ))}
@@ -362,9 +354,9 @@ export default function CartelasLandingBackup() {
               Organização gera possibilidades.
             </p>
             <h2 className="u-display mt-6 text-5xl leading-[1.05] md:text-6xl">
-              Seu guarda-roupa mágico,
+              Seu guarda-roupa mais
               <br />
-              como em <em className="font-light italic u-accent">Nárnia.</em>
+              <em className="font-light italic u-accent">funcional do que nunca.</em>
             </h2>
             <p className="mt-6 max-w-md text-lg leading-relaxed text-paper/80">
               O preço de uma t-shirt básica. O potencial de um{" "}

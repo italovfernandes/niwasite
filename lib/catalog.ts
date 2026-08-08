@@ -21,7 +21,10 @@ export interface Season {
   image: string; // unsplash id
   icon: string; // /icones/*.svg
   accent: string; // solid panel colour
-  cartelas: { name: string; src: string }[];
+  // cada estação tem 3 cartelas — produtos individuais (slug = URL/PDP próprio).
+  // name em inglês para casar com a capa impressa do produto (sistema 12 estações);
+  // src = leque 1:1 usado em thumbnails; a capa do produto vem de /capas/{slug}.jpg
+  cartelas: { name: string; slug: string; src: string }[];
 }
 
 export interface Collection {
@@ -86,9 +89,9 @@ export const SEASONS: Season[] = [
     icon: "/icones/primavera.svg",
     accent: "#f5d9a0",
     cartelas: [
-      { name: "Primavera Clara", src: "/cartelas/Light_Spring_1x1.png" },
-      { name: "Primavera Quente", src: "/cartelas/Warm_Spring_1x1.png" },
-      { name: "Primavera Brilhante", src: "/cartelas/Bright_Spring_1x1.png" },
+      { name: "Light Spring", slug: "cartela-light-spring", src: "/cartelas/Light_Spring_1x1.png" },
+      { name: "Warm Spring", slug: "cartela-warm-spring", src: "/cartelas/Warm_Spring_1x1.png" },
+      { name: "Bright Spring", slug: "cartela-bright-spring", src: "/cartelas/Bright_Spring_1x1.png" },
     ],
   },
   {
@@ -110,9 +113,9 @@ export const SEASONS: Season[] = [
     icon: "/icones/verao.svg",
     accent: "#6ec6ac",
     cartelas: [
-      { name: "Verão Claro", src: "/cartelas/Light_Summer_1x1.png" },
-      { name: "Verão Suave", src: "/cartelas/Soft_Summer_1x1.png" },
-      { name: "Verão Frio", src: "/cartelas/Cool_Summer_1x1.png" },
+      { name: "Light Summer", slug: "cartela-light-summer", src: "/cartelas/Light_Summer_1x1.png" },
+      { name: "Soft Summer", slug: "cartela-soft-summer", src: "/cartelas/Soft_Summer_1x1.png" },
+      { name: "Cool Summer", slug: "cartela-cool-summer", src: "/cartelas/Cool_Summer_1x1.png" },
     ],
   },
   {
@@ -134,9 +137,9 @@ export const SEASONS: Season[] = [
     icon: "/icones/outono.svg",
     accent: "#e3a882",
     cartelas: [
-      { name: "Outono Suave", src: "/cartelas/Soft_Autumn_1x1.png" },
-      { name: "Outono Quente", src: "/cartelas/Warm_Autumn_1x1.png" },
-      { name: "Outono Profundo", src: "/cartelas/Deep_Autumn_1x1.png" },
+      { name: "Soft Autumn", slug: "cartela-soft-autumn", src: "/cartelas/Soft_Autumn_1x1.png" },
+      { name: "Warm Autumn", slug: "cartela-warm-autumn", src: "/cartelas/Warm_Autumn_1x1.png" },
+      { name: "Deep Autumn", slug: "cartela-deep-autumn", src: "/cartelas/Deep_Autumn_1x1.png" },
     ],
   },
   {
@@ -158,9 +161,9 @@ export const SEASONS: Season[] = [
     icon: "/icones/inverno.svg",
     accent: "#a9dcea",
     cartelas: [
-      { name: "Inverno Brilhante", src: "/cartelas/Bright_Winter_1x1.png" },
-      { name: "Inverno Frio", src: "/cartelas/Cool_Winter_1x1.png" },
-      { name: "Inverno Profundo", src: "/cartelas/Deep_Winter_1x1.png" },
+      { name: "Bright Winter", slug: "cartela-bright-winter", src: "/cartelas/Bright_Winter_1x1.png" },
+      { name: "Cool Winter", slug: "cartela-cool-winter", src: "/cartelas/Cool_Winter_1x1.png" },
+      { name: "Deep Winter", slug: "cartela-deep-winter", src: "/cartelas/Deep_Winter_1x1.png" },
     ],
   },
 ];
@@ -202,140 +205,98 @@ export const collectionById = (id: CollectionId) =>
 
 // --------------------------------- products --------------------------------
 
+// preço unitário de cada cartela (US$) — ver documento de referência
+export const CARTELA_PRICE = 49.99;
+
+// texto curto de vitrine por cartela (excerpt do card / topo do PDP)
+const CARTELA_EXCERPTS: Record<string, string> = {
+  "cartela-light-spring": "Os claros quentes e luminosos da Primavera — leveza que acende a pele.",
+  "cartela-warm-spring": "O calor dourado da Primavera em estado puro — vibração sem peso.",
+  "cartela-bright-spring": "A Primavera no auge do brilho — cores nítidas e cheias de vida.",
+  "cartela-light-summer": "A leveza fria do Verão — tons suaves que acalmam e iluminam.",
+  "cartela-soft-summer": "O Verão em pastel esfumado — elegância discreta e serena.",
+  "cartela-cool-summer": "O frescor frio do Verão — azuis e rosas que refrescam a pele.",
+  "cartela-soft-autumn": "O Outono em tons quebrados e aconchegantes — calor sem contraste.",
+  "cartela-warm-autumn": "O ouro terroso do Outono — especiarias, folhagem e âmbar.",
+  "cartela-deep-autumn": "O Outono profundo e intenso — riqueza quente em cada tom.",
+  "cartela-bright-winter": "O Inverno em alto contraste e cores puras — presença imediata.",
+  "cartela-cool-winter": "O frio cristalino do Inverno — tons gelados e nítidos.",
+  "cartela-deep-winter": "O Inverno profundo e dramático — escuros intensos e vibrantes.",
+};
+
+// 12 cartelas individuais — geradas a partir das 3 cartelas de cada estação.
+// Cada uma tem slug/PDP próprio e capa em /capas/{slug}.jpg
+const CARTELA_PRODUCTS: Product[] = SEASONS.flatMap((season) =>
+  season.cartelas.map((c) => ({
+    slug: c.slug,
+    name: c.name,
+    collection: "ferramentas" as const,
+    format: "Físico" as const,
+    price: CARTELA_PRICE,
+    season: season.id,
+    excerpt: CARTELA_EXCERPTS[c.slug] ?? `Uma das cartelas da estação ${season.name}.`,
+    description: [
+      CARTELA_EXCERPTS[c.slug] ?? "",
+      `Uma das três cartelas da família ${season.name}, impressa em alta fidelidade às cores reais — leve e fácil de levar para onde você for.`,
+    ].filter(Boolean),
+    features: [
+      "Materiais de alta resistência",
+      "Fácil de manusear, leve e portátil",
+      "Impressão em alta fidelidade às cores reais",
+    ],
+    includes: [`Cartela ${c.name}`, "Guia de combinações"],
+  }))
+);
+
 export const PRODUCTS: Product[] = [
-  {
-    slug: "cartela-primavera",
-    name: "Cartela Primavera",
-    collection: "ferramentas",
-    format: "Físico",
-    price: 90,
-    season: "primavera",
-    excerpt: "Sua beleza no auge das cores.",
-    description: [
-      "A cartela da Primavera reúne as cores claras, quentes e luminosas — para os dias em que a sua beleza está no auge.",
-      "Impressa em alta fidelidade às cores reais, leve e fácil de levar para onde você for.",
-    ],
-    features: [
-      "Materiais de alta resistência",
-      "Fácil de manusear, leve e portátil",
-      "Impressão em alta fidelidade às cores reais",
-    ],
-    includes: ["1 cartela Primavera", "Guia de combinações"],
-  },
-  {
-    slug: "cartela-verao",
-    name: "Cartela Verão",
-    collection: "ferramentas",
-    format: "Físico",
-    price: 90,
-    season: "verao",
-    excerpt: "Dias de look e de sol inesquecíveis.",
-    description: [
-      "A cartela do Verão traz os tons suaves, frios e delicados que fazem dos seus dias de sol looks inesquecíveis.",
-      "Impressa em alta fidelidade às cores reais, leve e fácil de levar para onde você for.",
-    ],
-    features: [
-      "Materiais de alta resistência",
-      "Fácil de manusear, leve e portátil",
-      "Impressão em alta fidelidade às cores reais",
-    ],
-    includes: ["1 cartela Verão", "Guia de combinações"],
-  },
-  {
-    slug: "cartela-outono",
-    name: "Cartela Outono",
-    collection: "ferramentas",
-    format: "Físico",
-    price: 90,
-    season: "outono",
-    excerpt: "A poesia da estação, na nossa cartela.",
-    description: [
-      "A cartela do Outono carrega os tons quentes, profundos e terrosos — a poesia da estação traduzida em cor.",
-      "Impressa em alta fidelidade às cores reais, leve e fácil de levar para onde você for.",
-    ],
-    features: [
-      "Materiais de alta resistência",
-      "Fácil de manusear, leve e portátil",
-      "Impressão em alta fidelidade às cores reais",
-    ],
-    includes: ["1 cartela Outono", "Guia de combinações"],
-  },
-  {
-    slug: "cartela-inverno",
-    name: "Cartela Inverno",
-    collection: "ferramentas",
-    format: "Físico",
-    price: 90,
-    season: "inverno",
-    excerpt: "Nosso calor de cores, para a estação mais fria.",
-    description: [
-      "A cartela do Inverno reúne as cores frias, intensas e contrastantes — o nosso calor de cores para a estação mais fria.",
-      "Impressa em alta fidelidade às cores reais, leve e fácil de levar para onde você for.",
-    ],
-    features: [
-      "Materiais de alta resistência",
-      "Fácil de manusear, leve e portátil",
-      "Impressão em alta fidelidade às cores reais",
-    ],
-    includes: ["1 cartela Inverno", "Guia de combinações"],
-  },
+  ...CARTELA_PRODUCTS,
   {
     slug: "cartela-sazonal-12-subtons",
-    name: "Combo — As 4 Cartelas",
+    name: "Coleção Completa — 12 Cartelas",
     collection: "ferramentas",
     format: "Físico",
-    price: 320,
-    compareAt: 360,
+    price: 599.88,
     badge: "Mais vendido",
     landing: "cartelas",
     excerpt:
-      "As quatro estações reunidas — a coleção completa das suas cores em um só conjunto.",
+      "As 12 cartelas das quatro estações reunidas — toda a linguagem de cor Niwa em um só conjunto.",
     description: [
-      "As cartelas Primavera, Verão, Outono e Inverno juntas, para ter em mãos toda a linguagem de cor Niwa — não importa o seu subtom.",
-      "Impressas em alta fidelidade às cores reais, leves e fáceis de levar para onde você for.",
+      "As 12 cartelas — as três de Primavera, Verão, Outono e Inverno — juntas, para ter em mãos toda a linguagem de cor Niwa, não importa o subtom.",
+      "Impressas em alta fidelidade às cores reais, leves e fáceis de levar para onde você for. Ideal para presente e para profissionais.",
     ],
     features: [
-      "As 4 cartelas sazonais",
+      "As 12 cartelas das 4 estações",
       "Materiais de alta resistência",
       "Impressão em alta fidelidade às cores reais",
     ],
-    includes: [
-      "Cartela Primavera",
-      "Cartela Verão",
-      "Cartela Outono",
-      "Cartela Inverno",
-    ],
+    includes: SEASONS.flatMap((s) => s.cartelas.map((c) => c.name)),
   },
   {
     slug: "combo-cartelas-guia",
-    name: "Combo — 4 Cartelas + Guia",
+    name: "Coleção Completa + Guia",
     collection: "ferramentas",
     format: "Físico",
-    price: 520,
-    compareAt: 600,
+    price: 669.87,
     badge: "Melhor valor",
     excerpt:
-      "As quatro cartelas mais o guia de estilo — cor e conhecimento, na mesma caixa.",
+      "As 12 cartelas mais o guia de estilo — cor e conhecimento, na mesma caixa.",
     description: [
-      "Tudo o que você precisa para começar: as quatro cartelas sazonais e o guia de estilo Niwa, que ensina a usar as suas cores da cabeça aos pés.",
+      "Tudo o que você precisa: as 12 cartelas das quatro estações e o guia de estilo Niwa, que ensina a usar as suas cores da cabeça aos pés.",
       "O caminho completo do autoconhecimento das suas cores — pronto para viver com você.",
     ],
     features: [
-      "As 4 cartelas sazonais",
+      "As 12 cartelas das 4 estações",
       "Guia de estilo Niwa completo",
-      "Economia frente à compra separada",
+      "Tudo em um só conjunto",
     ],
-    includes: [
-      "As 4 cartelas sazonais",
-      "Guia Niwa — Método das 4 Estações",
-    ],
+    includes: ["As 12 cartelas das 4 estações", "Guia Niwa — Método das 4 Estações"],
   },
   {
     slug: "guia-metodo-4-estacoes",
     name: "Guia de Estilo Niwa",
     collection: "guias",
     format: "Físico",
-    price: 240,
+    price: 69.99,
     excerpt:
       "O guia que ensina a usar as suas cores, estampas, acessórios, maquiagem e cabelo.",
     description: [
@@ -354,7 +315,7 @@ export const PRODUCTS: Product[] = [
     name: "Consultoria Completa",
     collection: "formacao",
     format: "Presencial",
-    price: 1200,
+    price: 249,
     badge: "Experiência",
     excerpt:
       "A análise completa da sua coloração pessoal, conduzida por uma consultora Niwa.",
@@ -392,11 +353,14 @@ export function paletteFor(product: Product): string[] {
   return map[product.collection];
 }
 
-export function formatBRL(value: number): string {
-  return value.toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
+// preços em dólar, no formato "US$ 49.99"
+export function formatPrice(value: number): string {
+  const n = value.toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
   });
+  return `US$ ${n}`;
 }
+
+// alias legado — mantém as importações existentes funcionando
+export const formatBRL = formatPrice;

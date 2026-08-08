@@ -14,11 +14,7 @@ const BLOCOS = [
   },
   {
     t: "Prazo de entrega",
-    d: "Após a postagem, o prazo varia com a sua região: de 2 a 5 dias úteis para o Sudeste e de 5 a 10 dias úteis para as demais regiões do Brasil.",
-  },
-  {
-    t: "Frete cortesia",
-    d: "Pedidos acima de R$ 600 têm frete cortesia para todo o Brasil. Abaixo desse valor, o frete é calculado na finalização, pelo seu CEP.",
+    d: "Após a postagem, a entrega leva de 5 a 10 dias úteis para todos os Estados Unidos. O frete é calculado na finalização, pelo seu endereço.",
   },
   {
     t: "Rastreamento",

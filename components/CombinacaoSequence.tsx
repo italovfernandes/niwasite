@@ -47,13 +47,15 @@ interface Card {
   speed: number;
 }
 const CARDS: Card[] = [
-  { src: "/combinacao/foto-5.png", w: 172, h: 126, left: 6, top: 11, dx: -150, dy: -120, rot: -2, enter: 210, speed: 0.3 },
-  { src: "/combinacao/foto-6.png", w: 150, h: 208, left: 15, top: 20, dx: -150, dy: -70, rot: 1.5, enter: 90, speed: 0.24 },
-  { src: "/combinacao/foto-7.png", w: 150, h: 110, left: 9, top: 45, dx: -165, dy: -30, rot: -1.5, enter: 150, speed: 0.34 },
-  { src: "/combinacao/foto-4.png", w: 128, h: 164, left: 0.5, top: 57, dx: -150, dy: 110, rot: 2, enter: 60, speed: 0.22 },
-  { src: "/combinacao/foto-1.png", w: 192, h: 136, left: 53, top: 65, dx: 120, dy: 150, rot: -1.5, enter: 230, speed: 0.32 },
-  { src: "/combinacao/foto-3.png", w: 168, h: 130, left: 83, top: 30, dx: 170, dy: -110, rot: 1.5, enter: 120, speed: 0.26 },
-  { src: "/combinacao/foto-2.png", w: 156, h: 202, left: 80, top: 48, dx: 175, dy: 50, rot: -2, enter: 185, speed: 0.36 },
+  // topo (acima do headline)
+  { src: "/combinacao/foto-5.jpg", w: 172, h: 126, left: 3, top: 8, dx: -160, dy: -130, rot: -2, enter: 210, speed: 0.3 },
+  { src: "/combinacao/foto-6.jpg", w: 150, h: 208, left: 26, top: 3, dx: -110, dy: -140, rot: 1.5, enter: 90, speed: 0.24 },
+  { src: "/combinacao/foto-7.jpg", w: 150, h: 110, left: 57, top: 6, dx: 120, dy: -140, rot: -1.5, enter: 150, speed: 0.34 },
+  { src: "/combinacao/foto-3.jpg", w: 168, h: 130, left: 82, top: 11, dx: 175, dy: -120, rot: 1.5, enter: 120, speed: 0.26 },
+  // base (abaixo do headline)
+  { src: "/combinacao/foto-4.jpg", w: 128, h: 164, left: 4, top: 66, dx: -160, dy: 120, rot: 2, enter: 60, speed: 0.22 },
+  { src: "/combinacao/foto-1.jpg", w: 192, h: 136, left: 39, top: 80, dx: 0, dy: 170, rot: -1.5, enter: 230, speed: 0.32 },
+  { src: "/combinacao/foto-2.jpg", w: 156, h: 202, left: 80, top: 66, dx: 175, dy: 120, rot: -2, enter: 185, speed: 0.36 },
 ];
 
 function CollageCard({
@@ -103,16 +105,25 @@ const CARTELAS = [
   "Bright_Winter", "Soft_Summer", "Warm_Autumn", "Bright_Spring",
   "Light_Spring", "Deep_Autumn", "Soft_Autumn", "Warm_Spring",
 ];
-type CItem = { src: string; label: string; kind: "color" | "photo" | "portrait" };
+// a pedido do cliente: sem fotografias no círculo — as CAPAS verticais das
+// cartelas + TONALIDADES de cor, alternadas, formando um círculo cromático.
+// O retrato central foi abandonado: a foto cresce, depois encolhe e DISSOLVE,
+// restando só a div com um tom semelhante à foto.
+const PORTRAIT_TONE = "#ba98b3"; // cor média da foto principal
+type CItem = {
+  src?: string;
+  color?: string;
+  label: string;
+  kind: "cover" | "portrait" | "tone";
+};
+// alternância estrita: SEMPRE capa (índice par) → cor (índice ímpar). O retrato
+// ocupa um slot de COR (ele dissolve em cor), no par do Deep_Autumn — assim não
+// há duas cores seguidas.
 const CIRCLE: CItem[] = CARTELAS.flatMap((n, i) => [
+  { src: `/cartelas-vertical/${n}.png`, label: n.replace("_", " "), kind: "cover" as const },
   n === "Deep_Autumn"
-    ? { src: "/combinacao/principal.png", label: "Você", kind: "portrait" as const }
-    : { src: `/cartelas-hero/cards/${n}.png`, label: n.replace("_", " "), kind: "color" as const },
-  {
-    src: `/cartelas-hero/photos/p${String(i + 1).padStart(2, "0")}.jpg`,
-    label: "Niwa",
-    kind: "photo" as const,
-  },
+    ? { src: "/combinacao/principal.jpg", color: PORTRAIT_TONE, label: "Você", kind: "portrait" as const }
+    : { color: `hsl(${i * 30 + 15} 50% 60%)`, label: "", kind: "tone" as const },
 ]);
 const N = CIRCLE.length; // 24
 const PORTRAIT = CIRCLE.findIndex((c) => c.kind === "portrait");
@@ -147,6 +158,7 @@ const CARD_GROW = 0.3; // os cards crescem junto quando o círculo expande
 export default function CombinacaoSequence() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const portraitImgRef = useRef<HTMLImageElement>(null);
   const collageRef = useRef<HTMLDivElement>(null);
   const phrase1Ref = useRef<HTMLDivElement>(null);
   const coverRef = useRef<HTMLDivElement>(null);
@@ -303,6 +315,14 @@ export default function CombinacaoSequence() {
           el.style.opacity = String(opacity);
           el.style.borderRadius = `${radiusPx}px`;
           el.style.transform = `translate(-50%,-50%) translate(${x}px,${y}px) rotate(${rot}deg) scale(${scale})`;
+
+          // retrato central: a foto some (dissolve) durante o encolhimento,
+          // deixando só a div com o tom semelhante à foto (PORTRAIT_TONE)
+          if (i === PORTRAIT && portraitImgRef.current) {
+            portraitImgRef.current.style.opacity = String(
+              seg(p, PH.shrink[0], PH.shrink[1], 1, 0)
+            );
+          }
         }
       }
       raf = requestAnimationFrame(tick);
@@ -324,15 +344,24 @@ export default function CombinacaoSequence() {
           </h2>
           <div className="mt-12 grid grid-cols-3 gap-3 sm:grid-cols-6">
             {CIRCLE.map((c, i) => (
-              <div key={i} className="relative aspect-[2/3] overflow-hidden rounded-xl">
-                <Image src={c.src} alt="" aria-hidden fill sizes="30vw" className="object-cover" />
+              <div
+                key={i}
+                className="relative aspect-[2/3] overflow-hidden rounded-xl"
+                style={
+                  c.kind === "tone" || c.kind === "portrait"
+                    ? { backgroundColor: c.color }
+                    : undefined
+                }
+              >
+                {c.kind === "cover" && (
+                  <Image src={c.src!} alt="" aria-hidden fill sizes="30vw" className="object-cover" />
+                )}
               </div>
             ))}
           </div>
           <h2 className="u-display mx-auto mt-14 max-w-2xl text-center text-4xl text-paper md:text-6xl">
-            Cores, nós também{" "}
-            <em className="font-light italic u-accent">redefinimos</em> a
-            teoria.
+            A teoria das cores agora{" "}
+            <em className="font-light italic u-accent">prática, fácil e sua.</em>
           </h2>
         </div>
       </section>
@@ -372,15 +401,24 @@ export default function CombinacaoSequence() {
                 cardRefs.current[i] = el;
               }}
               className="absolute left-1/2 top-1/2 overflow-hidden"
-              style={{ opacity: 0, willChange: "transform" }}
+              style={{
+                opacity: 0,
+                willChange: "transform",
+                ...(item.kind === "tone" || item.kind === "portrait"
+                  ? { backgroundColor: item.color }
+                  : {}),
+              }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={item.src}
-                alt=""
-                aria-hidden
-                className={`h-full w-full object-cover ${item.kind === "portrait" ? "object-top" : ""}`}
-              />
+              {item.kind !== "tone" && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  ref={item.kind === "portrait" ? portraitImgRef : undefined}
+                  src={item.src}
+                  alt=""
+                  aria-hidden
+                  className={`h-full w-full object-cover ${item.kind === "portrait" ? "object-top" : ""}`}
+                />
+              )}
             </div>
           ))}
         </div>
@@ -391,8 +429,7 @@ export default function CombinacaoSequence() {
           aria-hidden
           style={{
             opacity: 0,
-            background:
-              "radial-gradient(circle at 50% 55%, rgba(28,23,18,0.34), rgba(28,23,18,0.06) 62%)",
+            background: "rgba(0,0,0,0.42)",
           }}
           className="absolute inset-0 z-40"
         />
@@ -400,9 +437,10 @@ export default function CombinacaoSequence() {
         {/* frase 2 */}
         <div ref={phrase2Ref} style={{ opacity: 0 }} className="pointer-events-none absolute inset-0 z-50 flex flex-col items-center justify-center px-6 text-center text-paper">
           <h2 className="u-display text-4xl sm:text-5xl md:text-[3.6rem]">
-            Sua beleza no topo,
+            Realce sua personalidade
             <br />
-            porque está no <em className="font-light italic u-accent">ritmo certo.</em>
+            com as{" "}
+            <em className="font-light italic u-accent">cores certas pra você.</em>
           </h2>
           <p className="mt-5 max-w-md text-sm leading-relaxed text-paper/90 sm:text-base">
             Não é mágica, apesar de parecer.
@@ -414,10 +452,9 @@ export default function CombinacaoSequence() {
         {/* frase do círculo */}
         <div ref={phraseCircleRef} style={{ opacity: 0 }} className="pointer-events-none absolute inset-0 z-50 flex items-center justify-center px-6 text-center">
           <h2 className="u-display text-paper text-4xl sm:text-5xl md:text-[3.6rem]">
-            Cores, nós também
+            A teoria das cores agora
             <br />
-            <em className="font-light italic u-accent">redefinimos</em> a
-            teoria.
+            <em className="font-light italic u-accent">prática, fácil e sua.</em>
           </h2>
         </div>
 
@@ -427,7 +464,7 @@ export default function CombinacaoSequence() {
             Novas formas
             <br />
             <em className="font-light italic u-accent">
-              de encarar as cores.
+              de experimentar as cores.
             </em>
           </h2>
         </div>

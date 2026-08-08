@@ -9,11 +9,16 @@ export const metadata: Metadata = {
 };
 
 const CANAIS: { label: string; valor: string; href?: string }[] = [
-  { label: "E-mail", valor: "oi@niwa.com", href: "mailto:oi@niwa.com" },
+  { label: "E-mail", valor: "hello@niwa.com", href: "mailto:hello@niwa.com" },
   {
-    label: "WhatsApp",
-    valor: "+55 11 90000-0000",
-    href: "https://wa.me/5511900000000",
+    label: "Instagram",
+    valor: "@niwa.seasons",
+    href: "https://instagram.com/niwa.seasons",
+  },
+  {
+    label: "Facebook",
+    valor: "/niwaseasons",
+    href: "https://facebook.com/niwaseasons",
   },
   { label: "Atendimento", valor: "Segunda a sexta, das 9h às 18h" },
 ];

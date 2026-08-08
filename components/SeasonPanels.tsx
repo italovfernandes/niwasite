@@ -12,6 +12,20 @@ import { SEASONS } from "@/lib/catalog";
  */
 const STAGGER_MS = 220; // atraso entre cada card
 
+// mesma sequência dos vídeos do hero: Verão → Outono → Inverno → Primavera
+const ORDERED_SEASONS = ["verao", "outono", "inverno", "primavera"].map(
+  (id) => SEASONS.find((s) => s.id === id)!
+);
+
+// BG dos cards = tom mais escuro da cor do ícone de cada estação
+// (mesma matiz do ícone, escurecida — o ícone claro fica por cima)
+const SEASON_BG: Record<string, string> = {
+  primavera: "#937025", // ícone #F9DFAF
+  verao: "#32856c", // ícone #6DC6AB
+  outono: "#935a2e", // ícone #EAB48F
+  inverno: "#327a90", // ícone #A9DCEA
+};
+
 export default function SeasonPanels() {
   const ref = useRef<HTMLDivElement>(null);
   const [shownCount, setShownCount] = useState(0);
@@ -25,7 +39,7 @@ export default function SeasonPanels() {
         entries.forEach((e) => {
           if (e.isIntersecting) {
             // revela cada card em tempos diferentes (stagger de verdade)
-            SEASONS.forEach((_, i) => {
+            ORDERED_SEASONS.forEach((_, i) => {
               timers.push(
                 window.setTimeout(
                   () => setShownCount((c) => Math.max(c, i + 1)),
@@ -46,8 +60,8 @@ export default function SeasonPanels() {
   }, []);
 
   return (
-    <div ref={ref} className="flex flex-col md:h-[100vh] md:min-h-[620px] md:flex-row">
-      {SEASONS.map((season, i) => {
+    <div ref={ref} className="flex flex-col md:h-[90vh] md:min-h-[620px] md:flex-row">
+      {ORDERED_SEASONS.map((season, i) => {
         const shown = i < shownCount;
         return (
           <article
@@ -55,28 +69,25 @@ export default function SeasonPanels() {
             style={{
               opacity: shown ? 1 : 0,
               transform: shown ? "translateY(0)" : "translateY(72px)",
+              backgroundColor: SEASON_BG[season.id],
               transition:
                 "flex-grow 0.7s cubic-bezier(0.22,1,0.36,1), opacity 0.7s ease, transform 0.8s cubic-bezier(0.22,1,0.36,1)",
             }}
             className="group relative min-h-[75vh] flex-1 overflow-hidden text-paper md:min-h-0 md:min-w-[74px] md:flex-[1] md:hover:flex-[2.5]"
           >
-            {/* foto de fundo */}
-            <Image
-              src={`/cores/${season.id}.jpg`}
-              alt={`Estação ${season.name}`}
-              fill
-              sizes="(max-width: 768px) 100vw, 40vw"
-              className="object-cover object-top"
+            {/* ícone gigante tom-sobre-tom sangrando pela esquerda (só ~50% visível) */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={season.icon}
+              alt=""
+              aria-hidden
+              className="pointer-events-none absolute left-0 top-0 h-[70%] w-auto -translate-x-1/2 -translate-y-[20%] opacity-[0.14]"
             />
 
-            {/* scrims: leve no topo (ícone/selo) + forte embaixo (texto) */}
+            {/* scrim sutil embaixo — só p/ firmar o texto sobre a cor */}
             <div
               aria-hidden
-              className="absolute inset-x-0 top-0 h-[26%] bg-gradient-to-b from-black/30 to-transparent"
-            />
-            <div
-              aria-hidden
-              className="absolute inset-x-0 bottom-0 h-[78%] bg-gradient-to-t from-black/85 via-black/40 to-transparent"
+              className="absolute inset-x-0 bottom-0 h-[70%] bg-gradient-to-t from-black/45 via-black/10 to-transparent"
             />
 
             {/* top meta: icon (cor default) + temperature */}
@@ -114,18 +125,20 @@ export default function SeasonPanels() {
                     </p>
                     <div className="mt-2.5 flex gap-2.5">
                       {season.cartelas.map((c) => (
-                        <div
-                          key={c.src}
-                          className="relative aspect-square w-14 overflow-hidden rounded-md ring-1 ring-white/25 sm:w-16"
+                        <Link
+                          key={c.slug}
+                          href={`/produto/${c.slug}`}
+                          title={c.name}
+                          className="relative aspect-square w-20 overflow-hidden rounded-md ring-1 ring-white/25 transition-transform hover:-translate-y-0.5 hover:ring-white/70 sm:w-24"
                         >
                           <Image
                             src={c.src}
                             alt={c.name}
                             fill
-                            sizes="64px"
+                            sizes="96px"
                             className="object-cover"
                           />
-                        </div>
+                        </Link>
                       ))}
                     </div>
                   </div>
@@ -135,10 +148,10 @@ export default function SeasonPanels() {
               {/* ação — botão primário, permanece no rodapé mesmo com o hover expandido */}
               <div className="mt-6">
                 <Link
-                  href={`/produto/cartela-${season.id}`}
+                  href="/loja?c=ferramentas"
                   className="inline-block rounded-xs bg-paper px-6 py-3 text-[0.6rem] font-medium uppercase tracking-[0.22em] text-marsala transition-colors hover:bg-marsala hover:text-paper"
                 >
-                  Saiba mais
+                  Ver as cartelas
                 </Link>
               </div>
             </div>

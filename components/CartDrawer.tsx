@@ -6,15 +6,10 @@ import { useState } from "react";
 import { useCart } from "@/lib/cart";
 import { formatBRL } from "@/lib/catalog";
 
-const FREE_SHIPPING = 600;
-
 export default function CartDrawer() {
   const { items, isOpen, closeCart, remove, setQty, subtotal, clear, count } =
     useCart();
   const [confirmed, setConfirmed] = useState(false);
-
-  const remaining = Math.max(0, FREE_SHIPPING - subtotal);
-  const progress = Math.min(100, (subtotal / FREE_SHIPPING) * 100);
 
   function checkout() {
     setConfirmed(true);
@@ -38,7 +33,7 @@ export default function CartDrawer() {
       <aside
         role="dialog"
         aria-modal="true"
-        aria-label="Sacola de compras"
+        aria-label="Carrinho de compras"
         className={`fixed right-0 top-0 z-[61] flex h-dvh w-full max-w-[26rem] flex-col bg-paper shadow-2xl transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
@@ -46,7 +41,7 @@ export default function CartDrawer() {
         {/* header */}
         <div className="flex items-center justify-between px-7 pb-5 pt-7">
           <div>
-            <p className="u-eyebrow">Sua sacola</p>
+            <p className="u-eyebrow">Seu carrinho</p>
             <p className="u-display mt-1 text-2xl text-ink">
               {count} {count === 1 ? "item" : "itens"}
             </p>
@@ -54,7 +49,7 @@ export default function CartDrawer() {
           <button
             type="button"
             onClick={handleClose}
-            aria-label="Fechar sacola"
+            aria-label="Fechar carrinho"
             className="grid h-9 w-9 place-items-center rounded-full text-ink-soft transition-colors hover:bg-paper-deep hover:text-ink"
           >
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
@@ -84,7 +79,7 @@ export default function CartDrawer() {
           </div>
         ) : items.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center gap-4 px-8 text-center">
-            <p className="font-display text-2xl text-ink">Sua sacola está vazia</p>
+            <p className="font-display text-2xl text-ink">Seu carrinho está vazio</p>
             <p className="max-w-xs text-sm leading-relaxed text-ink-soft">
               As cores certas começam pelas ferramentas certas.
             </p>
@@ -98,31 +93,6 @@ export default function CartDrawer() {
           </div>
         ) : (
           <>
-            {/* free shipping meter */}
-            <div className="px-7 pb-5">
-              <p className="text-[0.8rem] leading-relaxed text-ink-soft">
-                {remaining > 0 ? (
-                  <>
-                    Faltam{" "}
-                    <span className="font-medium text-ink">
-                      {formatBRL(remaining)}
-                    </span>{" "}
-                    para o frete cortesia.
-                  </>
-                ) : (
-                  <span className="font-medium text-ink">
-                    Você ganhou frete cortesia ✦
-                  </span>
-                )}
-              </p>
-              <div className="mt-2.5 h-px w-full bg-line">
-                <div
-                  className="h-px bg-marsala transition-[width] duration-500"
-                  style={{ width: `${progress}%` }}
-                />
-              </div>
-            </div>
-
             {/* items */}
             <ul className="flex-1 divide-y divide-line/70 overflow-y-auto border-t border-line/70 px-7">
               {items.map((item) => (

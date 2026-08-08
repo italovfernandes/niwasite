@@ -7,10 +7,11 @@ import { useCart } from "@/lib/cart";
 
 const LINKS = [
   { href: "/", label: "Home" },
-  { href: "/produto/cartela-sazonal-12-subtons", label: "Cartelas" },
-  { href: "/guias", label: "Guias" },
   { href: "/loja", label: "Loja" },
+  { href: "/produto/cartela-sazonal-12-subtons", label: "Cartelas" },
+  { href: "/guias", label: "Dossiês" },
   { href: "/partnership", label: "Partnership" },
+  { href: "/reviews", label: "Reviews" },
 ];
 
 function IconSearch() {
@@ -32,8 +33,9 @@ function IconUser() {
 function IconBag() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="h-[19px] w-[19px]">
-      <path d="M6 8h12l-1 12.5H7L6 8Z" />
-      <path d="M9 8.5V6a3 3 0 0 1 6 0v2.5" />
+      <path d="M2.5 3.5H5l2.1 10.5a1.7 1.7 0 0 0 1.7 1.4h8a1.7 1.7 0 0 0 1.7-1.3L21.5 7H6" />
+      <circle cx="9.5" cy="19.5" r="1.3" />
+      <circle cx="17" cy="19.5" r="1.3" />
     </svg>
   );
 }
@@ -95,12 +97,12 @@ export default function Nav() {
       }`}
     >
       <div
-        className={`border-b transition-colors duration-500 ${
+        className={`transition-colors duration-500 ${
           transparent
-            ? "border-transparent bg-transparent"
+            ? "bg-transparent"
             : theme === "dark" && !menuOpen
-              ? "border-white/10 bg-plum/95 backdrop-blur-md"
-              : "border-line bg-paper/95 backdrop-blur-md"
+              ? "bg-plum/95 backdrop-blur-md"
+              : "bg-paper/95 backdrop-blur-md"
         }`}
       >
         <nav className="u-container flex h-[62px] items-center gap-6">
@@ -109,9 +111,13 @@ export default function Nav() {
             <Link href="/" aria-label="Niwa — início" className="flex shrink-0 items-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={whiteText ? "/logo-white.svg" : "/logo-purple.svg"}
-                alt="Niwa"
-                className="h-[22px] w-auto"
+                src={
+                  whiteText
+                    ? "/logo-seasons-white.svg"
+                    : "/logo-seasons-purple.svg"
+                }
+                alt="Niwa Seasons"
+                className="h-20 w-auto md:h-24"
               />
             </Link>
           </div>
@@ -147,13 +153,14 @@ export default function Nav() {
             <span aria-hidden className="cursor-default">
               <IconSearch />
             </span>
-            <Link href="/conta" aria-label="Minha conta" className="transition-opacity hover:opacity-70">
+            {/* perfil só no desktop — no mobile a conta fica no menu hambúrguer */}
+            <Link href="/conta" aria-label="Minha conta" className="hidden transition-opacity hover:opacity-70 md:block">
               <IconUser />
             </Link>
             <button
               type="button"
               onClick={openCart}
-              aria-label={`Abrir sacola, ${count} ${count === 1 ? "item" : "itens"}`}
+              aria-label={`Abrir carrinho, ${count} ${count === 1 ? "item" : "itens"}`}
               className="flex items-center gap-1.5 transition-opacity hover:opacity-70"
             >
               <IconBag />
@@ -185,23 +192,28 @@ export default function Nav() {
         </nav>
       </div>
 
-      {/* mobile menu */}
+      {/* mobile menu — painel de altura cheia (não corta os itens) */}
       <div
-        className={`overflow-hidden border-b border-line bg-paper md:hidden ${
-          menuOpen ? "max-h-96" : "max-h-0"
-        } transition-[max-height] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]`}
+        className={`overflow-y-auto bg-paper md:hidden ${
+          menuOpen ? "h-[calc(100dvh-62px)]" : "h-0"
+        } transition-[height] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]`}
       >
-        <div className="u-container flex flex-col gap-1 py-3">
+        <div className="u-container flex flex-col gap-1 py-4">
           {LINKS.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className="border-b border-line/60 py-3 font-display text-xl text-ink last:border-0"
+              onClick={() => setMenuOpen(false)}
+              className="border-b border-line/60 py-4 font-display text-xl text-ink"
             >
               {l.label}
             </Link>
           ))}
-          <Link href="/conta" className="py-3 font-display text-xl text-ink">
+          <Link
+            href="/conta"
+            onClick={() => setMenuOpen(false)}
+            className="py-4 font-display text-xl text-ink"
+          >
             Minha conta
           </Link>
         </div>

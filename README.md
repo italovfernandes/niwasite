@@ -1,51 +1,36 @@
-# Niwa — Casa de Coloração Pessoal
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-Site institucional e loja da **Niwa**, marca de coloração pessoal (colorimetria).
-Protótipo de alta fidelidade: hero em vídeo, jornada editorial por scroll,
-cartelas das 4 estações, guias de estilo, consultoria e carrinho mock.
+## Getting Started
 
-## Stack
-
-- **Next.js 16** (App Router, React 19, Server Components)
-- **TypeScript**
-- **Tailwind CSS v4** (tokens em `app/globals.css`)
-- Animações de scroll com **rAF + getBoundingClientRect** (imperativo)
-
-## Rodando localmente
+First, run the development server:
 
 ```bash
-npm install
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-Abra [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Outros scripts:
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-```bash
-npm run build   # build de produção
-npm run start   # servir o build de produção
-npm run lint    # eslint
-```
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Estrutura
+## Learn More
 
-```
-app/            rotas (App Router): home, produto, guias, loja, sobre,
-                partnership, atendimento, conta, busca
-components/     componentes de UI e seções (Nav, Footer, heros, sequências…)
-lib/            catálogo de produtos, estações e estado do carrinho
-public/         imagens, vídeos e ícones da marca
-```
+To learn more about Next.js, take a look at the following resources:
 
-## Design system
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-Tokens de cor, tipografia e ritmo estão em `app/globals.css` (`@theme`).
-As diretrizes de composição e a régua de qualidade estão em
-[`CLAUDE.md`](./CLAUDE.md). Notas específicas desta versão do Next em
-[`AGENTS.md`](./AGENTS.md).
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
----
+## Deploy on Vercel
 
-Protótipo de demonstração — checkout, login e busca não estão conectados a
-back-end.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
