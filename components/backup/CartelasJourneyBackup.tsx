@@ -16,22 +16,22 @@ const seg = (v: number, i0: number, i1: number, o0: number, o1: number) =>
 const PHRASES = [
   (
     <>
-      Você não se veste melhor{" "}
-      <em className="italic">pela quantidade de roupas que tem,</em>
+      You don't dress better{" "}
+      <em className="italic">by the number of clothes you own,</em>
     </>
   ),
   (
     <>
-      mas pela quantidade de{" "}
-      <em className="italic">conhecimento que tem sobre si</em> mesma e sobre as
-      suas cores.
+      but by the amount of{" "}
+      <em className="italic">knowledge you have about yourself</em> and about
+      your colors.
     </>
   ),
-  <>As cartelas Niwa são a síntese de anos de experiência humana e técnica,</>,
+  <>Niwa color fans are the synthesis of years of human and technical experience,</>,
   (
     <>
-      para{" "}
-      <em className="italic">te fazer sentir-se bem consigo mesma.</em>
+      to{" "}
+      <em className="italic">make you feel good about yourself.</em>
     </>
   ),
 ];
@@ -200,14 +200,14 @@ function Filosofia() {
   return (
     <div className="mx-auto max-w-2xl font-display text-2xl font-light leading-[1.4] sm:text-3xl md:text-[2.4rem] md:leading-[1.35]">
       <p>
-        Você não se veste melhor{" "}
-        <em className="italic">pela quantidade de roupas que tem,</em> mas pela
-        quantidade de <em className="italic">conhecimento que tem sobre si</em>{" "}
-        mesma e sobre as suas cores.
+        You don't dress better{" "}
+        <em className="italic">by the number of clothes you own,</em> but by the
+        amount of <em className="italic">knowledge you have about yourself</em>{" "}
+        and about your colors.
       </p>
       <p className="mt-6">
-        As cartelas Niwa são a síntese de anos de experiência humana e técnica,
-        para <em className="italic">te fazer sentir-se bem consigo mesma.</em>
+        Niwa color fans are the synthesis of years of human and technical experience,
+        to <em className="italic">make you feel good about yourself.</em>
       </p>
     </div>
   );
@@ -216,9 +216,9 @@ function Filosofia() {
 function DeAdeus() {
   return (
     <h2 className="u-display text-5xl md:text-6xl">
-      Dê adeus ao estresse
+      Say goodbye to the stress
       <br />
-      de <em className="font-light italic u-accent">se vestir.</em>
+      of <em className="font-light italic u-accent">getting dressed.</em>
     </h2>
   );
 }

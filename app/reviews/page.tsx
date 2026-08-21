@@ -8,7 +8,7 @@ import { REVIEWS } from "@/lib/reviews";
 export const metadata: Metadata = {
   title: "Reviews",
   description:
-    "Depoimentos, avaliações e vídeos de quem usa as cartelas Niwa Seasons e descobriu a própria estação.",
+    "Testimonials, reviews, and videos from women who use the Niwa Seasons color fans and discovered their own season.",
 };
 
 function Stars({ value }: { value: number }) {
@@ -45,13 +45,13 @@ export default function ReviewsPage() {
         <Reveal className="max-w-3xl">
           <p className="u-eyebrow">Reviews</p>
           <h1 className="u-display mt-4 text-5xl md:text-6xl">
-            Quem já vive
+            Women already living
             <br />
-            <em className="font-light italic u-accent">nas suas cores.</em>
+            <em className="font-light italic u-accent">in their colors.</em>
           </h1>
           <p className="mt-6 max-w-md text-lg leading-relaxed text-ink-soft">
-            Histórias reais de quem descobriu a própria estação e nunca mais
-            duvidou de uma cor.
+            Real stories from women who discovered their own season and never
+            doubted a color again.
           </p>
         </Reveal>
       </section>
@@ -61,13 +61,13 @@ export default function ReviewsPage() {
         <div className="grid items-center gap-10 rounded-lg border border-line bg-paper-deep p-8 md:grid-cols-[auto_1fr] md:gap-16 md:p-12">
           <Reveal className="text-center md:text-left">
             <p className="font-display text-7xl leading-none text-ink">
-              {media.toFixed(1).replace(".", ",")}
+              {media.toFixed(1)}
             </p>
             <div className="mt-3 flex justify-center md:justify-start">
               <Stars value={media} />
             </div>
             <p className="mt-3 text-sm text-ink-soft">
-              {total} avaliações verificadas
+              {total} verified reviews
             </p>
           </Reveal>
 
@@ -97,10 +97,10 @@ export default function ReviewsPage() {
       {/* ===== DEPOIMENTOS ===== */}
       <section className="u-container mt-20 md:mt-28">
         <Reveal className="mb-12 max-w-2xl">
-          <p className="u-eyebrow">Depoimentos</p>
+          <p className="u-eyebrow">Testimonials</p>
           <h2 className="u-display mt-4 text-4xl md:text-5xl">
-            Palavras de quem{" "}
-            <em className="font-light italic u-accent">vestiu a mudança.</em>
+            Words from those who{" "}
+            <em className="font-light italic u-accent">wore the change.</em>
           </h2>
         </Reveal>
         <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
@@ -115,10 +115,10 @@ export default function ReviewsPage() {
       {/* ===== VÍDEOS ===== */}
       <section className="u-container mt-20 md:mt-28">
         <Reveal className="mb-12 max-w-2xl">
-          <p className="u-eyebrow">Em vídeo</p>
+          <p className="u-eyebrow">On video</p>
           <h2 className="u-display mt-4 text-4xl md:text-5xl">
-            Veja e ouça{" "}
-            <em className="font-light italic u-accent">as histórias.</em>
+            Watch and hear{" "}
+            <em className="font-light italic u-accent">the stories.</em>
           </h2>
         </Reveal>
         <ReviewVideos />
@@ -128,14 +128,14 @@ export default function ReviewsPage() {
       <section className="u-section mt-20 bg-paper-deep md:mt-28">
         <div className="u-container grid gap-12 md:grid-cols-[1fr_1.2fr] md:gap-20">
           <Reveal>
-            <p className="u-eyebrow">Sua vez</p>
+            <p className="u-eyebrow">Your turn</p>
             <h2 className="u-display mt-4 text-4xl md:text-5xl">
-              Deixe o seu{" "}
+              Leave your{" "}
               <em className="font-light italic u-accent">review.</em>
             </h2>
             <p className="mt-6 max-w-sm text-lg leading-relaxed text-ink-soft">
-              Já vive nas suas cores? Conte a sua história — ela pode ser o empurrão
-              que outra mulher precisa.
+              Already living in your colors? Share your story — it could be the
+              nudge another woman needs.
             </p>
           </Reveal>
           <Reveal delay={120}>

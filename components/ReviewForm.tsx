@@ -49,11 +49,11 @@ export default function ReviewForm() {
       <div className="flex min-h-[18rem] flex-col items-center justify-center rounded-sm border border-line bg-paper p-10 text-center">
         <span className="font-display text-5xl text-marsala">✓</span>
         <h3 className="mt-4 font-display text-2xl text-ink">
-          Obrigada pelo seu review!
+          Thank you for your review!
         </h3>
         <p className="mt-2 max-w-xs text-sm leading-relaxed text-ink-soft">
-          Este é um envio de demonstração. Na versão real, seu depoimento entraria
-          na moderação antes de aparecer aqui.
+          This is a demo submission. In the real version, your testimonial would go
+          through moderation before appearing here.
         </p>
       </div>
     );
@@ -69,7 +69,7 @@ export default function ReviewForm() {
     >
       {/* indicador de etapa */}
       <p className="mb-6 text-[0.6rem] uppercase tracking-[0.24em] text-ink-mute">
-        Etapa {step} de 2
+        Step {step} of 2
       </p>
 
       {step === 1 ? (
@@ -77,7 +77,7 @@ export default function ReviewForm() {
           {/* nome */}
           <div>
             <label htmlFor="rv-nome" className={label}>
-              Nome
+              Name
             </label>
             <input
               id="rv-nome"
@@ -85,14 +85,14 @@ export default function ReviewForm() {
               type="text"
               value={nome}
               onChange={(e) => setNome(e.target.value)}
-              placeholder="Como quer aparecer"
+              placeholder="How you'd like to appear"
             />
           </div>
 
           {/* email */}
           <div className="mt-5">
             <label htmlFor="rv-email" className={label}>
-              E-mail
+              Email
             </label>
             <input
               id="rv-email"
@@ -103,7 +103,7 @@ export default function ReviewForm() {
               placeholder="seu@email.com"
             />
             <p className="mt-1.5 text-[0.72rem] leading-relaxed text-ink-mute">
-              Seu e-mail não será divulgado — usamos só para confirmar a avaliação.
+              Your email won't be shared — we only use it to confirm your review.
             </p>
           </div>
 
@@ -113,7 +113,7 @@ export default function ReviewForm() {
             disabled={!step1Ok}
             className="group mt-7 inline-flex items-center gap-2.5 rounded-xs bg-marsala px-8 py-4 text-[0.7rem] font-medium uppercase tracking-[0.22em] text-paper transition-[background-color,transform] duration-300 hover:bg-marsala-deep active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40"
           >
-            Continuar
+            Continue
             <span aria-hidden className="u-arrow">
               →
             </span>
@@ -125,11 +125,11 @@ export default function ReviewForm() {
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <label htmlFor="rv-cartela" className={label}>
-                Cartela
+                Color Fan
               </label>
               <select id="rv-cartela" className={field} defaultValue="">
                 <option value="" disabled>
-                  Selecione a sua cartela
+                  Select your color fan
                 </option>
                 {SEASONS.map((s) => (
                   <optgroup key={s.id} label={s.name}>
@@ -140,34 +140,34 @@ export default function ReviewForm() {
                     ))}
                   </optgroup>
                 ))}
-                <option value="nao-sei">Ainda não sei</option>
+                <option value="nao-sei">I don't know yet</option>
               </select>
             </div>
             <div>
               <label htmlFor="rv-cidade" className={label}>
-                Cidade
+                City
               </label>
-              <input id="rv-cidade" className={field} type="text" placeholder="Sua cidade" />
+              <input id="rv-cidade" className={field} type="text" placeholder="Your city" />
             </div>
           </div>
 
           {/* avaliação */}
           <div className="mt-5">
             <label htmlFor="rv-texto" className={label}>
-              Avaliação
+              Review
             </label>
             <textarea
               id="rv-texto"
               className={`${field} min-h-[7rem] resize-y`}
               required
-              placeholder="Conte como as suas cores mudaram o seu dia a dia…"
+              placeholder="Tell us how your colors changed your everyday life…"
             />
           </div>
 
           {/* arquivos */}
           <div className="mt-5">
             <label htmlFor="rv-fotos" className={label}>
-              Fotos (opcional)
+              Photos (optional)
             </label>
             <label
               htmlFor="rv-fotos"
@@ -178,8 +178,8 @@ export default function ReviewForm() {
                 <path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
               </svg>
               {files.length > 0
-                ? `${files.length} ${files.length === 1 ? "foto selecionada" : "fotos selecionadas"}`
-                : "Adicionar fotos das suas cores"}
+                ? `${files.length} ${files.length === 1 ? "photo selected" : "photos selected"}`
+                : "Add photos of your colors"}
             </label>
             <input
               id="rv-fotos"
@@ -193,12 +193,12 @@ export default function ReviewForm() {
 
           {/* nota — por último */}
           <div className="mt-6">
-            <span className={label}>Sua nota</span>
+            <span className={label}>Your rating</span>
             <div
               className="flex gap-1"
               onMouseLeave={() => setHover(0)}
               role="radiogroup"
-              aria-label="Nota de 1 a 5"
+              aria-label="Rating from 1 to 5"
             >
               {[1, 2, 3, 4, 5].map((n) => (
                 <Star
@@ -206,7 +206,7 @@ export default function ReviewForm() {
                   filled={n <= (hover || rating)}
                   onMouseEnter={() => setHover(n)}
                   onClick={() => setRating(n)}
-                  aria-label={`${n} ${n === 1 ? "estrela" : "estrelas"}`}
+                  aria-label={`${n} ${n === 1 ? "star" : "stars"}`}
                   aria-pressed={n === rating}
                 />
               ))}
@@ -220,14 +220,14 @@ export default function ReviewForm() {
               onClick={() => setStep(1)}
               className="rounded-xs border border-line px-6 py-4 text-[0.7rem] font-medium uppercase tracking-[0.22em] text-ink-soft transition-colors hover:border-ink hover:text-ink"
             >
-              Voltar
+              Back
             </button>
             <button
               type="submit"
               disabled={rating === 0}
               className="group inline-flex items-center gap-2.5 rounded-xs bg-marsala px-8 py-4 text-[0.7rem] font-medium uppercase tracking-[0.22em] text-paper transition-[background-color,transform] duration-300 hover:bg-marsala-deep active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40"
             >
-              Enviar review
+              Submit review
               <span aria-hidden className="u-arrow">
                 →
               </span>

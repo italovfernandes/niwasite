@@ -66,45 +66,45 @@ function CenarioIcon({
 }
 
 const POR_QUE = [
-  "Quanto mais você usa, mais aprende a usar",
-  "Descubra sempre novas combinações",
-  "Cores e combinações com validade técnica",
+  "The more you use them, the more you learn to use them",
+  "Always discover new combinations",
+  "Colors and combinations with technical grounding",
 ];
 
 const RECURSOS = [
   {
-    title: "Autoconhecimento",
-    text: "Um espelho para entender as suas cores — e, com elas, um pouco mais de você.",
+    title: "Self-knowledge",
+    text: "A mirror to understand your colors — and, with them, a little more of yourself.",
   },
   {
-    title: "Compartilhe",
-    text: "Ajude suas amigas a descobrirem as próprias cores e combinações.",
+    title: "Share",
+    text: "Help your friends discover their own colors and combinations.",
   },
 ];
 
 const ECON_RECURSOS = [
-  "Menos compras motivadas só por tendência",
-  "Maior taxa de uso por peça adquirida",
-  "Menos dinheiro parado em roupas esquecidas",
+  "Fewer purchases driven by trends alone",
+  "A higher wear rate for every piece you buy",
+  "Less money tied up in forgotten clothes",
 ];
 const ECON_TEMPO = [
-  "Menos tempo experimentando o que não combina",
-  "Decisões mais rápidas na hora de se vestir",
-  "Compras mais objetivas, menos indecisão",
+  "Less time trying on what doesn't suit you",
+  "Faster decisions when getting dressed",
+  "More focused shopping, less indecision",
 ];
 
 const CENARIOS: { label: string; desc?: string; icon: CenarioIconName }[] = [
-  { label: "+ de 80 cores por estação", icon: "palette" },
-  { label: "Cabelos & Maquiagem", icon: "makeup" },
+  { label: "80+ colors per season", icon: "palette" },
+  { label: "Hair & Makeup", icon: "makeup" },
   {
     label: "ColorKiss",
-    desc: "Teste em acrílico de batom — exclusividade Niwa.",
+    desc: "Acrylic lipstick tester — a Niwa exclusive.",
     icon: "lips",
   },
-  { label: "Acessórios & Estampas", icon: "accessories" },
+  { label: "Accessories & Prints", icon: "accessories" },
   {
     label: "SmartTravel",
-    desc: "Looks e checklist de viagem.",
+    desc: "Looks and a travel checklist.",
     icon: "travel",
   },
 ];
@@ -131,12 +131,12 @@ export default function CartelasLandingBackup() {
       <section className="grid bg-plum text-paper md:min-h-screen md:grid-cols-2">
         <div className="flex flex-col justify-center px-6 py-16 md:px-14 md:py-0 lg:px-20">
           <Reveal className="max-w-md">
-            <p className="u-eyebrow !text-[#C295D9]/70">Por que usar</p>
+            <p className="u-eyebrow !text-[#C295D9]/70">Why use them</p>
             <h2 className="u-display mt-6 text-5xl leading-[1.05] md:text-6xl">
-              Com as cartelas Niwa,
+              With Niwa color fans,
               <br />
-              se vestir{" "}
-              <em className="font-light italic u-accent">vira prazer</em>
+              getting dressed{" "}
+              <em className="font-light italic u-accent">becomes a joy</em>
             </h2>
             <ul className="mt-12 border-b border-paper/15">
               {POR_QUE.map((item, i) => (
@@ -156,7 +156,7 @@ export default function CartelasLandingBackup() {
         <div className="relative min-h-[62vh] md:min-h-screen">
           <Image
             src="/cartelas/vira-prazer.jpg"
-            alt="Mulher se arrumando ao espelho com o leque de cores Niwa"
+            alt="Woman getting ready at the mirror with the Niwa color fan"
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover object-center"
@@ -168,12 +168,12 @@ export default function CartelasLandingBackup() {
       <section data-nav-dark className="u-section bg-plum text-paper">
         <div className="u-container">
           <Reveal className="max-w-2xl">
-            <p className="u-eyebrow !text-[#C295D9]/70">Mais recursos</p>
+            <p className="u-eyebrow !text-[#C295D9]/70">More features</p>
             <h2 className="u-display mt-6 text-5xl md:text-6xl">
-              Para expandir sua
+              To expand your
               <br />
-              experiência de{" "}
-              <em className="font-light italic u-accent">viver.</em>
+              experience of{" "}
+              <em className="font-light italic u-accent">living.</em>
             </h2>
           </Reveal>
           <div className="mt-16 grid gap-x-10 gap-y-12 md:grid-cols-2">
@@ -198,11 +198,11 @@ export default function CartelasLandingBackup() {
       <section id="cartelas-sazonais" className="u-section scroll-mt-24">
         <div className="u-container">
           <Reveal className="max-w-2xl">
-            <p className="u-eyebrow">As 12 cartelas</p>
+            <p className="u-eyebrow">The 12 color fans</p>
             <h2 className="u-display mt-4 text-5xl md:text-6xl">
-              Esteja com elas em
+              Be with them through
               <br />
-              <em className="font-light italic u-accent">todas as estações.</em>
+              <em className="font-light italic u-accent">every season.</em>
             </h2>
           </Reveal>
 
@@ -212,7 +212,7 @@ export default function CartelasLandingBackup() {
                 <div className="flex items-baseline justify-between border-b border-line pb-3">
                   <h3 className="u-display text-2xl md:text-3xl">{season.name}</h3>
                   <span className="text-[0.58rem] uppercase tracking-[0.2em] text-ink-mute">
-                    {season.temp} · 3 cartelas
+                    {season.temp} · 3 color fans
                   </span>
                 </div>
                 <div className="-mx-6 mt-7 flex snap-x gap-5 overflow-x-auto px-6 pb-4 [scrollbar-width:none] md:mx-0 md:px-0 [&::-webkit-scrollbar]:hidden">
@@ -252,21 +252,21 @@ export default function CartelasLandingBackup() {
         <div aria-hidden className="absolute inset-0 bg-black/60" />
         <div className="u-container relative">
           <Reveal className="max-w-2xl">
-            <p className="u-eyebrow !text-paper/55">Como funciona</p>
+            <p className="u-eyebrow !text-paper/55">How it works</p>
             <h2 className="u-display mt-4 text-4xl md:text-5xl">
-              Tão simples que
+              So simple it
               <br />
-              parece <em className="font-light italic u-accent">mágica.</em>
+              feels like <em className="font-light italic u-accent">magic.</em>
             </h2>
             <p className="mt-6 max-w-lg leading-relaxed text-paper/70">
-              Uma imersão que alia autoconhecimento, dinamismo e técnica. Economize
-              tempo, potencialize seus looks, ganhe segurança.
+              An immersion that blends self-knowledge, dynamism, and technique. Save
+              time, elevate your looks, gain confidence.
             </p>
           </Reveal>
           <div className="mt-14 grid gap-12 md:grid-cols-2 md:gap-16">
             {[
-              { title: "Economize recursos", items: ECON_RECURSOS },
-              { title: "Economize tempo", items: ECON_TEMPO },
+              { title: "Save resources", items: ECON_RECURSOS },
+              { title: "Save time", items: ECON_TEMPO },
             ].map((col, ci) => (
               <Reveal key={col.title} delay={ci * 100}>
                 <h3 className="border-b border-paper/15 pb-4 font-display text-2xl italic">
@@ -290,10 +290,11 @@ export default function CartelasLandingBackup() {
       <section data-nav-dark className="u-section bg-plum text-paper">
         <div className="u-container">
           <Reveal className="max-w-2xl">
-            <p className="u-eyebrow !text-[#C295D9]/70">Recursos</p>
+            <p className="u-eyebrow !text-[#C295D9]/70">Features</p>
             <h2 className="u-display mt-4 text-5xl md:text-6xl">
-              Cartelas únicas
-              <br />e <em className="font-light italic u-accent">práticas.</em>
+              Color fans that are unique
+              <br />
+              and <em className="font-light italic u-accent">practical.</em>
             </h2>
           </Reveal>
 
@@ -337,7 +338,7 @@ export default function CartelasLandingBackup() {
       >
         <Image
           src="/cartelas/guarda-roupa.jpg"
-          alt="Closet organizado com roupas dispostas por cor"
+          alt="Organized closet with clothes arranged by color"
           fill
           sizes="100vw"
           className="object-cover object-[70%_center]"
@@ -351,22 +352,22 @@ export default function CartelasLandingBackup() {
         <div className="u-container relative py-24 md:py-0">
           <Reveal className="max-w-3xl">
             <p className="u-eyebrow !text-[#C295D9]/80">
-              Organização gera possibilidades.
+              Organization creates possibilities.
             </p>
             <h2 className="u-display mt-6 text-5xl leading-[1.05] md:text-6xl">
-              Seu guarda-roupa mais
+              Your wardrobe more
               <br />
-              <em className="font-light italic u-accent">funcional do que nunca.</em>
+              <em className="font-light italic u-accent">functional than ever.</em>
             </h2>
             <p className="mt-6 max-w-md text-lg leading-relaxed text-paper/80">
-              O preço de uma t-shirt básica. O potencial de um{" "}
-              <em className="italic text-[#C295D9]">guarda-roupa inteiro.</em>
+              The price of a basic t-shirt. The potential of an{" "}
+              <em className="italic text-[#C295D9]">entire wardrobe.</em>
             </p>
             <Link
               href="#cartelas-sazonais"
               className="mt-9 inline-block self-start rounded-xs bg-paper px-9 py-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-marsala transition-colors hover:bg-[#C295D9] hover:text-plum"
             >
-              Escolher minha estação
+              Choose my season
             </Link>
           </Reveal>
         </div>

@@ -7,7 +7,7 @@ import type { Product } from "@/lib/catalog";
 export default function AddToCartButton({
   product,
   className = "",
-  label = "Adicionar ao carrinho",
+  label = "Add to cart",
 }: {
   product: Product;
   className?: string;
@@ -34,11 +34,11 @@ export default function AddToCartButton({
     <button
       type="button"
       onClick={handleAdd}
-      aria-label={`Adicionar ${product.name} ao carrinho`}
+      aria-label={`Add ${product.name} to cart`}
       className={`group inline-flex items-center justify-center gap-2.5 rounded-xs bg-marsala px-7 py-4 text-[0.7rem] font-medium uppercase tracking-[0.22em] text-paper transition-[background-color,transform] duration-300 hover:bg-marsala-deep focus-visible:outline-marsala active:scale-[0.98] ${className}`}
     >
       {added ? (
-        <span className="anim-pop">Adicionado ✓</span>
+        <span className="anim-pop">Added ✓</span>
       ) : (
         <>
           {label}

@@ -10,14 +10,14 @@ import { useEffect, useRef } from "react";
 const clamp = (n: number, a = 0, b = 1) => Math.min(b, Math.max(a, n));
 
 const LINES: { t: string; em?: boolean; mt?: boolean }[] = [
-  { t: "Você não se veste melhor" },
-  { t: "pela quantidade de roupas que tem,", em: true },
-  { t: "mas pela quantidade de conhecimento" },
-  { t: "que tem sobre si mesma", em: true },
-  { t: "e sobre as suas cores." },
-  { t: "As cartelas Niwa são a síntese de anos", mt: true },
-  { t: "de experiência humana e técnica," },
-  { t: "para te fazer sentir-se bem consigo mesma.", em: true },
+  { t: "You don't dress better" },
+  { t: "by the amount of clothes you own,", em: true },
+  { t: "but by the amount of knowledge" },
+  { t: "you have about yourself", em: true },
+  { t: "and about your colors." },
+  { t: "The Niwa color fans are the synthesis of years", mt: true },
+  { t: "of human and technical experience," },
+  { t: "to make you feel good about yourself.", em: true },
 ];
 
 export default function PhilosophyReveal() {

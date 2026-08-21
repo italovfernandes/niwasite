@@ -42,7 +42,7 @@ export default function BackToTop() {
     <button
       type="button"
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      aria-label="Voltar ao topo"
+      aria-label="Back to top"
       className={`group fixed bottom-6 right-6 z-40 grid h-11 w-11 place-items-center rounded-full bg-marsala text-paper ring-1 ring-paper/15 transition-[opacity,transform,background-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-marsala-deep active:scale-90 ${
         visible
           ? "translate-y-0 opacity-100"

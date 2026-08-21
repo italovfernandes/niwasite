@@ -18,7 +18,7 @@ export default function ProductArt({
   return (
     <div className={`relative isolate overflow-hidden bg-paper-deep ${className}`}>
       <Image
-        src={`/capas/${product.slug}.jpg`}
+        src={product.image ?? `/capas/${product.slug}.jpg`}
         alt={product.name}
         fill
         sizes={sizes}

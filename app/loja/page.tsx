@@ -9,13 +9,13 @@ import {
 } from "@/lib/catalog";
 
 export const metadata: Metadata = {
-  title: "Loja",
+  title: "Shop",
   description:
-    "Cartelas, leques, guias e formação em coloração pessoal para profissionais.",
+    "Color fans, style dossiers, and personal-color training for professionals.",
 };
 
 const FILTERS: { id: "todos" | CollectionId; label: string }[] = [
-  { id: "todos", label: "Tudo" },
+  { id: "todos", label: "All" },
   ...COLLECTIONS.map((c) => ({ id: c.id, label: c.name })),
 ];
 
@@ -35,8 +35,8 @@ export default async function LojaPage({
     <div className="u-container py-10 md:py-14">
       {/* header — enxuto, foco nos produtos */}
       <Reveal>
-        <p className="u-eyebrow">A loja</p>
-        <h1 className="u-display mt-3 text-3xl md:text-4xl">O universo Niwa</h1>
+        <p className="u-eyebrow">The shop</p>
+        <h1 className="u-display mt-3 text-3xl md:text-4xl">The Niwa universe</h1>
       </Reveal>
 
       {/* filters — quadrados (padrão dos botões) */}
@@ -60,7 +60,7 @@ export default async function LojaPage({
           );
         })}
         <span className="ml-auto hidden text-[0.66rem] uppercase tracking-[0.16em] text-ink-mute sm:block">
-          {products.length} {products.length === 1 ? "produto" : "produtos"}
+          {products.length} {products.length === 1 ? "product" : "products"}
         </span>
       </div>
 

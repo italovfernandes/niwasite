@@ -6,14 +6,14 @@ import Reveal from "@/components/Reveal";
 export const metadata: Metadata = {
   title: "Partnership",
   description:
-    "Você sempre quis uma aliada nos negócios. A Niwa tem um portfólio completo para atender você e todas as suas clientes com excelência, personalização e cuidado.",
+    "You've always wanted a true business ally. Niwa has a complete portfolio to serve you and all of your clients with excellence, personalization, and care.",
 };
 
 const VALOR = [
-  "Ganhe mais tempo de produtividade",
-  "Comunique ainda mais especialidade e profissionalismo",
-  "Amplie seus valores de consultoria",
-  "Garanta descontos exclusivos pra você e suas clientes",
+  "Gain more productive time.",
+  "Communicate even greater expertise and professionalism.",
+  "Increase the value of your consulting services.",
+  "Enjoy exclusive discounts for you and your clients.",
 ];
 
 // programa de parceria — desconto progressivo por volume (03 ofertas, doc EN)
@@ -26,18 +26,18 @@ const OFERTAS: {
   {
     itens: "30+",
     desconto: "10%",
-    retorno: "Até US$ 150 a mais no seu bolso a cada pedido.",
+    retorno: "Up to $150 back in your pocket on every order.",
   },
   {
     itens: "50+",
     desconto: "20%",
-    retorno: "Até US$ 500 a mais no seu bolso a cada pedido.",
+    retorno: "Up to $500 back in your pocket on every order.",
     destaque: true,
   },
   {
     itens: "100+",
     desconto: "30%",
-    retorno: "Até US$ 1.500 a mais no seu bolso a cada pedido.",
+    retorno: "Up to $1,500 back in your pocket on every order.",
   },
 ];
 
@@ -51,7 +51,7 @@ export default function PartnershipPage() {
       >
         <Image
           src="/consultoras/consultora.jpg"
-          alt="Consultora com o leque de cores Niwa em um campo de hortênsias"
+          alt="Consultant with the Niwa color fan in a field of hydrangeas"
           fill
           priority
           sizes="100vw"
@@ -59,20 +59,20 @@ export default function PartnershipPage() {
         />
         <div aria-hidden className="absolute inset-0 bg-black/45" />
         <Reveal className="relative max-w-2xl text-paper">
-          <p className="u-eyebrow !text-paper/70">Partnership · Consultoras</p>
+          <p className="u-eyebrow !text-paper/70">Partnership · Consultants</p>
           <h1 className="u-display mt-5 text-5xl leading-[1.05] md:text-6xl">
-            Você sempre quis uma{" "}
-            <em className="font-light italic u-accent">aliada</em> nos negócios.
+            You've always wanted a true{" "}
+            <em className="font-light italic u-accent">ally</em> in business.
           </h1>
           <p className="mx-auto mt-6 max-w-md text-lg leading-relaxed text-paper/85">
-            E nós chegamos pra você. A Niwa tem as melhores cartelas e dossiês do
-            mercado para atender você e todas as suas clientes.
+            And we're here for you. Niwa has the finest color fans and dossiers on
+            the market to serve you and all of your clients.
           </p>
           <a
             href="#oferta"
             className="mt-8 inline-block rounded-xs bg-paper px-8 py-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-marsala transition-colors hover:bg-marsala hover:text-paper"
           >
-            Ver o programa
+            See the program
           </a>
         </Reveal>
       </section>
@@ -81,11 +81,11 @@ export default function PartnershipPage() {
       <section className="u-section bg-paper-deep">
         <div className="u-container">
           <Reveal className="mb-12 max-w-2xl">
-            <p className="u-eyebrow">Por que ser parceira</p>
+            <p className="u-eyebrow">Why become a partner</p>
             <h2 className="u-display mt-4 text-5xl md:text-6xl">
-              Uma aliada em cada
+              An ally in every
               <br />
-              <em className="font-light italic u-accent">estação do ano.</em>
+              <em className="font-light italic u-accent">season of the year.</em>
             </h2>
           </Reveal>
           <div className="grid gap-x-10 gap-y-8 sm:grid-cols-2">
@@ -109,15 +109,15 @@ export default function PartnershipPage() {
       <section id="oferta" className="u-section scroll-mt-24 bg-plum text-paper">
         <div className="u-container">
           <Reveal className="mx-auto max-w-2xl text-center">
-            <p className="u-eyebrow !text-paper/55">Programa de parceria</p>
+            <p className="u-eyebrow !text-paper/55">Partnership program</p>
             <h2 className="u-display mt-4 text-5xl md:text-6xl">
-              Quanto mais leva,
+              The more you take,
               <br />
-              mais <em className="font-light italic u-accent">volta pra você.</em>
+              the more <em className="font-light italic u-accent">comes back to you.</em>
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-paper/80">
-              Cartelas e dossiês no atacado, com desconto progressivo por volume.
-              Escolha o seu nível e fale com a gente para começar.
+              Color fans and dossiers at wholesale, with a progressive volume
+              discount. Choose your tier and talk to us to get started.
             </p>
           </Reveal>
 
@@ -133,18 +133,18 @@ export default function PartnershipPage() {
                 >
                   {o.destaque && (
                     <span className="mx-auto mb-4 rounded-full border border-[#C295D9]/60 px-3 py-1 text-[0.56rem] uppercase tracking-[0.22em] text-[#C295D9]">
-                      Mais escolhido
+                      Most chosen
                     </span>
                   )}
                   <p className="u-display text-2xl text-paper">{o.itens}</p>
                   <p className="mt-1 text-[0.66rem] uppercase tracking-[0.22em] text-paper/55">
-                    itens por pedido
+                    items per order
                   </p>
                   <p className="mt-6 font-display text-6xl text-[#C295D9]">
                     {o.desconto}
                   </p>
                   <p className="mt-1 text-[0.66rem] uppercase tracking-[0.2em] text-paper/55">
-                    de desconto
+                    discount
                   </p>
                   <p className="mt-6 border-t border-paper/15 pt-6 text-sm leading-relaxed text-paper/80">
                     {o.retorno}
@@ -157,7 +157,7 @@ export default function PartnershipPage() {
                         : "border border-paper/40 text-paper hover:border-paper hover:bg-paper hover:text-marsala"
                     }`}
                   >
-                    Quero agora
+                    I want it now
                   </Link>
                 </div>
               </Reveal>

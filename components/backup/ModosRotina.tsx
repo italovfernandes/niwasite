@@ -44,11 +44,11 @@ function Card({ m, i }: { m: (typeof MODOS)[number]; i: number }) {
 function Intro() {
   return (
     <>
-      <p className="u-eyebrow !text-[#C295D9]/70">Momentos do seu dia</p>
+      <p className="u-eyebrow !text-[#C295D9]/70">Moments of your day</p>
       <h2 className="u-display mt-4 text-5xl leading-[1.05] md:text-6xl">
-        Combinações de cores
+        Color combinations
         <br />
-        muito <em className="font-light italic u-accent">além do comum.</em>
+        far <em className="font-light italic u-accent">beyond the ordinary.</em>
       </h2>
     </>
   );

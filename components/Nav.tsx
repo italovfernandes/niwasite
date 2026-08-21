@@ -7,9 +7,9 @@ import { useCart } from "@/lib/cart";
 
 const LINKS = [
   { href: "/", label: "Home" },
-  { href: "/loja", label: "Loja" },
-  { href: "/produto/cartela-sazonal-12-subtons", label: "Cartelas" },
-  { href: "/guias", label: "Dossiês" },
+  { href: "/loja", label: "Shop" },
+  { href: "/produto/cartela-sazonal-12-subtons", label: "Color Fans" },
+  { href: "/guias", label: "Dossiers" },
   { href: "/partnership", label: "Partnership" },
   { href: "/reviews", label: "Reviews" },
 ];
@@ -108,7 +108,7 @@ export default function Nav() {
         <nav className="u-container flex h-[62px] items-center gap-6">
           {/* left: wordmark */}
           <div className="flex flex-1 items-center">
-            <Link href="/" aria-label="Niwa — início" className="flex shrink-0 items-center">
+            <Link href="/" aria-label="Niwa — home" className="flex shrink-0 items-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={
@@ -154,13 +154,13 @@ export default function Nav() {
               <IconSearch />
             </span>
             {/* perfil só no desktop — no mobile a conta fica no menu hambúrguer */}
-            <Link href="/conta" aria-label="Minha conta" className="hidden transition-opacity hover:opacity-70 md:block">
+            <Link href="/conta" aria-label="My account" className="hidden transition-opacity hover:opacity-70 md:block">
               <IconUser />
             </Link>
             <button
               type="button"
               onClick={openCart}
-              aria-label={`Abrir carrinho, ${count} ${count === 1 ? "item" : "itens"}`}
+              aria-label={`Open cart, ${count} ${count === 1 ? "item" : "items"}`}
               className="flex items-center gap-1.5 transition-opacity hover:opacity-70"
             >
               <IconBag />
@@ -171,7 +171,7 @@ export default function Nav() {
             <button
               type="button"
               onClick={() => setMenuOpen((v) => !v)}
-              aria-label="Abrir menu"
+              aria-label="Open menu"
               aria-expanded={menuOpen}
               className="flex h-9 w-6 items-center justify-center md:hidden"
             >
@@ -214,7 +214,7 @@ export default function Nav() {
             onClick={() => setMenuOpen(false)}
             className="py-4 font-display text-xl text-ink"
           >
-            Minha conta
+            My account
           </Link>
         </div>
       </div>

@@ -3,13 +3,13 @@ import Reveal from "@/components/Reveal";
 import ContatoForm from "@/components/ContatoForm";
 
 export const metadata: Metadata = {
-  title: "Fale com a Niwa",
+  title: "Talk to Niwa",
   description:
-    "Dúvidas sobre as suas cores, um pedido ou uma parceria? Fale com o atendimento Niwa.",
+    "Questions about your colors, an order, or a partnership? Talk to Niwa support.",
 };
 
 const CANAIS: { label: string; valor: string; href?: string }[] = [
-  { label: "E-mail", valor: "hello@niwa.com", href: "mailto:hello@niwa.com" },
+  { label: "Email", valor: "hello@niwa.com", href: "mailto:hello@niwa.com" },
   {
     label: "Instagram",
     valor: "@niwa.seasons",
@@ -20,7 +20,7 @@ const CANAIS: { label: string; valor: string; href?: string }[] = [
     valor: "/niwaseasons",
     href: "https://facebook.com/niwaseasons",
   },
-  { label: "Atendimento", valor: "Segunda a sexta, das 9h às 18h" },
+  { label: "Support", valor: "Monday to Friday, 9am to 6pm" },
 ];
 
 export default function ContatoPage() {
@@ -28,11 +28,11 @@ export default function ContatoPage() {
     <div>
       <Reveal className="max-w-2xl">
         <h2 className="u-display text-4xl md:text-5xl">
-          Fale com <em className="font-light italic u-accent">a Niwa.</em>
+          Talk to <em className="font-light italic u-accent">Niwa.</em>
         </h2>
         <p className="mt-5 text-lg leading-relaxed text-ink-soft">
-          Dúvidas sobre as suas cores, um pedido ou uma parceria? Escreva pra
-          gente — respondemos com atenção e no seu tempo.
+          Questions about your colors, an order, or a partnership? Write to us —
+          we answer with care and in your time.
         </p>
       </Reveal>
 

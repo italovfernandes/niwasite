@@ -18,7 +18,7 @@ export default function AccountForm() {
     >
       <label className="mb-5 block">
         <span className="mb-2 block text-[0.66rem] uppercase tracking-[0.18em] text-ink-mute">
-          E-mail
+          Email
         </span>
         <input
           type="email"
@@ -31,7 +31,7 @@ export default function AccountForm() {
 
       <label className="block">
         <span className="mb-2 block text-[0.66rem] uppercase tracking-[0.18em] text-ink-mute">
-          Senha
+          Password
         </span>
         <input
           type="password"
@@ -47,14 +47,14 @@ export default function AccountForm() {
         type="button"
         className="mt-3 text-[0.68rem] uppercase tracking-[0.14em] text-ink-mute transition-colors hover:text-marsala"
       >
-        Esqueci minha senha
+        Forgot my password
       </button>
 
       <button
         type="submit"
         className="group mt-8 flex w-full items-center justify-center gap-2.5 rounded-xs bg-marsala py-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-paper transition-[background-color,transform] duration-300 hover:bg-marsala-deep active:scale-[0.99]"
       >
-        Entrar
+        Sign in
         <span aria-hidden className="u-arrow">
           →
         </span>
@@ -62,8 +62,8 @@ export default function AccountForm() {
 
       {sent && (
         <p className="mt-5 rounded-sm bg-sand px-4 py-3 text-sm leading-relaxed text-ink-soft">
-          Demonstração — o login ainda não está conectado. É aqui que a conta
-          real autenticaria o seu acesso.
+          Demo — sign-in isn&apos;t connected yet. This is where the real
+          account would authenticate your access.
         </p>
       )}
     </form>

@@ -25,7 +25,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { slug } = await props.params;
   const product = productBySlug(slug);
-  if (!product) return { title: "Produto não encontrado" };
+  if (!product) return { title: "Product not found" };
   return { title: product.name, description: product.excerpt };
 }
 
@@ -70,7 +70,7 @@ export default async function ProductPage(props: PageProps<"/produto/[slug]">) {
           <div className="w-full max-w-md">
             <nav className="flex items-center gap-2 text-[0.58rem] uppercase tracking-[0.2em] text-ink-mute">
               <Link href="/loja" className="u-link hover:text-ink">
-                Loja
+                Shop
               </Link>
               <span>/</span>
               <Link
@@ -108,7 +108,7 @@ export default async function ProductPage(props: PageProps<"/produto/[slug]">) {
             {season ? (
               <div className="mt-6">
                 <p className="text-[0.56rem] uppercase tracking-[0.24em] text-ink-mute">
-                  As 3 cartelas de {season.name}
+                  The 3 color fans of {season.name}
                 </p>
                 <div className="mt-2.5 flex flex-wrap gap-2">
                   {season.cartelas.map((c) => {
@@ -138,7 +138,7 @@ export default async function ProductPage(props: PageProps<"/produto/[slug]">) {
             ) : isComboCartelas ? (
               <div className="mt-6">
                 <p className="text-[0.56rem] uppercase tracking-[0.24em] text-ink-mute">
-                  As cartelas incluídas
+                  The color fans included
                 </p>
                 <div className="mt-2.5 flex flex-wrap gap-2">
                   {allCartelas.map((c) => (
@@ -165,7 +165,7 @@ export default async function ProductPage(props: PageProps<"/produto/[slug]">) {
             <div className="mt-8">
               <AddToCartButton product={product} className="w-full" />
               <p className="mt-3 text-[0.58rem] uppercase tracking-[0.18em] text-ink-mute">
-                Frete calculado na finalização
+                Shipping calculated at checkout
               </p>
             </div>
 
@@ -173,7 +173,7 @@ export default async function ProductPage(props: PageProps<"/produto/[slug]">) {
             <div className="mt-9">
               <details className="group border-t border-line">
                 <summary className={detailSummary}>
-                  Descrição
+                  Description
                   <span
                     aria-hidden
                     className="text-sm leading-none text-ink-mute transition-transform duration-300 group-open:rotate-45"
@@ -190,7 +190,7 @@ export default async function ProductPage(props: PageProps<"/produto/[slug]">) {
 
               <details className="group border-t border-line">
                 <summary className={detailSummary}>
-                  Detalhes
+                  Details
                   <span
                     aria-hidden
                     className="text-sm leading-none text-ink-mute transition-transform duration-300 group-open:rotate-45"
@@ -213,7 +213,7 @@ export default async function ProductPage(props: PageProps<"/produto/[slug]">) {
 
               <details className="group border-y border-line">
                 <summary className={detailSummary}>
-                  O que acompanha
+                  What's included
                   <span
                     aria-hidden
                     className="text-sm leading-none text-ink-mute transition-transform duration-300 group-open:rotate-45"
@@ -242,9 +242,9 @@ export default async function ProductPage(props: PageProps<"/produto/[slug]">) {
       {related.length > 0 && (
         <section className="u-container border-t border-line py-16 md:py-20">
           <Reveal className="mb-10">
-            <p className="u-eyebrow">Ainda em {collection.name}</p>
+            <p className="u-eyebrow">Still in {collection.name}</p>
             <h2 className="u-display mt-3 text-4xl md:text-5xl">
-              Complete a <em className="font-light italic u-accent">coleção.</em>
+              Complete the <em className="font-light italic u-accent">collection.</em>
             </h2>
           </Reveal>
           <div className="grid grid-cols-2 gap-x-5 gap-y-10 md:grid-cols-4">

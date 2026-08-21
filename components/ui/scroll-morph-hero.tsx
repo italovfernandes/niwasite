@@ -58,10 +58,10 @@ function FlipCard({ src, label, kind, w, h, target }: FlipCardProps) {
           style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
         >
           <p className="mb-1 text-[7px] font-semibold uppercase tracking-[0.18em] text-[#C295D9]">
-            {kind === "color" ? "Cartela" : "Niwa"}
+            {kind === "color" ? "Color Fan" : "Niwa"}
           </p>
           <p className="font-display text-[10px] leading-tight text-paper">
-            {kind === "color" ? label : "Coloração pessoal"}
+            {kind === "color" ? label : "Personal color"}
           </p>
         </div>
       </motion.div>
@@ -299,10 +299,10 @@ export default function IntroAnimation() {
             className="u-display px-4 text-ink"
             style={{ fontSize: "clamp(1.6rem, 5vmin, 3.4rem)" }}
           >
-            Cores, nós também
+            Color, we also
             <br />
-            <em className="font-light italic u-accent">redefinimos</em> a
-            teoria.
+            <em className="font-light italic u-accent">redefined</em> the
+            theory.
           </motion.h1>
         </div>
 
@@ -315,8 +315,8 @@ export default function IntroAnimation() {
             className="u-display px-4 text-ink"
             style={{ fontSize: "clamp(1.6rem, 5vmin, 3.4rem)" }}
           >
-            Novas formas de encarar
-            <br />as cores.
+            New ways to look
+            <br />at color.
           </h2>
         </motion.div>
 

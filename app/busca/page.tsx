@@ -5,7 +5,7 @@ import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 import { PRODUCTS, COLLECTIONS } from "@/lib/catalog";
 
-const SUGESTOES = ["Cartelas", "Combo", "Guia", "Consultoria", "Inverno"];
+const SUGESTOES = ["Color Fans", "Collections", "Dossier", "Consultation", "Winter"];
 
 export default function BuscaPage() {
   const [q, setQ] = useState("");
@@ -25,7 +25,7 @@ export default function BuscaPage() {
 
   return (
     <div className="u-container py-16 md:py-20">
-      <p className="u-eyebrow">Buscar</p>
+      <p className="u-eyebrow">Search</p>
 
       {/* campo de busca */}
       <div className="mt-4 flex items-center gap-4 border-b-2 border-ink pb-4">
@@ -47,8 +47,8 @@ export default function BuscaPage() {
           type="search"
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="O que você procura?"
-          aria-label="Buscar produtos"
+          placeholder="What are you looking for?"
+          aria-label="Search products"
           className="u-display w-full min-w-0 bg-transparent text-2xl text-ink placeholder:text-ink-mute/45 focus:outline-none md:text-5xl"
         />
         {q && (
@@ -57,7 +57,7 @@ export default function BuscaPage() {
             onClick={() => setQ("")}
             className="shrink-0 text-[0.62rem] uppercase tracking-[0.18em] text-ink-mute transition-colors hover:text-marsala"
           >
-            Limpar
+            Clear
           </button>
         )}
       </div>
@@ -66,7 +66,7 @@ export default function BuscaPage() {
       {!hasQuery && (
         <div className="mt-8 flex flex-wrap items-center gap-2">
           <span className="mr-1 text-[0.62rem] uppercase tracking-[0.2em] text-ink-mute">
-            Sugestões
+            Suggestions
           </span>
           {SUGESTOES.map((s) => (
             <button
@@ -85,7 +85,7 @@ export default function BuscaPage() {
       {hasQuery && (
         <p className="mt-8 text-[0.7rem] uppercase tracking-[0.16em] text-ink-mute">
           {results.length}{" "}
-          {results.length === 1 ? "resultado" : "resultados"} para “{q.trim()}”
+          {results.length === 1 ? "result" : "results"} for “{q.trim()}”
         </p>
       )}
 
@@ -102,17 +102,17 @@ export default function BuscaPage() {
       {hasQuery && results.length === 0 && (
         <div className="mt-16 max-w-md">
           <p className="u-display text-2xl text-ink">
-            Nada encontrado por aqui.
+            Nothing found here.
           </p>
           <p className="mt-3 text-sm leading-relaxed text-ink-soft">
-            Não achamos nada para “{q.trim()}”. Tente outro termo ou explore a
-            loja inteira.
+            We didn&apos;t find anything for “{q.trim()}”. Try another term or
+            explore the whole shop.
           </p>
           <Link
             href="/loja"
             className="group mt-6 inline-flex items-center gap-2.5 rounded-xs bg-marsala px-8 py-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-paper transition-[background-color,transform] duration-300 hover:bg-marsala-deep active:scale-[0.98]"
           >
-            Ver a loja
+            View the shop
             <span aria-hidden className="u-arrow">
               →
             </span>

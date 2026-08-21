@@ -21,7 +21,7 @@ function Ic({ children }: { children: React.ReactNode }) {
 
 const PILLS = [
   {
-    label: "Cores",
+    label: "Colors",
     icon: (
       <Ic>
         <path d="M12 3s6 5.5 6 10a6 6 0 0 1-12 0c0-4.5 6-10 6-10Z" />
@@ -29,7 +29,7 @@ const PILLS = [
     ),
   },
   {
-    label: "Maquiagem",
+    label: "Makeup",
     icon: (
       <Ic>
         <path d="M9.06 11.9l8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08" />
@@ -38,7 +38,7 @@ const PILLS = [
     ),
   },
   {
-    label: "Estilo de vida",
+    label: "Lifestyle",
     icon: (
       <Ic>
         <path d="M20.4 3.5 16 2a4 4 0 0 1-8 0L3.6 3.5a2 2 0 0 0-1.3 2.2l.6 3.5a1 1 0 0 0 1 .8H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.1a1 1 0 0 0 1-.8l.6-3.5a2 2 0 0 0-1.3-2.2Z" />
@@ -57,7 +57,7 @@ export default function GuiaEstilo() {
   return (
     <section
       data-nav-sky
-      aria-label="Guia de estilo completo"
+      aria-label="Complete style dossier"
       className="relative flex min-h-screen items-center overflow-hidden bg-[#161d2b]"
     >
       {/* vídeo full-bleed em loop ping-pong (vai e volta) */}
@@ -72,14 +72,14 @@ export default function GuiaEstilo() {
       <div className="u-container relative">
         <Reveal className="max-w-xl text-paper">
           <h2 className="u-display text-5xl leading-[1.02] md:text-7xl">
-            Se aprofunde na
+            Go deeper into
             <br />
-            <em className="font-light italic u-accent">sua estação.</em>
+            <em className="font-light italic u-accent">your season.</em>
           </h2>
 
           <p className="mt-7 max-w-md text-lg leading-relaxed text-paper/80">
-            Um dossiê completo — cores, maquiagem e estilo de vida, feito pra
-            combinar com a sua cartela.
+            A complete dossier — colors, makeup, and lifestyle, made to match
+            your color fan.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-2.5">
@@ -100,7 +100,7 @@ export default function GuiaEstilo() {
             href="/guias"
             className="group mt-11 inline-flex items-center gap-2.5 rounded-xs bg-paper px-7 py-4 text-sm font-medium text-marsala transition-colors hover:bg-marsala hover:text-paper"
           >
-            Conheça nossos dossiês
+            Discover our dossiers
             <span aria-hidden className="u-arrow">
               →
             </span>

@@ -12,10 +12,10 @@ export default function ContatoForm() {
     return (
       <div className="flex h-full flex-col items-start justify-center gap-4 rounded-sm bg-paper-deep p-10">
         <span className="font-display text-4xl text-marsala anim-pop">✓</span>
-        <h3 className="font-display text-2xl text-ink">Mensagem enviada</h3>
+        <h3 className="font-display text-2xl text-ink">Message sent</h3>
         <p className="max-w-sm leading-relaxed text-ink-soft">
-          Recebemos o seu recado e respondemos em até 2 dias úteis. Obrigada por
-          escrever para a Niwa.
+          We received your note and will reply within 2 business days. Thank you
+          for writing to Niwa.
         </p>
       </div>
     );
@@ -34,7 +34,7 @@ export default function ContatoForm() {
           htmlFor="nome"
           className="u-eyebrow block text-ink-mute"
         >
-          Nome
+          Name
         </label>
         <input
           id="nome"
@@ -42,13 +42,13 @@ export default function ContatoForm() {
           type="text"
           required
           autoComplete="name"
-          placeholder="Como podemos te chamar?"
+          placeholder="What can we call you?"
           className={`mt-3 ${inputBase}`}
         />
       </div>
       <div>
         <label htmlFor="email" className="u-eyebrow block text-ink-mute">
-          E-mail
+          Email
         </label>
         <input
           id="email"
@@ -62,14 +62,14 @@ export default function ContatoForm() {
       </div>
       <div>
         <label htmlFor="mensagem" className="u-eyebrow block text-ink-mute">
-          Mensagem
+          Message
         </label>
         <textarea
           id="mensagem"
           name="mensagem"
           required
           rows={4}
-          placeholder="Conte pra gente como podemos ajudar."
+          placeholder="Tell us how we can help."
           className={`mt-3 resize-none ${inputBase}`}
         />
       </div>
@@ -77,7 +77,7 @@ export default function ContatoForm() {
         type="submit"
         className="group inline-flex items-center gap-2.5 rounded-xs bg-marsala px-8 py-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-paper transition-[background-color,transform] duration-300 hover:bg-marsala-deep active:scale-[0.98]"
       >
-        Enviar mensagem
+        Send message
         <span aria-hidden className="u-arrow">
           →
         </span>

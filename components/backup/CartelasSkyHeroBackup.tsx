@@ -54,7 +54,7 @@ export default function CartelasSkyHeroBackup() {
       data-nav-sky
       className="relative z-10 -mt-[62px] min-h-screen overflow-hidden bg-[#3f8fd4]"
       style={{ "--cw": "clamp(66px, 7.6vw, 118px)" } as CSSProperties}
-      aria-label="As cartelas Niwa"
+      aria-label="The Niwa color fans"
     >
       {/* céu */}
       <Image
@@ -80,8 +80,8 @@ export default function CartelasSkyHeroBackup() {
           className="u-display text-5xl leading-[1.05] sm:text-6xl md:text-7xl"
           style={{ textShadow: "0 2px 30px rgba(20,60,110,0.35)" }}
         >
-          As cores têm muito
-          <br />a te contar.
+          Colors have so much
+          <br />to tell you.
         </h1>
       </div>
 

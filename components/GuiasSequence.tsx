@@ -9,26 +9,26 @@ import Reveal from "@/components/Reveal";
  */
 const TOPICOS = [
   {
-    name: "Cores & estampas",
-    desc: "Aprenda a usar cores e estampas a seu favor.",
+    name: "Colors & prints",
+    desc: "Learn to use colors and prints to your advantage.",
     img: "/guia/l-cores.jpg",
     pos: "object-top",
   },
   {
-    name: "Acessórios",
-    desc: "Desbrave o mundo dos acessórios.",
+    name: "Accessories",
+    desc: "Explore the world of accessories.",
     img: "/guia/l-acessorios.jpg",
     pos: "object-center",
   },
   {
-    name: "Maquiagem",
-    desc: "Evolua suas capacidades de maquiagem.",
+    name: "Makeup",
+    desc: "Level up your makeup skills.",
     img: "/guia/l-maquiagem-2.jpg",
     pos: "object-center",
   },
   {
-    name: "Cabelo",
-    desc: "Aprenda técnicas sobre estilo de cabelos.",
+    name: "Hair",
+    desc: "Learn techniques for hair styling.",
     img: "/guia/l-cabelo-2.jpg",
     pos: "object-center",
   },
@@ -41,13 +41,13 @@ export default function GuiasSequence() {
       <div className="sticky top-0 flex h-screen items-center overflow-hidden border-t border-paper/15">
         <div className="u-container">
           <Reveal className="max-w-3xl">
-            <p className="u-eyebrow !text-[#C295D9]/70">O guia de estilo</p>
+            <p className="u-eyebrow !text-[#C295D9]/70">The style dossier</p>
             <h2 className="u-display mt-5 text-6xl leading-[1.02] md:text-8xl">
-              Da cabeça <em className="font-light italic u-accent">aos pés.</em>
+              From head <em className="font-light italic u-accent">to toe.</em>
             </h2>
             <p className="mt-7 max-w-md text-lg leading-relaxed text-paper/75">
-              Um dossiê que ensina a usar as suas cores em cada detalhe — role para
-              descobrir cada camada.
+              A dossier that teaches you to wear your colors in every detail — scroll
+              to discover each layer.
             </p>
           </Reveal>
         </div>

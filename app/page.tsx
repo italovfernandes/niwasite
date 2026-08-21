@@ -21,7 +21,7 @@ export default function Home() {
       {/* ===== ESTAÇÕES · os cards (sobem sobrepondo a seção do círculo) ===== */}
       <section
         id="estacoes"
-        aria-label="As quatro estações"
+        aria-label="The four seasons"
         className="relative z-20 -mt-[55vh] scroll-mt-24"
       >
         <SeasonPanels />
@@ -34,7 +34,7 @@ export default function Home() {
       >
         <Image
           src="/section/praticas.jpg"
-          alt="Mãos com o leque de cores Niwa diante do closet"
+          alt="Hands with the Niwa color fan in front of the closet"
           fill
           sizes="100vw"
           className="object-cover object-center"
@@ -46,18 +46,18 @@ export default function Home() {
         <div className="u-container relative">
           <Reveal className="max-w-2xl">
             <h2 className="u-display text-5xl leading-[1.03] md:text-7xl">
-              Práticas, fáceis
-              <br />e <em className="font-light italic u-accent">sua.</em>
+              Practical, easy
+              <br />and <em className="font-light italic u-accent">yours.</em>
             </h2>
             <p className="mt-7 max-w-md text-lg leading-relaxed text-paper/80">
-              Compactas e resistentes, feitas pra viver com você — o poder de
-              nunca mais duvidar de uma cor.
+              Compact and durable, made to live with you — the power to never
+              doubt a color again.
             </p>
             <Link
               href="/produto/cartela-sazonal-12-subtons"
               className="mt-9 inline-block rounded-xs bg-paper px-9 py-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-marsala transition-colors hover:bg-marsala hover:text-paper"
             >
-              Conheça
+              Discover
             </Link>
           </Reveal>
         </div>
@@ -77,7 +77,7 @@ export default function Home() {
       >
         <Image
           src="/consultoras/consultora.jpg"
-          alt="Consultora com o leque de cores Niwa em um campo de hortênsias"
+          alt="Consultant with the Niwa color fan in a field of hydrangeas"
           fill
           priority={false}
           sizes="100vw"
@@ -88,23 +88,23 @@ export default function Home() {
 
         <Reveal className="relative max-w-2xl text-center text-paper">
           <p className="u-eyebrow !text-paper/70">
-            Consultoras de cor e estilo
+            Color and style consultants
           </p>
           <h2 className="u-display mt-5 text-5xl md:text-6xl">
-            A oportunidade
+            The ultimate
             <br />
-            definitiva{" "}
-            <em className="font-light italic u-accent">chegou.</em>
+            opportunity{" "}
+            <em className="font-light italic u-accent">has arrived.</em>
           </h2>
           <p className="mx-auto mt-5 max-w-sm leading-relaxed text-paper/85">
-            Descubra como nossas cartelas e planos especiais podem ampliar seu
-            faturamento.
+            Discover how our color fans and special plans can grow your
+            revenue.
           </p>
           <Link
             href="/partnership"
             className="mt-8 inline-block rounded-xs bg-paper px-8 py-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-marsala transition-colors hover:bg-marsala hover:text-paper"
           >
-            Saiba mais
+            Learn more
           </Link>
         </Reveal>
       </section>

@@ -13,7 +13,7 @@ export interface Swatch {
 export interface Season {
   id: SeasonId;
   name: string;
-  temp: "Quente" | "Fria";
+  temp: "Warm" | "Cool";
   index: string;
   tagline: string;
   description: string;
@@ -39,12 +39,13 @@ export interface Product {
   slug: string;
   name: string;
   collection: CollectionId;
-  format: "Físico" | "Digital" | "Online" | "Presencial";
+  format: "Physical" | "Digital" | "Online" | "In person";
   price: number;
   compareAt?: number;
   badge?: string;
   season?: SeasonId;
   landing?: "cartelas"; // when set, its PDP renders the rich Cartelas landing
+  image?: string; // override do art padrão (/capas/{slug}.jpg)
   excerpt: string;
   description: string[];
   features: string[];
@@ -72,18 +73,18 @@ export const PHOTO = {
 export const SEASONS: Season[] = [
   {
     id: "primavera",
-    name: "Primavera",
-    temp: "Quente",
+    name: "Spring",
+    temp: "Warm",
     index: "01",
-    tagline: "Clara, quente e luminosa",
+    tagline: "Light, warm and radiant",
     description:
-      "Suas cores nascem no subtom quente e luminoso — o atalho pra vestir só o que ilumina sua pele.",
+      "Your colors are born in a warm, radiant undertone — the shortcut to wearing only what lights up your skin.",
     swatches: [
       { name: "Coral", hex: "#f4826b" },
-      { name: "Pêssego", hex: "#f6b99b" },
-      { name: "Ouro claro", hex: "#e7b24c" },
-      { name: "Verde folha", hex: "#8fbf6b" },
-      { name: "Água", hex: "#6fc7c0" },
+      { name: "Peach", hex: "#f6b99b" },
+      { name: "Light gold", hex: "#e7b24c" },
+      { name: "Leaf green", hex: "#8fbf6b" },
+      { name: "Aqua", hex: "#6fc7c0" },
     ],
     image: "photo-1515372039744-b8f02a3ae446",
     icon: "/icones/primavera.svg",
@@ -96,18 +97,18 @@ export const SEASONS: Season[] = [
   },
   {
     id: "verao",
-    name: "Verão",
-    temp: "Fria",
+    name: "Summer",
+    temp: "Cool",
     index: "02",
-    tagline: "Suave, fria e delicada",
+    tagline: "Soft, cool and delicate",
     description:
-      "Seu subtom frio pede leveza. As 3 cartelas trazem os tons que suavizam, sem contraste que pesa.",
+      "Your cool undertone calls for softness. The 3 color fans bring the tones that soothe, with no contrast that weighs you down.",
     swatches: [
-      { name: "Rosa poeira", hex: "#c99aa6" },
-      { name: "Azul névoa", hex: "#9fb4ce" },
-      { name: "Lavanda", hex: "#b0a6c9" },
-      { name: "Sálvia", hex: "#a9bba6" },
-      { name: "Malva", hex: "#cbb8c4" },
+      { name: "Dusty rose", hex: "#c99aa6" },
+      { name: "Mist blue", hex: "#9fb4ce" },
+      { name: "Lavender", hex: "#b0a6c9" },
+      { name: "Sage", hex: "#a9bba6" },
+      { name: "Mauve", hex: "#cbb8c4" },
     ],
     image: "photo-1487412720507-e7ab37603c6f",
     icon: "/icones/verao.svg",
@@ -120,18 +121,18 @@ export const SEASONS: Season[] = [
   },
   {
     id: "outono",
-    name: "Outono",
-    temp: "Quente",
+    name: "Autumn",
+    temp: "Warm",
     index: "03",
-    tagline: "Quente, profunda e terrosa",
+    tagline: "Warm, deep and earthy",
     description:
-      "Terracota, folhagem, ouro velho — as cores do seu subtom quente, prontas pra usar com segurança.",
+      "Terracotta, foliage, antique gold — the colors of your warm undertone, ready to wear with confidence.",
     swatches: [
-      { name: "Terracota", hex: "#b5623c" },
-      { name: "Oliva", hex: "#8a7a3d" },
-      { name: "Mostarda", hex: "#c8993c" },
-      { name: "Ferrugem", hex: "#9c4a2e" },
-      { name: "Musgo", hex: "#566044" },
+      { name: "Terracotta", hex: "#b5623c" },
+      { name: "Olive", hex: "#8a7a3d" },
+      { name: "Mustard", hex: "#c8993c" },
+      { name: "Rust", hex: "#9c4a2e" },
+      { name: "Moss", hex: "#566044" },
     ],
     image: "photo-1531123897727-8f129e1688ce",
     icon: "/icones/outono.svg",
@@ -144,18 +145,18 @@ export const SEASONS: Season[] = [
   },
   {
     id: "inverno",
-    name: "Inverno",
-    temp: "Fria",
+    name: "Winter",
+    temp: "Cool",
     index: "04",
-    tagline: "Fria, intensa e contrastante",
+    tagline: "Cool, intense and high-contrast",
     description:
-      "Alto contraste, cores puras — os tons do seu subtom frio que dão presença à sua pele.",
+      "High contrast, pure colors — the tones of your cool undertone that give your skin presence.",
     swatches: [
-      { name: "Carmim", hex: "#b0243b" },
-      { name: "Esmeralda", hex: "#1e6e56" },
-      { name: "Azul real", hex: "#2e4a8a" },
+      { name: "Carmine", hex: "#b0243b" },
+      { name: "Emerald", hex: "#1e6e56" },
+      { name: "Royal blue", hex: "#2e4a8a" },
       { name: "Magenta", hex: "#a02e6e" },
-      { name: "Tinta", hex: "#2a2733" },
+      { name: "Ink", hex: "#2a2733" },
     ],
     image: "photo-1494790108377-be9c29b29330",
     icon: "/icones/inverno.svg",
@@ -176,26 +177,26 @@ export const seasonById = (id: SeasonId) =>
 export const COLLECTIONS: Collection[] = [
   {
     id: "ferramentas",
-    name: "Cartelas",
-    kicker: "As cores",
+    name: "Color Fans",
+    kicker: "The colors",
     description:
-      "As cartelas sazonais e os combos — as suas cores, prontas pra viver com você.",
+      "The 12 seasonal color fans — your colors, ready to live with you.",
     image: PHOTO.flatDark,
   },
   {
     id: "guias",
-    name: "Guias",
-    kicker: "O repertório",
+    name: "Dossiers",
+    kicker: "The repertoire",
     description:
-      "O guia de estilo Niwa — aprenda a usar as suas cores da cabeça aos pés.",
+      "The Niwa style dossier — learn to wear your colors from head to toe.",
     image: PHOTO.flatWarm,
   },
   {
     id: "formacao",
-    name: "Consultoria",
-    kicker: "O acompanhamento",
+    name: "Collections",
+    kicker: "The combinations",
     description:
-      "A análise completa da sua coloração pessoal, conduzida por uma consultora Niwa.",
+      "Complete sets of color fans and dossier — plus the in-person consultation. The most complete path, at the best value.",
     image: PHOTO.bw,
   },
 ];
@@ -210,18 +211,18 @@ export const CARTELA_PRICE = 49.99;
 
 // texto curto de vitrine por cartela (excerpt do card / topo do PDP)
 const CARTELA_EXCERPTS: Record<string, string> = {
-  "cartela-light-spring": "Os claros quentes e luminosos da Primavera — leveza que acende a pele.",
-  "cartela-warm-spring": "O calor dourado da Primavera em estado puro — vibração sem peso.",
-  "cartela-bright-spring": "A Primavera no auge do brilho — cores nítidas e cheias de vida.",
-  "cartela-light-summer": "A leveza fria do Verão — tons suaves que acalmam e iluminam.",
-  "cartela-soft-summer": "O Verão em pastel esfumado — elegância discreta e serena.",
-  "cartela-cool-summer": "O frescor frio do Verão — azuis e rosas que refrescam a pele.",
-  "cartela-soft-autumn": "O Outono em tons quebrados e aconchegantes — calor sem contraste.",
-  "cartela-warm-autumn": "O ouro terroso do Outono — especiarias, folhagem e âmbar.",
-  "cartela-deep-autumn": "O Outono profundo e intenso — riqueza quente em cada tom.",
-  "cartela-bright-winter": "O Inverno em alto contraste e cores puras — presença imediata.",
-  "cartela-cool-winter": "O frio cristalino do Inverno — tons gelados e nítidos.",
-  "cartela-deep-winter": "O Inverno profundo e dramático — escuros intensos e vibrantes.",
+  "cartela-light-spring": "The light, warm and radiant tones of Spring — a lightness that lifts the skin.",
+  "cartela-warm-spring": "The golden warmth of Spring in its purest state — vibrance without weight.",
+  "cartela-bright-spring": "Spring at the height of its brilliance — clear colors, full of life.",
+  "cartela-light-summer": "The cool lightness of Summer — soft tones that soothe and brighten.",
+  "cartela-soft-summer": "Summer in smoky pastels — quiet, serene elegance.",
+  "cartela-cool-summer": "The cool freshness of Summer — blues and pinks that refresh the skin.",
+  "cartela-soft-autumn": "Autumn in muted, comforting tones — warmth without contrast.",
+  "cartela-warm-autumn": "The earthy gold of Autumn — spices, foliage and amber.",
+  "cartela-deep-autumn": "Deep, intense Autumn — warm richness in every tone.",
+  "cartela-bright-winter": "Winter in high contrast and pure colors — instant presence.",
+  "cartela-cool-winter": "The crystalline cool of Winter — icy, sharp tones.",
+  "cartela-deep-winter": "Deep, dramatic Winter — intense, vibrant darks.",
 };
 
 // 12 cartelas individuais — geradas a partir das 3 cartelas de cada estação.
@@ -231,20 +232,20 @@ const CARTELA_PRODUCTS: Product[] = SEASONS.flatMap((season) =>
     slug: c.slug,
     name: c.name,
     collection: "ferramentas" as const,
-    format: "Físico" as const,
+    format: "Physical" as const,
     price: CARTELA_PRICE,
     season: season.id,
-    excerpt: CARTELA_EXCERPTS[c.slug] ?? `Uma das cartelas da estação ${season.name}.`,
+    excerpt: CARTELA_EXCERPTS[c.slug] ?? `A color fan from the ${season.name} season.`,
     description: [
       CARTELA_EXCERPTS[c.slug] ?? "",
-      `Uma das três cartelas da família ${season.name}, impressa em alta fidelidade às cores reais — leve e fácil de levar para onde você for.`,
+      `One of the three color fans in the ${season.name} family, printed with high fidelity to the real colors — light and easy to carry wherever you go.`,
     ].filter(Boolean),
     features: [
-      "Materiais de alta resistência",
-      "Fácil de manusear, leve e portátil",
-      "Impressão em alta fidelidade às cores reais",
+      "High-durability materials",
+      "Easy to handle, light and portable",
+      "Printed with high fidelity to the real colors",
     ],
-    includes: [`Cartela ${c.name}`, "Guia de combinações"],
+    includes: [`${c.name} color fan`, "Combination guide"],
   }))
 );
 
@@ -252,86 +253,87 @@ export const PRODUCTS: Product[] = [
   ...CARTELA_PRODUCTS,
   {
     slug: "cartela-sazonal-12-subtons",
-    name: "Coleção Completa — 12 Cartelas",
-    collection: "ferramentas",
-    format: "Físico",
+    name: "The Color Atlas — 12 Color Fans",
+    collection: "formacao",
+    format: "Physical",
     price: 599.88,
-    badge: "Mais vendido",
+    badge: "Best seller",
     landing: "cartelas",
     excerpt:
-      "As 12 cartelas das quatro estações reunidas — toda a linguagem de cor Niwa em um só conjunto.",
+      "The 12 color fans of all four seasons together — the entire Niwa color language in a single set.",
     description: [
-      "As 12 cartelas — as três de Primavera, Verão, Outono e Inverno — juntas, para ter em mãos toda a linguagem de cor Niwa, não importa o subtom.",
-      "Impressas em alta fidelidade às cores reais, leves e fáceis de levar para onde você for. Ideal para presente e para profissionais.",
+      "The 12 color fans — the three from Spring, Summer, Autumn and Winter — together, so you have the entire Niwa color language on hand, whatever your undertone.",
+      "Printed with high fidelity to the real colors, light and easy to carry wherever you go. Perfect as a gift and for professionals.",
     ],
     features: [
-      "As 12 cartelas das 4 estações",
-      "Materiais de alta resistência",
-      "Impressão em alta fidelidade às cores reais",
+      "The 12 color fans of all 4 seasons",
+      "High-durability materials",
+      "Printed with high fidelity to the real colors",
     ],
     includes: SEASONS.flatMap((s) => s.cartelas.map((c) => c.name)),
   },
   {
     slug: "combo-cartelas-guia",
-    name: "Coleção Completa + Guia",
-    collection: "ferramentas",
-    format: "Físico",
+    name: "The Color Atlas + Style Dossier",
+    collection: "formacao",
+    format: "Physical",
     price: 669.87,
-    badge: "Melhor valor",
+    badge: "Best value",
     excerpt:
-      "As 12 cartelas mais o guia de estilo — cor e conhecimento, na mesma caixa.",
+      "The 12 color fans plus the style dossier — color and knowledge, in the same box.",
     description: [
-      "Tudo o que você precisa: as 12 cartelas das quatro estações e o guia de estilo Niwa, que ensina a usar as suas cores da cabeça aos pés.",
-      "O caminho completo do autoconhecimento das suas cores — pronto para viver com você.",
+      "Everything you need: the 12 color fans of all four seasons and the Niwa style dossier, which teaches you to wear your colors from head to toe.",
+      "The complete path to knowing your colors — ready to live with you.",
     ],
     features: [
-      "As 12 cartelas das 4 estações",
-      "Guia de estilo Niwa completo",
-      "Tudo em um só conjunto",
+      "The 12 color fans of all 4 seasons",
+      "The complete Niwa style dossier",
+      "Everything in a single set",
     ],
-    includes: ["As 12 cartelas das 4 estações", "Guia Niwa — Método das 4 Estações"],
+    includes: ["The 12 color fans of all 4 seasons", "Niwa Dossier — The 4 Seasons Method"],
   },
   {
     slug: "guia-metodo-4-estacoes",
-    name: "Guia de Estilo Niwa",
+    name: "Niwa Style Dossier",
     collection: "guias",
-    format: "Físico",
+    format: "Physical",
     price: 69.99,
+    image: "/capas/dossie-guia.jpg",
     excerpt:
-      "O guia que ensina a usar as suas cores, estampas, acessórios, maquiagem e cabelo.",
+      "The dossier that teaches you to wear your colors, prints, accessories, makeup and hair.",
     description: [
-      "Um livro de mesa e de consulta. Reúne o método Niwa e ensina, da cabeça aos pés, como usar as suas cores a seu favor — cores e estampas, acessórios, maquiagem e cabelo.",
-      "Feito para ser lido, consultado e admirado sobre a mesa.",
+      "A coffee-table and reference book. It gathers the Niwa method and teaches you, from head to toe, how to use your colors in your favor — colors and prints, accessories, makeup and hair.",
+      "Made to be read, consulted and admired on the table.",
     ],
     features: [
-      "196 páginas, capa dura",
-      "Pranchas de cor calibradas",
-      "Da cabeça aos pés: estilo, maquiagem e cabelo",
+      "196 pages, hardcover",
+      "Calibrated color plates",
+      "From head to toe: style, makeup and hair",
     ],
-    includes: ["Guia impresso", "Marcador em fita"],
+    includes: ["Printed dossier", "Ribbon bookmark"],
   },
   {
     slug: "consultoria-completa",
-    name: "Consultoria Completa",
+    name: "Complete Consultation",
     collection: "formacao",
-    format: "Presencial",
+    format: "In person",
     price: 249,
-    badge: "Experiência",
+    badge: "Experience",
     excerpt:
-      "A análise completa da sua coloração pessoal, conduzida por uma consultora Niwa.",
+      "The complete analysis of your personal coloring, led by a Niwa consultant.",
     description: [
-      "Uma experiência de autoconhecimento conduzida por uma consultora Niwa: drapeamento ao vivo, definição da sua estação e da sua cartela, e a orientação de como usar tudo isso no dia a dia.",
-      "Ao final, você sai com as suas cores diagnosticadas e um plano de como vestir só o que ilumina você.",
+      "A journey of self-discovery led by a Niwa consultant: live draping, defining your season and your color fan, and guidance on how to use it all day to day.",
+      "At the end, you leave with your colors diagnosed and a plan for wearing only what lights you up.",
     ],
     features: [
-      "Sessão individual de drapeamento",
-      "Diagnóstico da estação e cartela",
-      "Orientação de uso da cabeça aos pés",
+      "One-on-one draping session",
+      "Season and color fan diagnosis",
+      "Head-to-toe usage guidance",
     ],
     includes: [
-      "Consultoria presencial completa",
-      "Cartela da sua estação",
-      "Guia de combinações personalizado",
+      "Complete in-person consultation",
+      "Color fan for your season",
+      "Personalized combination guide",
     ],
   },
 ];

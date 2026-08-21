@@ -34,7 +34,7 @@ export default function CuideSe() {
       ) : (
         <Image
           src="/cuide-se/cuide-2.jpg"
-          alt="Mulher em um campo florido diante de um espelho"
+          alt="Woman in a field of flowers in front of a mirror"
           fill
           sizes="100vw"
           className="object-cover"
@@ -46,21 +46,21 @@ export default function CuideSe() {
 
       {/* content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center text-white">
-        <p className="u-eyebrow !text-white/75">Cuide-se</p>
+        <p className="u-eyebrow !text-white/75">Take care of yourself</p>
         <h2 className="u-display mt-4 text-[2.6rem] leading-[1.04] sm:text-6xl md:text-[4rem]">
-          Todo mundo merece uma pausa,
+          Everyone deserves a break,
           <br />
-          <em className="font-light italic u-accent">principalmente</em> você.
+          <em className="font-light italic u-accent">especially</em> you.
         </h2>
         <p className="mt-4 max-w-md text-sm leading-relaxed text-white/90 sm:text-base">
-          Nossos guias e cartelas são também um convite para você descansar e se
-          autoconhecer.
+          Our dossiers and color fans are also an invitation to rest and get to
+          know yourself.
         </p>
         <Link
           href="/loja?c=guias"
           className="mt-7 inline-block rounded-xs bg-paper px-8 py-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-marsala transition-colors hover:bg-marsala hover:text-white"
         >
-          Saiba mais
+          Learn more
         </Link>
       </div>
     </section>

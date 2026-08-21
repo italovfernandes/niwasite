@@ -22,11 +22,11 @@ const hanken = Hanken_Grotesk({
 
 export const metadata: Metadata = {
   title: {
-    default: "Niwa — Casa de Coloração Pessoal",
+    default: "Niwa — Personal Color House",
     template: "%s · Niwa",
   },
   description:
-    "Cartelas Niwa, descubra seu estilo. Cartelas, leques e formação em coloração pessoal — a cor pelo subtom de pele e pelas estações.",
+    "Niwa color fans, discover your style. Color fans and personal color training — color by skin undertone and by the seasons.",
   metadataBase: new URL("https://niwa.example"),
 };
 
@@ -35,7 +35,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
-      lang="pt-BR"
+      lang="en"
       className={`${fraunces.variable} ${hanken.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-paper text-ink">

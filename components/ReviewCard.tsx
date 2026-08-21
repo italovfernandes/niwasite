@@ -12,7 +12,7 @@ function Stars({
   className?: string;
 }) {
   return (
-    <div className={`flex gap-0.5 ${className}`} aria-label={`${rating} de 5`}>
+    <div className={`flex gap-0.5 ${className}`} aria-label={`${rating} of 5`}>
       {Array.from({ length: 5 }).map((_, i) => (
         <svg
           key={i}
@@ -57,7 +57,7 @@ export default function ReviewCard({ review }: { review: Review }) {
           <Image
             key={imgs[idx]}
             src={imgs[idx]}
-            alt={`Cliente ${review.name}`}
+            alt={`Client ${review.name}`}
             fill
             sizes="(max-width: 768px) 100vw, 33vw"
             className="object-cover object-center"
@@ -74,7 +74,7 @@ export default function ReviewCard({ review }: { review: Review }) {
               <button
                 type="button"
                 onClick={() => go(-1)}
-                aria-label="Foto anterior"
+                aria-label="Previous photo"
                 className="absolute left-3 top-[42%] grid h-8 w-8 -translate-y-1/2 place-items-center rounded-full bg-paper/85 text-plum transition-colors hover:bg-paper"
               >
                 <Chevron dir="left" />
@@ -82,7 +82,7 @@ export default function ReviewCard({ review }: { review: Review }) {
               <button
                 type="button"
                 onClick={() => go(1)}
-                aria-label="Próxima foto"
+                aria-label="Next photo"
                 className="absolute right-3 top-[42%] grid h-8 w-8 -translate-y-1/2 place-items-center rounded-full bg-paper/85 text-plum transition-colors hover:bg-paper"
               >
                 <Chevron dir="right" />

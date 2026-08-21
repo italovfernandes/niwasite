@@ -84,28 +84,28 @@ export default function TresPassos() {
           className="absolute inset-x-0 top-[20%] flex justify-center px-6 text-center md:top-[22%]"
         >
           <p className="max-w-md text-lg leading-relaxed text-paper/90">
-            São apenas três passos até o guarda roupas perfeito.
+            Only three steps to the perfect wardrobe.
           </p>
         </div>
 
         {/* words + progress bars */}
         <div className="u-container absolute inset-x-0 top-1/2 flex -translate-y-1/2 flex-col items-center gap-10 md:flex-row md:gap-8">
           <span ref={cartelasRef} style={{ opacity: 0 }} className={word}>
-            Cartelas
+            Color Fans
           </span>
           <motion.div
             style={{ scaleX: div1 }}
             className="hidden h-px flex-1 origin-left bg-paper/30 md:block"
           />
           <span ref={guiasRef} style={{ opacity: 0 }} className={word}>
-            Guias
+            Dossiers
           </span>
           <motion.div
             style={{ scaleX: div2 }}
             className="hidden h-px flex-1 origin-left bg-paper/30 md:block"
           />
           <span ref={imersaoRef} style={{ opacity: 0 }} className={word}>
-            Imersão
+            Immersion
           </span>
         </div>
 
@@ -127,7 +127,7 @@ export default function TresPassos() {
             href="/loja"
             className="inline-block rounded-xs bg-paper px-7 py-3.5 text-[0.68rem] font-medium uppercase tracking-[0.22em] text-marsala transition-colors hover:bg-marsala hover:text-paper"
           >
-            Saiba mais
+            Learn more
           </Link>
         </div>
       </div>

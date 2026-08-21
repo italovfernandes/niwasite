@@ -10,11 +10,11 @@ export default function Footer() {
         {/* newsletter */}
         <div className="grid gap-10 border-b border-paper/15 pb-14 md:grid-cols-2 md:items-end">
           <div>
-            <p className="u-eyebrow !text-paper/55">A carta das estações</p>
+            <p className="u-eyebrow !text-paper/55">The letter of the seasons</p>
             <h2 className="u-display mt-4 text-4xl md:text-5xl">
-              Receba as novidades
+              Get the latest
               <br />
-              da <em className="font-light italic u-accent">Niwa Seasons.</em>
+              from <em className="font-light italic u-accent">Niwa Seasons.</em>
             </h2>
           </div>
           <form
@@ -24,15 +24,15 @@ export default function Footer() {
             <input
               type="email"
               required
-              placeholder="Seu melhor e-mail"
-              aria-label="Seu e-mail"
+              placeholder="Your best email"
+              aria-label="Your email"
               className="w-full bg-transparent text-paper placeholder:text-paper/40 focus:outline-none"
             />
             <button
               type="submit"
               className="shrink-0 text-[0.7rem] font-medium uppercase tracking-[0.2em] text-paper u-link"
             >
-              Assinar
+              Subscribe
             </button>
           </form>
         </div>
@@ -40,7 +40,7 @@ export default function Footer() {
         {/* columns */}
         <div className="grid gap-10 py-14 sm:grid-cols-2 md:grid-cols-4">
           <div>
-            <p className="u-eyebrow !text-paper/50">Loja</p>
+            <p className="u-eyebrow !text-paper/50">Shop</p>
             <ul className="mt-4 space-y-2.5 text-sm text-paper/75">
               {COLLECTIONS.map((c) => (
                 <li key={c.id}>
@@ -51,35 +51,35 @@ export default function Footer() {
               ))}
               <li>
                 <Link href="/loja" className="u-link hover:text-paper">
-                  Ver tudo
+                  View all
                 </Link>
               </li>
             </ul>
           </div>
           <div>
-            <p className="u-eyebrow !text-paper/50">A Niwa</p>
+            <p className="u-eyebrow !text-paper/50">Niwa</p>
             <ul className="mt-4 space-y-2.5 text-sm text-paper/75">
               <li>
                 <Link href="/sobre" className="u-link hover:text-paper">
-                  Sobre a Niwa
+                  About Niwa
                 </Link>
               </li>
               <li>
                 <Link href="/#estacoes" className="u-link hover:text-paper">
-                  As Estações
+                  The Seasons
                 </Link>
               </li>
             </ul>
           </div>
           <div>
-            <p className="u-eyebrow !text-paper/50">Atendimento</p>
+            <p className="u-eyebrow !text-paper/50">Support</p>
             <ul className="mt-4 space-y-2.5 text-sm text-paper/75">
               <li>
                 <Link
                   href="/atendimento/envios"
                   className="u-link hover:text-paper"
                 >
-                  Envios e prazos
+                  Shipping & delivery
                 </Link>
               </li>
               <li>
@@ -87,7 +87,7 @@ export default function Footer() {
                   href="/atendimento/trocas"
                   className="u-link hover:text-paper"
                 >
-                  Trocas e devoluções
+                  Exchanges & returns
                 </Link>
               </li>
               <li>
@@ -95,7 +95,7 @@ export default function Footer() {
                   href="/atendimento/contato"
                   className="u-link hover:text-paper"
                 >
-                  Fale com a Niwa
+                  Talk to Niwa
                 </Link>
               </li>
             </ul>
@@ -145,7 +145,7 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col gap-2 border-t border-paper/15 pt-6 text-[0.7rem] uppercase tracking-[0.18em] text-paper/45 sm:flex-row sm:items-center sm:justify-between">
-          <span>© {new Date().getFullYear()} Niwa · Casa de Coloração Pessoal</span>
+          <span>© {new Date().getFullYear()} Niwa · Personal Color House</span>
         </div>
       </div>
     </footer>

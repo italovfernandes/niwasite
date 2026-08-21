@@ -10,70 +10,70 @@ export interface Review {
 export const REVIEWS: Review[] = [
   {
     quote:
-      "Parei de comprar roupa errada. Levo a cartela na bolsa e a dúvida some na hora de escolher.",
+      "I stopped buying the wrong clothes. I carry my color fan in my bag and the doubt disappears the moment I choose.",
     name: "Marina R.",
-    meta: "Cartela Verão · São Paulo",
+    meta: "Summer color fan · São Paulo",
     rating: 5,
     // exemplo de avaliação com mais de uma foto (galeria)
     images: ["/reviews/marina.jpg", "/reviews/juliana.jpg", "/reviews/carla.jpg"],
   },
   {
     quote:
-      "Descobri que metade do meu armário não era pra mim. Hoje visto só o que me ilumina.",
+      "I discovered that half my closet wasn't for me. Now I only wear what lights me up.",
     name: "Carla M.",
-    meta: "Cartela Outono · Belo Horizonte",
+    meta: "Autumn color fan · Belo Horizonte",
     rating: 5,
     image: "/reviews/carla.jpg",
   },
   {
     quote:
-      "As cores certas mudaram até como as pessoas me olham. Parece pequeno, mas não é.",
+      "The right colors even changed how people look at me. It sounds small, but it isn't.",
     name: "Juliana P.",
-    meta: "Cartela Inverno · Curitiba",
+    meta: "Winter color fan · Curitiba",
     rating: 5,
     image: "/reviews/juliana.jpg",
   },
   {
     quote:
-      "Fácil de usar e linda de ter. A cartela virou meu acessório preferido do dia a dia.",
+      "Easy to use and lovely to own. The color fan became my favorite everyday accessory.",
     name: "Beatriz L.",
-    meta: "Cartela Primavera · Recife",
+    meta: "Spring color fan · Recife",
     rating: 5,
     image: "/reviews/beatriz.jpg",
   },
   {
     quote:
-      "Ganhei tempo de manhã e confiança o dia todo. Não fico mais perdida na frente do espelho.",
+      "I gained time in the morning and confidence all day. I'm no longer lost in front of the mirror.",
     name: "Fernanda S.",
-    meta: "Cartela Verão · Florianópolis",
+    meta: "Summer color fan · Florianópolis",
     rating: 5,
   },
   {
     quote:
-      "Presenteei minha mãe e agora combinamos as nossas cores juntas. Virou um momento nosso.",
+      "I gave one to my mother and now we match our colors together. It became a moment that's ours.",
     name: "Ana C.",
-    meta: "Cartela Outono · Salvador",
+    meta: "Autumn color fan · Salvador",
     rating: 5,
   },
   {
     quote:
-      "A consultoria foi um divisor de águas. A cartela é o mapa que eu levo pra sempre comigo.",
+      "The consultation was a turning point. The color fan is the map I carry with me forever.",
     name: "Renata T.",
-    meta: "Cartela Inverno · Porto Alegre",
+    meta: "Winter color fan · Porto Alegre",
     rating: 5,
   },
   {
     quote:
-      "Nunca imaginei que cor pudesse mudar tanto. Me sinto mais eu em cada look.",
+      "I never imagined color could change so much. I feel more like myself in every look.",
     name: "Camila V.",
-    meta: "Cartela Primavera · Brasília",
+    meta: "Spring color fan · Brasília",
     rating: 4,
   },
   {
     quote:
-      "Comprei o combo das 4 e uso todo dia. Simples, prático e realmente funciona.",
+      "I bought the set of all 4 and use it every day. Simple, practical and it really works.",
     name: "Patrícia G.",
-    meta: "Combo 4 Cartelas · Fortaleza",
+    meta: "Set of 4 color fans · Fortaleza",
     rating: 5,
   },
 ];

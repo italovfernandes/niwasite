@@ -27,10 +27,10 @@ const TOTAL = HERO_SCROLL + SEASONS.length * SEASON_SCROLL;
 const HERO_END = HERO_SCROLL / TOTAL; // fração de p em que o hero termina (full)
 
 const PHRASES: Record<string, string> = {
-  primavera: "Sua beleza no auge das cores",
-  verao: "Dias de look e de sol inesquecíveis",
-  outono: "A poesia da estação, na nossa cartela",
-  inverno: "Nosso calor de cores, para a estação mais fria",
+  primavera: "Your beauty at the peak of color",
+  verao: "The soft, graceful calm of your colors",
+  outono: "The poetry of the season, in our color fan",
+  inverno: "The bold, bright presence of your colors",
 };
 
 // ordem de exibição da galeria (a paleta não segue a estação do ano):
@@ -130,18 +130,18 @@ function HeroHeadline() {
   return (
     <div className="anim-rise max-w-xl">
       <h1 className="u-display text-[3rem] leading-[0.98] text-ink sm:text-6xl md:text-7xl">
-        Desperte o jardim
+        Awaken the garden
         <br />
-        que <em className="font-light italic u-accent">há em você.</em>
+        that lives <em className="font-light italic u-accent">within you.</em>
       </h1>
       <p className="mt-6 max-w-sm text-base leading-relaxed text-ink-soft">
-        Cartelas de cores e guias de estilo para elevar sua autoestima.
+        Color fans and style dossiers to elevate your self-esteem.
       </p>
       <Link
-        href="/produto/cartela-sazonal-12-subtons"
+        href="/loja"
         className="mt-8 inline-block rounded-xs bg-marsala px-8 py-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-paper transition-colors hover:bg-marsala-deep"
       >
-        Ver cartelas
+        View the fans
       </Link>
     </div>
   );
@@ -315,12 +315,12 @@ export default function HeroSeasonStage() {
       <section
         id="home-hero"
         className="relative -mt-[62px] bg-[#efe7db]"
-        aria-label="Niwa — coloração pessoal"
+        aria-label="Niwa — personal color analysis"
       >
         <div className="relative h-screen w-full overflow-hidden">
           <Image
             src="/herovideo/hero-first.jpg"
-            alt="Modelo com vestido em tons pastel e buquê de flores"
+            alt="Model in a pastel dress with a bouquet of flowers"
             fill
             priority
             sizes="100vw"
@@ -333,7 +333,7 @@ export default function HeroSeasonStage() {
         </div>
         {SLIDES.map((s) => (
           <div key={s.id} className="relative h-[80vh] w-full overflow-hidden">
-            <Image src={s.poster} alt={`Estação ${s.label}`} fill sizes="100vw" className="object-cover object-top" />
+            <Image src={s.poster} alt={`${s.label} season`} fill sizes="100vw" className="object-cover object-top" />
             <div className="absolute inset-0 flex items-end justify-center bg-gradient-to-t from-black/55 via-black/10 to-transparent pb-12">
               <p
                 className="text-[0.72rem] font-medium uppercase tracking-[0.42em] text-white"
@@ -356,11 +356,11 @@ export default function HeroSeasonStage() {
         <section
           id="home-hero"
           className="relative z-20 -mt-[62px] h-screen w-full overflow-hidden bg-[#efe7db]"
-          aria-label="Niwa — coloração pessoal"
+          aria-label="Niwa — personal color analysis"
         >
           <Image
             src="/herovideo/hero-first.jpg"
-            alt="Modelo com vestido em tons pastel e buquê de flores"
+            alt="Model in a pastel dress with a bouquet of flowers"
             fill
             priority
             sizes="100vw"
@@ -382,7 +382,7 @@ export default function HeroSeasonStage() {
           ref={liteGalRef}
           className="relative bg-[#efe7db]"
           style={{ height: `${(SLIDES.length * SEASON_SCROLL + 1) * 100}vh` }}
-          aria-label="As quatro estações"
+          aria-label="The four seasons"
         >
           <div className="sticky top-0 h-screen w-full overflow-hidden">
             <div
@@ -393,7 +393,7 @@ export default function HeroSeasonStage() {
                 <div key={s.id} className="relative h-full w-1/4 shrink-0 overflow-hidden">
                   <Image
                     src={s.poster}
-                    alt={`Estação ${s.label}`}
+                    alt={`${s.label} season`}
                     fill
                     sizes="100vw"
                     className="object-cover object-top"
@@ -415,7 +415,7 @@ export default function HeroSeasonStage() {
       id="home-hero"
       className="relative z-20 -mt-[62px] bg-[#efe7db]"
       style={{ height: `${(TOTAL + 1) * 100}vh` }}
-      aria-label="Niwa — coloração pessoal"
+      aria-label="Niwa — personal color analysis"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         {/* CAMADA GALERIA (fundo) */}
@@ -478,7 +478,7 @@ export default function HeroSeasonStage() {
                 <span className="anim-scroll-line block h-full w-full bg-ink-soft" />
               </span>
               <span className="text-[0.6rem] font-medium uppercase tracking-[0.3em]">
-                Role para começar
+                Scroll to begin
               </span>
             </div>
           </div>

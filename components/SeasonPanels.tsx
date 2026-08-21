@@ -20,7 +20,7 @@ const ORDERED_SEASONS = ["verao", "outono", "inverno", "primavera"].map(
 // BG dos cards = tom mais escuro da cor do ícone de cada estação
 // (mesma matiz do ícone, escurecida — o ícone claro fica por cima)
 const SEASON_BG: Record<string, string> = {
-  primavera: "#937025", // ícone #F9DFAF
+  primavera: "#c19a34", // ícone #F9DFAF — dourado claro de primavera (antes #937025, puxava p/ outono)
   verao: "#32856c", // ícone #6DC6AB
   outono: "#935a2e", // ícone #EAB48F
   inverno: "#327a90", // ícone #A9DCEA
@@ -121,7 +121,7 @@ export default function SeasonPanels() {
                   {/* cartelas (1:1) */}
                   <div className="mt-5">
                     <p className="text-[0.56rem] uppercase tracking-[0.24em] text-white/60">
-                      Cartelas da estação
+                      Season color fans
                     </p>
                     <div className="mt-2.5 flex gap-2.5">
                       {season.cartelas.map((c) => (
@@ -151,7 +151,7 @@ export default function SeasonPanels() {
                   href="/loja?c=ferramentas"
                   className="inline-block rounded-xs bg-paper px-6 py-3 text-[0.6rem] font-medium uppercase tracking-[0.22em] text-marsala transition-colors hover:bg-marsala hover:text-paper"
                 >
-                  Ver as cartelas
+                  View the fans
                 </Link>
               </div>
             </div>

@@ -8,6 +8,7 @@ import {
   useTransform,
   type MotionValue,
 } from "motion/react";
+import { SEASONS } from "@/lib/catalog";
 
 /* ------------------------------------------------------------------ *
  *  Sequência única dirigida por scroll (sticky nativo). TODO o timing
@@ -99,33 +100,71 @@ function CollageCard({
   );
 }
 
-/* ---------------- 24 cartas do círculo (retrato no lugar de Deep Autumn) --- */
-const CARTELAS = [
-  "Deep_Winter", "Cool_Winter", "Cool_Summer", "Light_Summer",
-  "Bright_Winter", "Soft_Summer", "Warm_Autumn", "Bright_Spring",
-  "Light_Spring", "Deep_Autumn", "Soft_Autumn", "Warm_Spring",
-];
-// a pedido do cliente: sem fotografias no círculo — as CAPAS verticais das
-// cartelas + TONALIDADES de cor, alternadas, formando um círculo cromático.
-// O retrato central foi abandonado: a foto cresce, depois encolhe e DISSOLVE,
-// restando só a div com um tom semelhante à foto.
-const PORTRAIT_TONE = "#ba98b3"; // cor média da foto principal
+/* ---------------- 24 cartas do círculo — POR ESTAÇÃO ----------------------- *
+ * A pedido do cliente: em vez das 12 capas de subestação, o círculo é organizado
+ * por ESTAÇÃO. Cada estação = 1 card com a LOGO/ícone da estação + as 5 cores
+ * (swatches) da estação = 6 cards. 4 estações × 6 = 24, preenchendo o círculo.
+ * O retrato central (a foto que cresce e depois DISSOLVE) ocupa um slot de COR
+ * do Verão (lavanda, próximo ao tom médio da foto) — assim o mecanismo do scroll
+ * é preservado e não sobra fotografia solta no círculo.
+ * --------------------------------------------------------------------------- */
+// fundo tom-sobre-tom (escuro) de cada estação para o card da LOGO — o ícone
+// claro e o nome branco ficam por cima (mesma matiz da estação, escurecida).
+const LOGO_BG: Record<string, string> = {
+  primavera: "#c19a34",
+  verao: "#32856c",
+  outono: "#935a2e",
+  inverno: "#327a90",
+};
+// nomes em inglês na logo — casa com o sistema das cartelas (Light Spring etc.)
+const SEASON_EN: Record<string, string> = {
+  primavera: "Spring",
+  verao: "Summer",
+  outono: "Autumn",
+  inverno: "Winter",
+};
+const PORTRAIT_SEASON = "verao";
+const PORTRAIT_SWATCH = 2; // Lavanda (#b0a6c9) — combina com o tom médio da foto
 type CItem = {
   src?: string;
+  icon?: string;
   color?: string;
   label: string;
-  kind: "cover" | "portrait" | "tone";
+  season?: string;
+  kind: "logo" | "portrait" | "tone";
 };
-// alternância estrita: SEMPRE capa (índice par) → cor (índice ímpar). O retrato
-// ocupa um slot de COR (ele dissolve em cor), no par do Deep_Autumn — assim não
-// há duas cores seguidas.
-const CIRCLE: CItem[] = CARTELAS.flatMap((n, i) => [
-  { src: `/cartelas-vertical/${n}.png`, label: n.replace("_", " "), kind: "cover" as const },
-  n === "Deep_Autumn"
-    ? { src: "/combinacao/principal.jpg", color: PORTRAIT_TONE, label: "Você", kind: "portrait" as const }
-    : { color: `hsl(${i * 30 + 15} 50% 60%)`, label: "", kind: "tone" as const },
+// o ícone do Verão (teal) se confunde com as cores da estação → renderiza branco
+// (só aqui neste componente; o arquivo .svg segue o mesmo em outras seções).
+const iconStyle = (season?: string) =>
+  season === "verao" ? { filter: "brightness(0) invert(1)" as const } : undefined;
+const CIRCLE: CItem[] = SEASONS.flatMap((season) => [
+  {
+    kind: "logo" as const,
+    icon: season.icon,
+    color: LOGO_BG[season.id],
+    label: SEASON_EN[season.id],
+    season: season.id,
+  },
+  ...season.swatches.map((sw, si) =>
+    season.id === PORTRAIT_SEASON && si === PORTRAIT_SWATCH
+      ? {
+          kind: "portrait" as const,
+          src: "/combinacao/principal.jpg",
+          color: sw.hex,
+          icon: season.icon,
+          label: "You",
+          season: season.id,
+        }
+      : {
+          kind: "tone" as const,
+          color: sw.hex,
+          icon: season.icon,
+          label: sw.name,
+          season: season.id,
+        }
+  ),
 ]);
-const N = CIRCLE.length; // 24
+const N = CIRCLE.length; // 24 = 4 estações × (1 logo + 5 cores)
 const PORTRAIT = CIRCLE.findIndex((c) => c.kind === "portrait");
 const circDist = (i: number, j: number) => {
   const d = Math.abs(i - j);
@@ -273,19 +312,19 @@ export default function CombinacaoSequence() {
               radiusPx = lerp(16, 0, g);
               opacity = 1;
             } else if (p < PH.morph[0]) {
-              // encolhe até o slot do círculo — só reduz e posiciona, SEM girar
+              // encolhe até o slot do círculo e gira até a rotação do slot
               const s = clamp01((p - PH.shrink[0]) / (PH.shrink[1] - PH.shrink[0]));
               w = lerp(vw, cardW, s);
               h = lerp(vh, cardH, s);
               x = lerp(0, pcx, s);
               y = lerp(0, pcy, s);
-              rot = 0; // crotN do slot Deep Autumn = 0
+              rot = crotN * s; // gira da foto (0°) até a rotação do slot no círculo
               scale = s >= 1 ? circleScale : 1; // cresce junto na expansão
               radiusPx = lerp(0, 14, s);
             } else {
               x = lerp(pcx, acx, mp);
               y = lerp(pcy, acy, mp);
-              rot = 0 + arotDelta * mp;
+              rot = crotN + arotDelta * mp; // círculo→arco a partir da rotação do slot
               scale = lerp(circleScale, ascale, mp);
             }
           } else if (p < PH.morph[0]) {
@@ -337,31 +376,38 @@ export default function CombinacaoSequence() {
       <section data-nav-dark className="bg-plum py-20 md:py-28">
         <div className="u-container">
           <h2 className="u-display mx-auto max-w-2xl text-center text-4xl text-paper md:text-6xl">
-            Combinações{" "}
-            <em className="font-light italic u-accent">perfeitas</em>,
+            Perfect{" "}
+            <em className="font-light italic u-accent">combinations</em>,
             <br />
-            da cabeça aos pés.
+            from head to toe.
           </h2>
           <div className="mt-12 grid grid-cols-3 gap-3 sm:grid-cols-6">
             {CIRCLE.map((c, i) => (
               <div
                 key={i}
-                className="relative aspect-[2/3] overflow-hidden rounded-xl"
-                style={
-                  c.kind === "tone" || c.kind === "portrait"
-                    ? { backgroundColor: c.color }
-                    : undefined
-                }
+                className="relative flex aspect-[2/3] flex-col items-center justify-center overflow-hidden rounded-xl text-center"
+                style={{ backgroundColor: c.color }}
               >
-                {c.kind === "cover" && (
-                  <Image src={c.src!} alt="" aria-hidden fill sizes="30vw" className="object-cover" />
+                {c.icon && c.kind !== "logo" && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={c.icon} alt="" aria-hidden className="h-1/4 w-auto opacity-50" style={iconStyle(c.season)} />
+                )}
+                {c.kind === "portrait" && (
+                  <Image src={c.src!} alt="" aria-hidden fill sizes="30vw" className="object-cover object-top" />
+                )}
+                {c.kind === "logo" && (
+                  <>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={c.icon} alt="" aria-hidden className="h-10 w-auto" style={iconStyle(c.season)} />
+                    <span className="u-display mt-1.5 text-sm text-white">{c.label}</span>
+                  </>
                 )}
               </div>
             ))}
           </div>
           <h2 className="u-display mx-auto mt-14 max-w-2xl text-center text-4xl text-paper md:text-6xl">
-            A teoria das cores agora{" "}
-            <em className="font-light italic u-accent">prática, fácil e sua.</em>
+            Color theory, now{" "}
+            <em className="font-light italic u-accent">practical, easy, and yours.</em>
           </h2>
         </div>
       </section>
@@ -382,10 +428,10 @@ export default function CombinacaoSequence() {
         {/* frase 1 */}
         <div ref={phrase1Ref} style={{ opacity: 1 }} className="absolute inset-0 z-20 flex items-center justify-center px-6">
           <h2 className="u-display text-center text-4xl text-paper sm:text-5xl md:text-[4rem]">
-            Combinações{" "}
-            <em className="font-light italic u-accent">perfeitas</em>,
+            Perfect{" "}
+            <em className="font-light italic u-accent">combinations</em>,
             <br />
-            da cabeça aos pés.
+            from head to toe.
           </h2>
         </div>
 
@@ -404,20 +450,45 @@ export default function CombinacaoSequence() {
               style={{
                 opacity: 0,
                 willChange: "transform",
-                ...(item.kind === "tone" || item.kind === "portrait"
-                  ? { backgroundColor: item.color }
-                  : {}),
+                backgroundColor: item.color,
               }}
             >
-              {item.kind !== "tone" && (
+              {item.icon && item.kind !== "logo" && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={item.icon}
+                    alt=""
+                    aria-hidden
+                    className="h-[26%] w-auto opacity-50"
+                    style={iconStyle(item.season)}
+                  />
+                </div>
+              )}
+              {item.kind === "portrait" && (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
-                  ref={item.kind === "portrait" ? portraitImgRef : undefined}
+                  ref={portraitImgRef}
                   src={item.src}
                   alt=""
                   aria-hidden
-                  className={`h-full w-full object-cover ${item.kind === "portrait" ? "object-top" : ""}`}
+                  className="relative z-10 h-full w-full object-cover object-top"
                 />
+              )}
+              {item.kind === "logo" && (
+                <div className="flex h-full w-full flex-col items-center justify-center gap-1 px-1 text-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={item.icon}
+                    alt=""
+                    aria-hidden
+                    className="h-[34%] w-auto"
+                    style={iconStyle(item.season)}
+                  />
+                  <span className="u-display text-[9px] leading-tight text-white sm:text-[11px]">
+                    {item.label}
+                  </span>
+                </div>
               )}
             </div>
           ))}
@@ -437,34 +508,34 @@ export default function CombinacaoSequence() {
         {/* frase 2 */}
         <div ref={phrase2Ref} style={{ opacity: 0 }} className="pointer-events-none absolute inset-0 z-50 flex flex-col items-center justify-center px-6 text-center text-paper">
           <h2 className="u-display text-4xl sm:text-5xl md:text-[3.6rem]">
-            Realce sua personalidade
+            Show your personality
             <br />
-            com as{" "}
-            <em className="font-light italic u-accent">cores certas pra você.</em>
+            with the{" "}
+            <em className="font-light italic u-accent">right colors for you.</em>
           </h2>
           <p className="mt-5 max-w-md text-sm leading-relaxed text-paper/90 sm:text-base">
-            Não é mágica, apesar de parecer.
-            <br className="hidden sm:block" /> É técnica, emoção, empatia através
-            de um guia pra você.
+            It&apos;s not magic, even though it seems so.
+            <br className="hidden sm:block" /> It&apos;s technique, emotion, and
+            empathy — through a guide made for you.
           </p>
         </div>
 
         {/* frase do círculo */}
         <div ref={phraseCircleRef} style={{ opacity: 0 }} className="pointer-events-none absolute inset-0 z-50 flex items-center justify-center px-6 text-center">
           <h2 className="u-display text-paper text-4xl sm:text-5xl md:text-[3.6rem]">
-            A teoria das cores agora
+            Color theory, now
             <br />
-            <em className="font-light italic u-accent">prática, fácil e sua.</em>
+            <em className="font-light italic u-accent">practical, easy, and yours.</em>
           </h2>
         </div>
 
         {/* frase do arco */}
         <div ref={phraseArcRef} style={{ opacity: 0 }} className="pointer-events-none absolute inset-0 z-50 flex items-center justify-center px-6 text-center">
           <h2 className="u-display text-paper text-4xl sm:text-5xl md:text-[3.6rem]">
-            Novas formas
+            New ways
             <br />
             <em className="font-light italic u-accent">
-              de experimentar as cores.
+              to experience color.
             </em>
           </h2>
         </div>

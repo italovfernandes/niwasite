@@ -55,12 +55,12 @@ function VideoCard({ v }: { v: (typeof VIDEOS)[number] }) {
           <button
             type="button"
             onClick={() => setPlaying(true)}
-            aria-label={`Assistir ao depoimento de ${v.name}`}
+            aria-label={`Watch ${v.name}'s testimonial`}
             className="absolute inset-0 h-full w-full"
           >
             <Image
               src={v.poster}
-              alt={`Cliente ${v.name}`}
+              alt={`Client ${v.name}`}
               fill
               sizes="(max-width: 768px) 100vw, 33vw"
               className="object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"

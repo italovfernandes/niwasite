@@ -2,23 +2,23 @@ import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "Envios e prazos",
+  title: "Shipping and timelines",
   description:
-    "Produção, envio, frete e rastreamento dos pedidos Niwa — tudo sobre os prazos de entrega.",
+    "Production, shipping, delivery cost, and tracking for Niwa orders — everything about delivery timelines.",
 };
 
 const BLOCOS = [
   {
-    t: "Prazo de produção",
-    d: "As cartelas e os guias são impressos sob demanda e conferidos peça a peça. A produção leva de 2 a 4 dias úteis antes da postagem.",
+    t: "Production time",
+    d: "The color fans and dossiers are printed on demand and checked piece by piece. Production takes 2 to 4 business days before shipping.",
   },
   {
-    t: "Prazo de entrega",
-    d: "Após a postagem, a entrega leva de 5 a 10 dias úteis para todos os Estados Unidos. O frete é calculado na finalização, pelo seu endereço.",
+    t: "Delivery time",
+    d: "After shipping, delivery takes 5 to 10 business days across the entire United States. Shipping is calculated at checkout, based on your address.",
   },
   {
-    t: "Rastreamento",
-    d: "Assim que o pedido é postado, você recebe o código de rastreio por e-mail para acompanhar cada etapa até a sua porta.",
+    t: "Tracking",
+    d: "As soon as your order ships, you receive the tracking code by email to follow every step to your door.",
   },
 ];
 
@@ -27,11 +27,11 @@ export default function EnviosPage() {
     <div className="max-w-2xl">
       <Reveal>
         <h2 className="u-display text-4xl md:text-5xl">
-          Envios e <em className="font-light italic u-accent">prazos.</em>
+          Shipping and <em className="font-light italic u-accent">timelines.</em>
         </h2>
         <p className="mt-5 text-lg leading-relaxed text-ink-soft">
-          Cada pedido é preparado com cuidado. Aqui está tudo sobre a produção, o
-          envio e quando as suas cores chegam até você.
+          Every order is prepared with care. Here is everything about production,
+          shipping, and when your colors reach you.
         </p>
       </Reveal>
 

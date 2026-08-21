@@ -94,47 +94,35 @@ const FEATURES: {
   highlight?: boolean;
 }[] = [
   {
-    label: "+130 páginas por estação",
-    desc: "Um dossiê completo e profundo, dedicado à sua cartela.",
-    icon: "pages",
+    label: "Self-discovery & self-care",
+    desc: "A guide to understanding, caring for, and recognizing yourself.",
+    icon: "immersion",
     span: "col-span-2 md:col-span-3",
     highlight: true,
   },
   {
-    label: "Exemplos práticos de uso",
-    desc: "Do papel ao espelho — como aplicar as suas cores no dia a dia.",
+    label: "Colors, the associative way",
+    desc: "Learn to use your colors by connecting them to who you are.",
     icon: "practical",
     span: "col-span-2 md:col-span-3",
   },
   {
-    label: "Linguagem de estilo acessível",
-    desc: "Sem jargão, fácil de colocar em prática.",
+    label: "Practical, accessible language",
+    desc: "No jargon — easy to understand and to put into practice.",
     icon: "language",
     span: "col-span-2 md:col-span-2",
   },
   {
-    label: "Imersão na sua personalidade",
-    desc: "Um mergulho em quem você é, além das cores.",
-    icon: "immersion",
+    label: "Every season, all year long",
+    desc: "Wear your colors any time of year, no matter the calendar.",
+    icon: "pages",
     span: "col-span-2 md:col-span-2",
-  },
-  {
-    label: "Maquiagens & Cabelos",
-    desc: "As cores certas pra sua make e o seu cabelo.",
-    icon: "makeup",
-    span: "col-span-2 md:col-span-2",
-  },
-  {
-    label: "Estampas & Acessórios",
-    desc: "Como combinar estampas e escolher acessórios.",
-    icon: "accessories",
-    span: "col-span-2 md:col-span-3",
   },
   {
     label: "SmartTravel",
-    desc: "Checklist, combinações de looks e como fazer as malas.",
+    desc: "Looks, combinations, and tips for traveling light.",
     icon: "travel",
-    span: "col-span-2 md:col-span-3",
+    span: "col-span-2 md:col-span-2",
   },
 ];
 
@@ -146,11 +134,11 @@ export default function GuiasFeatures() {
     >
       <div className="u-container">
         <Reveal className="max-w-2xl">
-          <p className="u-eyebrow !text-[#C295D9]/70">O que você recebe</p>
+          <p className="u-eyebrow !text-[#C295D9]/70">Inside the dossier</p>
           <h2 className="u-display mt-4 text-5xl md:text-6xl">
-            Um dossiê que
+            Learn to trust
             <br />
-            <em className="font-light italic u-accent">vive com você.</em>
+            <em className="font-light italic u-accent">yourself.</em>
           </h2>
         </Reveal>
 

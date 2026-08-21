@@ -88,7 +88,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <button
           type="button"
           onClick={handleAdd}
-          aria-label={`Adicionar ${product.name} ao carrinho`}
+          aria-label={`Add ${product.name} to cart`}
           className={`shrink-0 pt-0.5 transition-[color,transform] duration-300 ease-out hover:-translate-y-0.5 active:scale-90 ${
             added ? "text-marsala" : "text-ink-soft hover:text-marsala"
           }`}

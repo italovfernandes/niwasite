@@ -3,16 +3,16 @@ import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "Sobre a Niwa",
+  title: "About Niwa",
   description:
-    "Mulher, nós ouvimos seu coração. A Niwa é um movimento de mulheres que encontram, nas suas cores, o caminho para construir o próprio jardim interior.",
+    "Woman, we listened to your heart. Niwa is a movement of women who find, in their colors, the path to building their own inner garden.",
 };
 
 const CAMINHO = [
-  { verbo: "Semear", texto: "Você semeia o autoconhecimento." },
-  { verbo: "Crescer", texto: "Cresce nas suas próprias cores." },
-  { verbo: "Florescer", texto: "Floresce em quem você já é." },
-  { verbo: "Inspirar", texto: "E então, inspira todos ao seu redor." },
+  { verbo: "Sow", texto: "You sow self-knowledge." },
+  { verbo: "Grow", texto: "You grow into your own colors." },
+  { verbo: "Bloom", texto: "You bloom into who you already are." },
+  { verbo: "Inspire", texto: "And then, you inspire everyone around you." },
 ];
 
 export default function SobrePage() {
@@ -25,7 +25,7 @@ export default function SobrePage() {
       >
         <Image
           src="/sobre/asas.jpg"
-          alt="Mulher em um campo florido sob luz dourada"
+          alt="Woman in a flowering field under golden light"
           fill
           priority
           sizes="100vw"
@@ -33,12 +33,12 @@ export default function SobrePage() {
         />
         <div aria-hidden className="absolute inset-0 bg-black/45" />
         <Reveal className="relative max-w-3xl">
-          <p className="u-eyebrow !text-[#C295D9]/80">Sobre a Niwa</p>
+          <p className="u-eyebrow !text-[#C295D9]/80">About Niwa</p>
           <h1 className="u-display mt-6 text-5xl leading-[1.03] sm:text-6xl md:text-7xl">
-            Mulher.
+            Woman.
             <br />
-            Nós ouvimos{" "}
-            <em className="font-light italic u-accent">seu coração.</em>
+            We listened to{" "}
+            <em className="font-light italic u-accent">your heart.</em>
           </h1>
         </Reveal>
       </section>
@@ -47,25 +47,25 @@ export default function SobrePage() {
       <section className="grid md:min-h-[86vh] md:grid-cols-2">
         <div className="order-2 flex flex-col justify-center bg-paper px-6 py-20 md:order-1 md:px-14 md:py-0 lg:px-20">
           <Reveal className="max-w-md">
-            <p className="u-eyebrow">Nossa origem</p>
+            <p className="u-eyebrow">Our origin</p>
             <h2 className="u-display mt-4 text-4xl md:text-5xl">
-              Nascemos de uma
+              Born from a
               <br />
-              <em className="font-light italic u-accent">ruptura.</em>
+              <em className="font-light italic u-accent">rupture.</em>
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-ink-soft">
-              Sim, nós nascemos de uma dor — e não temos receio em dizer isso. Na
-              natureza, as maiores transformações nascem de rupturas. Uma
-              borboleta recebe, ainda no casulo, as cores únicas que vão colorir
-              suas asas, através de um prisma natural de luz. É isso que o nosso
-              guia deseja ser para você.
+              Yes, we were born from pain — and we're not afraid to say it. In
+              nature, the greatest transformations are born from ruptures. Still
+              in its cocoon, a butterfly receives the unique colors that will
+              color its wings, through a natural prism of light. That is what our
+              dossier wishes to be for you.
             </p>
           </Reveal>
         </div>
         <div className="relative order-1 min-h-[62vh] overflow-hidden bg-espresso md:order-2 md:min-h-0">
           <Image
             src="/sobre/flores.jpg"
-            alt="Buquê de peônias e flores"
+            alt="Bouquet of peonies and flowers"
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover object-center"
@@ -77,16 +77,16 @@ export default function SobrePage() {
       <section data-nav-dark className="u-section bg-plum text-paper">
         <Reveal className="u-container mx-auto max-w-4xl text-center">
           <p className="u-eyebrow !text-[#C295D9]/70">
-            Um lugar onde as cores reinam
+            A place where colors reign
           </p>
           <p className="u-display mt-8 text-3xl leading-[1.18] sm:text-4xl md:text-[2.9rem]">
-            Assim como as flores exalam, inspiram e transformam, a Niwa nasce
-            dessa mesma força — somos um movimento de mulheres que encontram, nas
-            suas cores, o caminho para construir o próprio{" "}
-            <em className="font-light italic u-accent">jardim interior.</em>
+            Just as flowers exhale, inspire, and transform, Niwa is born of that
+            same force — we are a movement of women who find, in their colors, the
+            path to building their own{" "}
+            <em className="font-light italic u-accent">inner garden.</em>
           </p>
           <p className="mx-auto mt-8 max-w-lg leading-relaxed text-paper/65">
-            Um espaço para se autoconhecer e dizer ao mundo quem você é.
+            A space to know yourself and tell the world who you are.
           </p>
         </Reveal>
       </section>
@@ -95,12 +95,12 @@ export default function SobrePage() {
       <section className="u-section bg-paper-deep">
         <div className="u-container">
           <Reveal className="max-w-2xl">
-            <p className="u-eyebrow">O caminho</p>
+            <p className="u-eyebrow">The path</p>
             <h2 className="u-display mt-4 text-5xl md:text-6xl">
-              Semear, crescer,
+              Sow, grow,
               <br />
-              florescer,{" "}
-              <em className="font-light italic u-accent">inspirar.</em>
+              bloom,{" "}
+              <em className="font-light italic u-accent">inspire.</em>
             </h2>
           </Reveal>
           <div className="mt-16 grid gap-x-10 gap-y-12 md:grid-cols-4">
@@ -121,6 +121,53 @@ export default function SobrePage() {
         </div>
       </section>
 
+      {/* ===== A ESPECIALISTA — Karol (retrato + declaração em 1ª pessoa) ===== */}
+      <section className="grid md:min-h-[92vh] md:grid-cols-2">
+        {/* retrato — sangra a coluna */}
+        <div className="relative order-1 min-h-[72vh] overflow-hidden bg-paper-deep md:min-h-0">
+          <Image
+            src="/sobre/karol.jpg"
+            alt="Karol, Niwa's personal color specialist"
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover object-top"
+          />
+        </div>
+
+        {/* declaração */}
+        <div className="order-2 flex flex-col justify-center bg-paper px-6 py-20 md:px-14 md:py-0 lg:px-20">
+          <Reveal className="max-w-md">
+            <p className="u-eyebrow">The specialist</p>
+            <h2 className="u-display mt-4 text-4xl md:text-5xl">
+              In love
+              <br />
+              with <em className="font-light italic u-accent">color.</em>
+            </h2>
+            <p className="mt-6 text-lg leading-relaxed text-ink-soft">
+              I decided to help people see more of themselves. Colors exist,
+              they're right there, yet so often it's as if no one noticed them in
+              all their potential.
+            </p>
+            <p className="mt-4 leading-relaxed text-ink-soft">
+              I'm a mother, a wife, an entrepreneur, and I've lived through many
+              seasons of a woman's life. Now, I pour all of my knowledge —
+              practical, theoretical, and above all, what comes from the heart —
+              into the color fans and dossiers that reach you.
+            </p>
+            <p className="mt-4 leading-relaxed text-ink-soft">
+              So that you don't just see the colors, but discover what they can
+              awaken in you.
+            </p>
+            <p className="mt-8 font-display text-2xl italic leading-snug u-accent">
+              Awaken your inner garden. 🌷
+            </p>
+            <p className="mt-6 border-t border-line pt-5 text-[0.66rem] uppercase tracking-[0.26em] text-ink-mute">
+              Karol · Personal color specialist
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
       {/* ===== FECHAMENTO — full-bleed + scrim (sem sombras) ===== */}
       <section
         data-nav-dark
@@ -128,7 +175,7 @@ export default function SobrePage() {
       >
         <Image
           src="/consultoras/campo.jpg"
-          alt="Mulher contemplativa em um campo de hortênsias ao entardecer"
+          alt="Contemplative woman in a field of hydrangeas at dusk"
           fill
           sizes="100vw"
           className="object-cover object-center"
@@ -136,11 +183,11 @@ export default function SobrePage() {
         <div aria-hidden className="absolute inset-0 bg-black/50" />
         <Reveal className="relative max-w-3xl">
           <p className="u-display text-3xl leading-[1.15] sm:text-4xl md:text-5xl">
-            Uma luz que vai encontrar quem você já é, e assim{" "}
-            <em className="font-light italic u-accent">colorir suas asas.</em>
+            A light that will find who you already are, and so{" "}
+            <em className="font-light italic u-accent">color your wings.</em>
           </p>
           <p className="mt-6 text-[0.72rem] uppercase tracking-[0.28em] text-paper/75">
-            Únicas, reais e irrepetíveis
+            Unique, real, irreplaceable
           </p>
         </Reveal>
       </section>

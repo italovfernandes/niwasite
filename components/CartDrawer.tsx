@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useCart } from "@/lib/cart";
-import { formatBRL } from "@/lib/catalog";
+import { formatBRL, productBySlug } from "@/lib/catalog";
 
 export default function CartDrawer() {
   const { items, isOpen, closeCart, remove, setQty, subtotal, clear, count } =
@@ -33,7 +33,7 @@ export default function CartDrawer() {
       <aside
         role="dialog"
         aria-modal="true"
-        aria-label="Carrinho de compras"
+        aria-label="Shopping cart"
         className={`fixed right-0 top-0 z-[61] flex h-dvh w-full max-w-[26rem] flex-col bg-paper shadow-2xl transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
@@ -41,15 +41,15 @@ export default function CartDrawer() {
         {/* header */}
         <div className="flex items-center justify-between px-7 pb-5 pt-7">
           <div>
-            <p className="u-eyebrow">Seu carrinho</p>
+            <p className="u-eyebrow">Your cart</p>
             <p className="u-display mt-1 text-2xl text-ink">
-              {count} {count === 1 ? "item" : "itens"}
+              {count} {count === 1 ? "item" : "items"}
             </p>
           </div>
           <button
             type="button"
             onClick={handleClose}
-            aria-label="Fechar carrinho"
+            aria-label="Close cart"
             className="grid h-9 w-9 place-items-center rounded-full text-ink-soft transition-colors hover:bg-paper-deep hover:text-ink"
           >
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
@@ -61,10 +61,10 @@ export default function CartDrawer() {
         {confirmed ? (
           <div className="flex flex-1 flex-col items-center justify-center gap-4 px-8 text-center">
             <span className="font-display text-5xl text-marsala">✓</span>
-            <h3 className="font-display text-2xl text-ink">Pedido registrado</h3>
+            <h3 className="font-display text-2xl text-ink">Order placed</h3>
             <p className="max-w-xs text-sm leading-relaxed text-ink-soft">
-              Este é um checkout de demonstração — nenhum pagamento foi
-              processado. É aqui que entraria a finalização real da compra.
+              This is a demo checkout — no payment was processed. This is
+              where the real checkout would happen.
             </p>
             <button
               type="button"
@@ -74,21 +74,21 @@ export default function CartDrawer() {
               }}
               className="mt-2 rounded-xs bg-marsala px-6 py-3 text-[0.7rem] font-medium uppercase tracking-[0.2em] text-paper hover:bg-marsala-deep"
             >
-              Voltar à loja
+              Back to shop
             </button>
           </div>
         ) : items.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center gap-4 px-8 text-center">
-            <p className="font-display text-2xl text-ink">Seu carrinho está vazio</p>
+            <p className="font-display text-2xl text-ink">Your cart is empty</p>
             <p className="max-w-xs text-sm leading-relaxed text-ink-soft">
-              As cores certas começam pelas ferramentas certas.
+              The right colors start with the right tools.
             </p>
             <Link
               href="/loja"
               onClick={handleClose}
               className="mt-1 rounded-xs border border-ink px-6 py-3 text-[0.7rem] font-medium uppercase tracking-[0.2em] text-ink transition-colors hover:bg-ink hover:text-paper"
             >
-              Explorar a loja
+              Explore the shop
             </Link>
           </div>
         ) : (
@@ -103,7 +103,7 @@ export default function CartDrawer() {
                     className="relative aspect-[4/5] w-[4.5rem] shrink-0 overflow-hidden rounded-xs bg-paper-deep"
                   >
                     <Image
-                      src={`/capas/${item.slug}.jpg`}
+                      src={productBySlug(item.slug)?.image ?? `/capas/${item.slug}.jpg`}
                       alt={item.name}
                       fill
                       sizes="72px"
@@ -131,7 +131,7 @@ export default function CartDrawer() {
                         <button
                           type="button"
                           onClick={() => setQty(item.slug, item.qty - 1)}
-                          aria-label="Diminuir quantidade"
+                          aria-label="Decrease quantity"
                           className="grid h-7 w-7 place-items-center rounded-full text-base transition-colors hover:bg-paper-deep hover:text-ink"
                         >
                           –
@@ -142,7 +142,7 @@ export default function CartDrawer() {
                         <button
                           type="button"
                           onClick={() => setQty(item.slug, item.qty + 1)}
-                          aria-label="Aumentar quantidade"
+                          aria-label="Increase quantity"
                           className="grid h-7 w-7 place-items-center rounded-full text-base transition-colors hover:bg-paper-deep hover:text-ink"
                         >
                           +
@@ -153,7 +153,7 @@ export default function CartDrawer() {
                         onClick={() => remove(item.slug)}
                         className="text-[0.58rem] uppercase tracking-[0.18em] text-ink-mute transition-colors hover:text-marsala"
                       >
-                        Remover
+                        Remove
                       </button>
                     </div>
                   </div>
@@ -172,14 +172,14 @@ export default function CartDrawer() {
                 </span>
               </div>
               <p className="mt-1.5 text-[0.68rem] text-ink-mute">
-                Impostos e frete calculados na finalização.
+                Taxes and shipping calculated at checkout.
               </p>
               <button
                 type="button"
                 onClick={checkout}
                 className="group mt-5 flex w-full items-center justify-center gap-2.5 rounded-xs bg-marsala py-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-paper transition-[background-color,transform] duration-300 hover:bg-marsala-deep active:scale-[0.99]"
               >
-                Finalizar compra
+                Checkout
                 <span aria-hidden className="u-arrow">
                   →
                 </span>

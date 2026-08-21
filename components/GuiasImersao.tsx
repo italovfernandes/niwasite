@@ -9,10 +9,10 @@ import { useEffect, useRef } from "react";
  * em TODOS os tamanhos). Sticky + translateX imperativo (rAF).
  */
 const DOSSIES = [
-  { name: "Verão", img: "/dossies/verao.jpg" },
-  { name: "Outono", img: "/dossies/outono.jpg" },
-  { name: "Inverno", img: "/dossies/inverno.jpg" },
-  { name: "Primavera", img: "/dossies/primavera.jpg" },
+  { name: "Summer", img: "/dossies/verao.jpg" },
+  { name: "Autumn", img: "/dossies/outono.jpg" },
+  { name: "Winter", img: "/dossies/inverno.jpg" },
+  { name: "Spring", img: "/dossies/primavera.jpg" },
 ];
 
 function Card({ d, i }: { d: (typeof DOSSIES)[number]; i: number }) {
@@ -20,7 +20,7 @@ function Card({ d, i }: { d: (typeof DOSSIES)[number]; i: number }) {
     <article className="relative h-full w-full overflow-hidden">
       <Image
         src={d.img}
-        alt={`Dossiê ${d.name}`}
+        alt={`${d.name} Dossier`}
         fill
         sizes="(max-width: 768px) 80vw, 52vw"
         className="object-cover object-center"
@@ -34,7 +34,7 @@ function Card({ d, i }: { d: (typeof DOSSIES)[number]; i: number }) {
           {String(i + 1).padStart(2, "0")} / {String(DOSSIES.length).padStart(2, "0")}
         </span>
         <h3 className="u-display mt-1.5 text-3xl text-paper md:text-4xl">
-          Dossiê {d.name}
+          {d.name} Dossier
         </h3>
       </div>
     </article>
@@ -44,11 +44,11 @@ function Card({ d, i }: { d: (typeof DOSSIES)[number]; i: number }) {
 function Intro() {
   return (
     <>
-      <p className="u-eyebrow !text-[#C295D9]/70">Os dossiês</p>
+      <p className="u-eyebrow !text-[#C295D9]/70">The four dossiers</p>
       <h2 className="u-display mt-4 text-5xl leading-[1.05] md:text-6xl">
-        Uma imersão completa,
+        A dossier for
         <br />
-        <em className="font-light italic u-accent">estação por estação.</em>
+        <em className="font-light italic u-accent">every season.</em>
       </h2>
     </>
   );

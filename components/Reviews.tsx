@@ -10,13 +10,13 @@ export default function Reviews() {
         <Reveal className="max-w-2xl">
           <p className="u-eyebrow">Reviews</p>
           <h2 className="u-display mt-4 text-5xl md:text-6xl">
-            Elas já vivem
+            They already live
             <br />
-            <em className="font-light italic u-accent">nas suas cores.</em>
+            <em className="font-light italic u-accent">in their colors.</em>
           </h2>
           <p className="mt-6 max-w-md text-lg leading-relaxed text-ink-soft">
-            Histórias reais de quem descobriu a própria estação e nunca mais
-            duvidou de uma cor.
+            Real stories from women who discovered their own season and never
+            doubted a color again.
           </p>
         </Reveal>
 
@@ -36,7 +36,7 @@ export default function Reviews() {
             href="/reviews"
             className="group inline-flex items-center gap-2.5 rounded-xs bg-marsala px-8 py-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-paper transition-[background-color,transform] duration-300 hover:bg-marsala-deep active:scale-[0.98]"
           >
-            Ver mais depoimentos
+            See more testimonials
             <span aria-hidden className="u-arrow">
               →
             </span>
