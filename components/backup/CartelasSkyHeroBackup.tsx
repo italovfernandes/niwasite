@@ -24,12 +24,19 @@ const CARDS = [
   "Warm_Spring",
 ];
 const N = CARDS.length;
-const A = 33; // deg — meia-abertura (menor = cards mais próximos)
-const R = 40; // vw — raio
 
 export default function CartelasSkyHeroBackup() {
   const [open, setOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const onChange = () => setIsMobile(mq.matches);
+    onChange();
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
 
   useEffect(() => {
     const el = ref.current;
@@ -48,12 +55,19 @@ export default function CartelasSkyHeroBackup() {
     return () => io.disconnect();
   }, []);
 
+  // geometria do leque — no mobile: cards maiores, arco mais aberto e baixo
+  // (encostam nas bordas e mergulham nas nuvens); no desktop: como antes.
+  const A = isMobile ? 39 : 33; // deg — meia-abertura
+  const R = isMobile ? 62 : 40; // vw — raio
+  const CW = isMobile ? "clamp(98px, 27vw, 140px)" : "clamp(66px, 7.6vw, 118px)";
+  const fanTop = isMobile ? "81%" : "70%";
+
   return (
     <section
       ref={ref}
       data-nav-sky
       className="relative z-10 -mt-[62px] min-h-screen overflow-hidden bg-[#3f8fd4]"
-      style={{ "--cw": "clamp(66px, 7.6vw, 118px)" } as CSSProperties}
+      style={{ "--cw": CW } as CSSProperties}
       aria-label="The Niwa color fans"
     >
       {/* céu */}
@@ -66,27 +80,28 @@ export default function CartelasSkyHeroBackup() {
         className="object-cover"
       />
 
-      {/* headline */}
-      <div
-        className="absolute inset-x-0 top-[20%] z-30 px-6 text-center text-white"
-        style={{
-          opacity: open ? 1 : 0,
-          transform: open ? "translateY(0)" : "translateY(16px)",
-          transition: "opacity 0.9s ease, transform 0.9s cubic-bezier(0.22,1,0.36,1)",
-          transitionDelay: open ? "0.9s" : "0s",
-        }}
-      >
-        <h1
-          className="u-display text-5xl leading-[1.05] sm:text-6xl md:text-7xl"
-          style={{ textShadow: "0 2px 30px rgba(20,60,110,0.35)" }}
+      {/* headline — centralizado verticalmente no mobile, mais alto no desktop */}
+      <div className="absolute inset-x-0 top-1/2 z-30 -translate-y-1/2 px-6 text-center text-white md:top-[20%] md:translate-y-0">
+        <div
+          style={{
+            opacity: open ? 1 : 0,
+            transform: open ? "translateY(0)" : "translateY(16px)",
+            transition: "opacity 0.9s ease, transform 0.9s cubic-bezier(0.22,1,0.36,1)",
+            transitionDelay: open ? "0.9s" : "0s",
+          }}
         >
-          Colors have so much
-          <br />to tell you.
-        </h1>
+          <h1
+            className="u-display text-[clamp(2.2rem,5.4vw,4.5rem)] leading-[1.08]"
+            style={{ textShadow: "0 2px 30px rgba(20,60,110,0.35)" }}
+          >
+            Colors have so much
+            <br />to tell you.
+          </h1>
+        </div>
       </div>
 
       {/* leque */}
-      <div className="absolute left-1/2 top-[70%] z-10">
+      <div className="absolute left-1/2 z-10" style={{ top: fanTop }}>
         {CARDS.map((name, i) => {
           const t = (i - (N - 1) / 2) / ((N - 1) / 2);
           const deg = t * A;

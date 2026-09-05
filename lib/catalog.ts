@@ -208,6 +208,8 @@ export const collectionById = (id: CollectionId) =>
 
 // preço unitário de cada cartela (US$) — ver documento de referência
 export const CARTELA_PRICE = 49.99;
+// preço unitário de cada dossiê de estação (US$)
+export const DOSSIER_PRICE = 119.99;
 
 // texto curto de vitrine por cartela (excerpt do card / topo do PDP)
 const CARTELA_EXCERPTS: Record<string, string> = {
@@ -249,8 +251,32 @@ const CARTELA_PRODUCTS: Product[] = SEASONS.flatMap((season) =>
   }))
 );
 
+// 4 dossiês — um por estação. Slug/PDP próprio; capa = /dossies/{id}.jpg (as
+// mesmas capas coloridas da página de dossiês).
+const DOSSIER_PRODUCTS: Product[] = SEASONS.map((s) => ({
+  slug: `dossier-${s.name.toLowerCase()}`,
+  name: `${s.name} Dossier`,
+  collection: "guias" as const,
+  format: "Physical" as const,
+  price: DOSSIER_PRICE,
+  season: s.id,
+  image: `/dossies/${s.id}.jpg`,
+  excerpt: `Your complete ${s.name} dossier — how to wear your colors from head to toe.`,
+  description: [
+    `The ${s.name} dossier gathers your season's color language and shows you, from head to toe, how to use it — colors and prints, accessories, makeup and hair.`,
+    s.description,
+  ],
+  features: [
+    "Hardcover with calibrated color plates",
+    "Colors, prints, accessories, makeup and hair",
+    "SmartTravel: looks and a packing checklist",
+  ],
+  includes: [`${s.name} dossier`, "Ribbon bookmark"],
+}));
+
 export const PRODUCTS: Product[] = [
   ...CARTELA_PRODUCTS,
+  ...DOSSIER_PRODUCTS,
   {
     slug: "cartela-sazonal-12-subtons",
     name: "The Color Atlas — 12 Color Fans",
@@ -273,67 +299,70 @@ export const PRODUCTS: Product[] = [
     includes: SEASONS.flatMap((s) => s.cartelas.map((c) => c.name)),
   },
   {
-    slug: "combo-cartelas-guia",
-    name: "The Color Atlas + Style Dossier",
+    slug: "seasonal-library",
+    name: "The Seasonal Library — 4 Dossiers",
     collection: "formacao",
     format: "Physical",
-    price: 669.87,
+    price: 479.96,
+    excerpt:
+      "All four season dossiers together — the complete head-to-toe method for every palette.",
+    description: [
+      "The four season dossiers — Spring, Summer, Autumn and Winter — gathered in one library, so the full Niwa method lives with you all year round.",
+      "Colors and prints, accessories, makeup and hair — with SmartTravel looks and checklists in every volume.",
+    ],
+    image: "/guia/dossies.jpg",
+    features: [
+      "The 4 season dossiers",
+      "Colors, prints, accessories, makeup and hair",
+      "SmartTravel in every volume",
+    ],
+    includes: SEASONS.map((s) => `${s.name} Dossier`),
+  },
+  {
+    slug: "signature",
+    name: "The Signature — Color Fan + Dossier",
+    collection: "formacao",
+    format: "Physical",
+    price: 161.98,
+    compareAt: 179.98,
+    badge: "Save 10%",
+    excerpt:
+      "Your season's color fan and dossier together — color and know-how, at 10% off.",
+    description: [
+      "The perfect start: your season's color fan paired with its dossier, so you can see your colors and learn to wear them from head to toe.",
+      "Color and knowledge, together — with 10% off the pair.",
+    ],
+    image: "/capas/combo-cartelas-guia.jpg",
+    features: [
+      "1 color fan + 1 dossier for your season",
+      "Colors, prints, accessories, makeup and hair",
+      "10% off the pair",
+    ],
+    includes: ["Color fan for your season", "Dossier for your season"],
+  },
+  {
+    slug: "complete-collection",
+    name: "The Complete Collection — 12 Fans + 4 Dossiers",
+    collection: "formacao",
+    format: "Physical",
+    price: 971.85,
+    compareAt: 1079.84,
     badge: "Best value",
     excerpt:
-      "The 12 color fans plus the style dossier — color and knowledge, in the same box.",
+      "Everything Niwa makes — the 12 color fans and all four dossiers, at 10% off.",
     description: [
-      "Everything you need: the 12 color fans of all four seasons and the Niwa style dossier, which teaches you to wear your colors from head to toe.",
-      "The complete path to knowing your colors — ready to live with you.",
+      "The whole Niwa universe: the 12 color fans of all four seasons plus the four season dossiers — every color and the complete head-to-toe method.",
+      "The most complete path to living in your colors, at 10% off the entire set.",
     ],
+    image: "/capas/consultoria-completa.jpg",
     features: [
       "The 12 color fans of all 4 seasons",
-      "The complete Niwa style dossier",
-      "Everything in a single set",
-    ],
-    includes: ["The 12 color fans of all 4 seasons", "Niwa Dossier — The 4 Seasons Method"],
-  },
-  {
-    slug: "guia-metodo-4-estacoes",
-    name: "Niwa Style Dossier",
-    collection: "guias",
-    format: "Physical",
-    price: 69.99,
-    image: "/capas/dossie-guia.jpg",
-    excerpt:
-      "The dossier that teaches you to wear your colors, prints, accessories, makeup and hair.",
-    description: [
-      "A coffee-table and reference book. It gathers the Niwa method and teaches you, from head to toe, how to use your colors in your favor — colors and prints, accessories, makeup and hair.",
-      "Made to be read, consulted and admired on the table.",
-    ],
-    features: [
-      "196 pages, hardcover",
-      "Calibrated color plates",
-      "From head to toe: style, makeup and hair",
-    ],
-    includes: ["Printed dossier", "Ribbon bookmark"],
-  },
-  {
-    slug: "consultoria-completa",
-    name: "Complete Consultation",
-    collection: "formacao",
-    format: "In person",
-    price: 249,
-    badge: "Experience",
-    excerpt:
-      "The complete analysis of your personal coloring, led by a Niwa consultant.",
-    description: [
-      "A journey of self-discovery led by a Niwa consultant: live draping, defining your season and your color fan, and guidance on how to use it all day to day.",
-      "At the end, you leave with your colors diagnosed and a plan for wearing only what lights you up.",
-    ],
-    features: [
-      "One-on-one draping session",
-      "Season and color fan diagnosis",
-      "Head-to-toe usage guidance",
+      "The 4 season dossiers",
+      "10% off the complete set",
     ],
     includes: [
-      "Complete in-person consultation",
-      "Color fan for your season",
-      "Personalized combination guide",
+      "The 12 color fans of all 4 seasons",
+      "The 4 season dossiers",
     ],
   },
 ];

@@ -90,7 +90,7 @@ export default function GuiasPage() {
         <div className="u-container relative py-24 text-center md:py-0">
           <Reveal className="mx-auto max-w-3xl">
             <p className="u-eyebrow !text-[#C295D9]/80">Four dossiers</p>
-            <h2 className="u-display mt-6 text-5xl leading-[1.03] md:text-7xl">
+            <h2 className="u-display mt-6 text-[clamp(2.3rem,5vw,4.5rem)] leading-[1.03] ">
               Bloom in
               <br />
               <em className="font-light italic u-accent">every season.</em>
@@ -136,7 +136,7 @@ export default function GuiasPage() {
         <div className="u-container relative pb-24 md:pb-0">
           <Reveal className="max-w-xl text-center md:ml-auto md:text-right">
             <p className="u-eyebrow !text-[#C295D9]/80">What sets us apart</p>
-            <h2 className="u-display mt-5 text-5xl leading-[1.04] md:text-7xl">
+            <h2 className="u-display mt-5 text-[clamp(2.3rem,5vw,4.5rem)] leading-[1.04] ">
               Together, you'll
               <br />
               be <em className="font-light italic u-accent">unstoppable.</em>
@@ -203,7 +203,7 @@ export default function GuiasPage() {
               <em className="font-light italic u-accent">listen to your heart.</em>
             </h2>
             <Link
-              href="/produto/guia-metodo-4-estacoes"
+              href="/loja?c=guias"
               className="mt-10 inline-block rounded-xs bg-paper px-10 py-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-marsala transition-colors hover:bg-[#C295D9] hover:text-plum"
             >
               Buy my dossier

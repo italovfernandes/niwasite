@@ -71,7 +71,7 @@ export default function GuiaEstilo() {
 
       <div className="u-container relative">
         <Reveal className="max-w-xl text-paper">
-          <h2 className="u-display text-5xl leading-[1.02] md:text-7xl">
+          <h2 className="u-display text-[clamp(2.3rem,5vw,4.5rem)] leading-[1.02] ">
             Go deeper into
             <br />
             <em className="font-light italic u-accent">your season.</em>

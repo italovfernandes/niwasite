@@ -108,14 +108,6 @@ function CollageCard({
  * do Verão (lavanda, próximo ao tom médio da foto) — assim o mecanismo do scroll
  * é preservado e não sobra fotografia solta no círculo.
  * --------------------------------------------------------------------------- */
-// fundo tom-sobre-tom (escuro) de cada estação para o card da LOGO — o ícone
-// claro e o nome branco ficam por cima (mesma matiz da estação, escurecida).
-const LOGO_BG: Record<string, string> = {
-  primavera: "#c19a34",
-  verao: "#32856c",
-  outono: "#935a2e",
-  inverno: "#327a90",
-};
 // nomes em inglês na logo — casa com o sistema das cartelas (Light Spring etc.)
 const SEASON_EN: Record<string, string> = {
   primavera: "Spring",
@@ -124,47 +116,37 @@ const SEASON_EN: Record<string, string> = {
   inverno: "Winter",
 };
 const PORTRAIT_SEASON = "verao";
-const PORTRAIT_SWATCH = 2; // Lavanda (#b0a6c9) — combina com o tom médio da foto
+const PORTRAIT_CARTELA = 1; // qual capa do Verão recebe a dissolução da foto
 type CItem = {
-  src?: string;
-  icon?: string;
-  color?: string;
+  src?: string; // foto do retrato (dissolve)
+  cover?: string; // capa 1x1 da cartela
+  icon?: string; // ícone/logo da estação (só no card de logo)
   label: string;
   season?: string;
-  kind: "logo" | "portrait" | "tone";
+  kind: "logo" | "portrait" | "cover";
 };
-// o ícone do Verão (teal) se confunde com as cores da estação → renderiza branco
-// (só aqui neste componente; o arquivo .svg segue o mesmo em outras seções).
-const iconStyle = (season?: string) =>
-  season === "verao" ? { filter: "brightness(0) invert(1)" as const } : undefined;
+// círculo: cada estação = 1 card de LOGO (fundo transparente) + as 3 capas das
+// suas cartelas. O retrato (foto que cresce e dissolve) ocupa uma capa do Verão.
 const CIRCLE: CItem[] = SEASONS.flatMap((season) => [
   {
     kind: "logo" as const,
     icon: season.icon,
-    color: LOGO_BG[season.id],
     label: SEASON_EN[season.id],
     season: season.id,
   },
-  ...season.swatches.map((sw, si) =>
-    season.id === PORTRAIT_SEASON && si === PORTRAIT_SWATCH
+  ...season.cartelas.map((c, ci) =>
+    season.id === PORTRAIT_SEASON && ci === PORTRAIT_CARTELA
       ? {
           kind: "portrait" as const,
           src: "/combinacao/principal.jpg",
-          color: sw.hex,
-          icon: season.icon,
-          label: "You",
+          cover: c.src,
+          label: c.name,
           season: season.id,
         }
-      : {
-          kind: "tone" as const,
-          color: sw.hex,
-          icon: season.icon,
-          label: sw.name,
-          season: season.id,
-        }
+      : { kind: "cover" as const, cover: c.src, label: c.name, season: season.id }
   ),
 ]);
-const N = CIRCLE.length; // 24 = 4 estações × (1 logo + 5 cores)
+const N = CIRCLE.length; // 16 = 4 estações × (1 logo + 3 capas)
 const PORTRAIT = CIRCLE.findIndex((c) => c.kind === "portrait");
 const circDist = (i: number, j: number) => {
   const d = Math.abs(i - j);
@@ -257,9 +239,8 @@ export default function CombinacaoSequence() {
 
         // ---- geometria ----
         const minDim = Math.min(vw, vh);
-        const rBase = Math.min(minDim * 0.46, 470);
-        const cardW = Math.min(Math.max(minDim * 0.1, 54), 104);
-        const cardH = cardW * 1.5;
+        const cardW = Math.min(Math.max(minDim * 0.125, 64), 128);
+        const cardH = cardW * 1.3;
         const isMobile = vw < 768;
         const baseRadius = Math.min(vw, vh * 1.5);
         const arcRadius = baseRadius * (isMobile ? 1.4 : 1.1);
@@ -271,21 +252,37 @@ export default function CombinacaoSequence() {
         // círculo FORMA menor (contido, sem tocar as bordas) e depois EXPANDE
         // até o tamanho maior (com a frase). Só a formação ficou menor.
         const expandT = seg(p, PH.expand[0], PH.expand[1], 0, 1);
-        const radiusForm = Math.min(minDim * 0.36, 360);
-        const radiusBig = rBase * (1 + EXPAND_AMT);
+        // raio limitado para TODO o anel caber no frame (vertical e horizontal),
+        // contando a altura do card já crescido na expansão.
+        // os LOGOS (ícones pequenos) ficam nos 4 pontos cardeais; as capas
+        // (cards cheios) ficam nos ângulos intermediários e se projetam menos —
+        // por isso o fit usa só ~0.62 da altura do card, permitindo um raio maior.
+        const cardHexp = cardH * (1 + CARD_GROW);
+        // VERTICAL: limitado pelo frame — as capas não podem sair pelo topo/base.
+        const fitRadiusY = (vh - cardHexp * 0.66) / 2 - 8;
+        const radiusBig = Math.min(minDim * 0.54 * (1 + EXPAND_AMT), fitRadiusY);
+        const radiusForm = Math.min(minDim * 0.4, radiusBig * 0.82);
         const radiusEff = lerp(radiusForm, radiusBig, expandT);
         const circleScale = 1 + expandT * CARD_GROW; // cards crescem na expansão
 
+        // ELIPSE: na horizontal há espaço de sobra, então alargamos ~28% para
+        // afastar o anel da frase (larga). A vertical fica no limite que cabe.
+        const radiusY = radiusEff;
+        const radiusX = Math.min(
+          radiusEff * 1.28,
+          (vw - cardW * (1 + CARD_GROW)) / 2 - 12
+        );
+
         const pca = ((PORTRAIT / N) * 360 * Math.PI) / 180;
-        const pcx = Math.cos(pca) * radiusEff;
-        const pcy = Math.sin(pca) * radiusEff;
+        const pcx = Math.cos(pca) * radiusX;
+        const pcy = Math.sin(pca) * radiusY;
 
         for (let i = 0; i < N; i++) {
           const el = cardRefs.current[i];
           if (!el) continue;
           const ca = ((i / N) * 360 * Math.PI) / 180;
-          const ccx = Math.cos(ca) * radiusEff;
-          const ccy = Math.sin(ca) * radiusEff;
+          const ccx = Math.cos(ca) * radiusX;
+          const ccy = Math.sin(ca) * radiusY;
           const crotN = norm((i / N) * 360 + 90); // rotação do card no círculo (curta)
           const aa = startAngle + i * step;
           const arad = (aa * Math.PI) / 180;
@@ -330,7 +327,7 @@ export default function CombinacaoSequence() {
           } else if (p < PH.morph[0]) {
             // demais cartas: abrem a partir da posição do retrato
             const d = circDist(i, PORTRAIT);
-            const es = PH.emergeBase + (d / 12) * PH.emergeSpread;
+            const es = PH.emergeBase + (d / (N / 2)) * PH.emergeSpread;
             const ep = clamp01((p - es) / PH.emergeWin);
             x = lerp(pcx, ccx, ep);
             y = lerp(pcy, ccy, ep);
@@ -381,26 +378,18 @@ export default function CombinacaoSequence() {
             <br />
             from head to toe.
           </h2>
-          <div className="mt-12 grid grid-cols-3 gap-3 sm:grid-cols-6">
+          <div className="mt-12 grid grid-cols-4 gap-3">
             {CIRCLE.map((c, i) => (
               <div
                 key={i}
-                className="relative flex aspect-[2/3] flex-col items-center justify-center overflow-hidden rounded-xl text-center"
-                style={{ backgroundColor: c.color }}
+                className="relative flex aspect-square flex-col items-center justify-center overflow-hidden rounded-xl text-center"
               >
-                {c.icon && c.kind !== "logo" && (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={c.icon} alt="" aria-hidden className="h-1/4 w-auto opacity-50" style={iconStyle(c.season)} />
-                )}
-                {c.kind === "portrait" && (
-                  <Image src={c.src!} alt="" aria-hidden fill sizes="30vw" className="object-cover object-top" />
+                {(c.kind === "cover" || c.kind === "portrait") && c.cover && (
+                  <Image src={c.cover} alt="" aria-hidden fill sizes="25vw" className="object-cover" />
                 )}
                 {c.kind === "logo" && (
-                  <>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={c.icon} alt="" aria-hidden className="h-10 w-auto" style={iconStyle(c.season)} />
-                    <span className="u-display mt-1.5 text-sm text-white">{c.label}</span>
-                  </>
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={c.icon} alt="" aria-hidden className="h-9 w-auto" />
                 )}
               </div>
             ))}
@@ -447,47 +436,40 @@ export default function CombinacaoSequence() {
                 cardRefs.current[i] = el;
               }}
               className="absolute left-1/2 top-1/2 overflow-hidden"
-              style={{
-                opacity: 0,
-                willChange: "transform",
-                backgroundColor: item.color,
-              }}
+              style={{ opacity: 0, willChange: "transform" }}
             >
-              {item.icon && item.kind !== "logo" && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={item.icon}
-                    alt=""
-                    aria-hidden
-                    className="h-[26%] w-auto opacity-50"
-                    style={iconStyle(item.season)}
-                  />
-                </div>
-              )}
-              {item.kind === "portrait" && (
+              {item.kind === "cover" && (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
-                  ref={portraitImgRef}
-                  src={item.src}
+                  src={item.cover}
                   alt=""
                   aria-hidden
-                  className="relative z-10 h-full w-full object-cover object-top"
+                  className="h-full w-full object-cover"
                 />
               )}
-              {item.kind === "logo" && (
-                <div className="flex h-full w-full flex-col items-center justify-center gap-1 px-1 text-center">
+              {item.kind === "portrait" && (
+                <>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={item.icon}
+                    src={item.cover}
                     alt=""
                     aria-hidden
-                    className="h-[34%] w-auto"
-                    style={iconStyle(item.season)}
+                    className="absolute inset-0 h-full w-full object-cover"
                   />
-                  <span className="u-display text-[9px] leading-tight text-white sm:text-[11px]">
-                    {item.label}
-                  </span>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    ref={portraitImgRef}
+                    src={item.src}
+                    alt=""
+                    aria-hidden
+                    className="relative z-10 h-full w-full object-cover object-top"
+                  />
+                </>
+              )}
+              {item.kind === "logo" && (
+                <div className="flex h-full w-full items-center justify-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={item.icon} alt="" aria-hidden className="h-[48%] w-auto" />
                 </div>
               )}
             </div>
@@ -522,7 +504,7 @@ export default function CombinacaoSequence() {
 
         {/* frase do círculo */}
         <div ref={phraseCircleRef} style={{ opacity: 0 }} className="pointer-events-none absolute inset-0 z-50 flex items-center justify-center px-6 text-center">
-          <h2 className="u-display text-paper text-4xl sm:text-5xl md:text-[3.6rem]">
+          <h2 className="u-display text-paper text-3xl sm:text-4xl md:text-[3rem]">
             Color theory, now
             <br />
             <em className="font-light italic u-accent">practical, easy, and yours.</em>

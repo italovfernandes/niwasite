@@ -129,7 +129,7 @@ function SeasonIndicator({ active, visible }: { active: number; visible: boolean
 function HeroHeadline() {
   return (
     <div className="anim-rise max-w-xl">
-      <h1 className="u-display text-[3rem] leading-[0.98] text-ink sm:text-6xl md:text-7xl">
+      <h1 className="u-display text-[clamp(2.4rem,5.2vw,4.5rem)] leading-[1.0] text-ink">
         Awaken the garden
         <br />
         that lives <em className="font-light italic u-accent">within you.</em>

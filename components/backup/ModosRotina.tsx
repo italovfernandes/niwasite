@@ -45,7 +45,7 @@ function Intro() {
   return (
     <>
       <p className="u-eyebrow !text-[#C295D9]/70">Moments of your day</p>
-      <h2 className="u-display mt-4 text-5xl leading-[1.05] md:text-6xl">
+      <h2 className="u-display mt-4 text-[clamp(1.9rem,4.6vw,3rem)] text-balance leading-[1.05]">
         Color combinations
         <br />
         far <em className="font-light italic u-accent">beyond the ordinary.</em>

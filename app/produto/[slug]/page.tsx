@@ -42,7 +42,7 @@ export default async function ProductPage(props: PageProps<"/produto/[slug]">) {
   const season = product.season ? seasonById(product.season) : undefined;
   // combo com todas as cartelas → mostra todas as cartelas das 4 estações
   const isComboCartelas =
-    product.slug === "combo-cartelas-guia" ||
+    product.slug === "complete-collection" ||
     product.slug === "cartela-sazonal-12-subtons";
   const allCartelas = SEASONS.flatMap((s) => s.cartelas);
   const related = PRODUCTS.filter(

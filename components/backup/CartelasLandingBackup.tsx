@@ -12,7 +12,8 @@ type CenarioIconName =
   | "makeup"
   | "lips"
   | "accessories"
-  | "travel";
+  | "travel"
+  | "wardrobe";
 
 function CenarioIcon({
   name,
@@ -55,6 +56,12 @@ function CenarioIcon({
         <rect x="4" y="7" width="16" height="13" rx="2" {...p} />
         <path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" {...p} />
         <path d="M9 11v5M15 11v5" {...p} />
+      </>
+    ),
+    wardrobe: (
+      <>
+        <path d="M11.6 8.2a1.7 1.7 0 1 1 2 1.65c-.9.15-1.6.6-1.6 1.35v.4" {...p} />
+        <path d="M12 11.6 4.4 16.6c-.9.6-.5 1.9.6 1.9h14c1.1 0 1.5-1.3.6-1.9L12 11.6Z" {...p} />
       </>
     ),
   };
@@ -107,15 +114,21 @@ const CENARIOS: { label: string; desc?: string; icon: CenarioIconName }[] = [
     desc: "Looks and a travel checklist.",
     icon: "travel",
   },
+  {
+    label: "Wardrobe & Color Combinations",
+    desc: "Build outfits that work together — more looks with fewer pieces.",
+    icon: "wardrobe",
+  },
 ];
 
 // bento: mobile = coluna única; md = 1 box largo em cima + 3 embaixo (grid de 6)
 const CENARIO_SPANS = [
   "col-span-2 md:col-span-4",
   "col-span-2 md:col-span-2",
-  "col-span-2 md:col-span-2",
-  "col-span-2 md:col-span-2",
-  "col-span-2 md:col-span-2",
+  "col-span-2 md:col-span-3",
+  "col-span-2 md:col-span-3",
+  "col-span-2 md:col-span-3",
+  "col-span-2 md:col-span-3",
 ];
 
 export default function CartelasLandingBackup() {
@@ -132,10 +145,8 @@ export default function CartelasLandingBackup() {
         <div className="flex flex-col justify-center px-6 py-16 md:px-14 md:py-0 lg:px-20">
           <Reveal className="max-w-md">
             <p className="u-eyebrow !text-[#C295D9]/70">Why use them</p>
-            <h2 className="u-display mt-6 text-5xl leading-[1.05] md:text-6xl">
-              With Niwa color fans,
-              <br />
-              getting dressed{" "}
+            <h2 className="u-display mt-6 text-[clamp(1.9rem,4.6vw,3rem)] text-balance leading-[1.1]">
+              With Niwa color fans, getting dressed{" "}
               <em className="font-light italic u-accent">becomes a joy</em>
             </h2>
             <ul className="mt-12 border-b border-paper/15">
@@ -169,7 +180,7 @@ export default function CartelasLandingBackup() {
         <div className="u-container">
           <Reveal className="max-w-2xl">
             <p className="u-eyebrow !text-[#C295D9]/70">More features</p>
-            <h2 className="u-display mt-6 text-5xl md:text-6xl">
+            <h2 className="u-display mt-6 text-[clamp(1.9rem,4.6vw,3rem)] text-balance">
               To expand your
               <br />
               experience of{" "}
@@ -199,7 +210,7 @@ export default function CartelasLandingBackup() {
         <div className="u-container">
           <Reveal className="max-w-2xl">
             <p className="u-eyebrow">The 12 color fans</p>
-            <h2 className="u-display mt-4 text-5xl md:text-6xl">
+            <h2 className="u-display mt-4 text-[clamp(1.9rem,4.6vw,3rem)] text-balance">
               Be with them through
               <br />
               <em className="font-light italic u-accent">every season.</em>
@@ -291,7 +302,7 @@ export default function CartelasLandingBackup() {
         <div className="u-container">
           <Reveal className="max-w-2xl">
             <p className="u-eyebrow !text-[#C295D9]/70">Features</p>
-            <h2 className="u-display mt-4 text-5xl md:text-6xl">
+            <h2 className="u-display mt-4 text-[clamp(1.9rem,4.6vw,3rem)] text-balance">
               Color fans that are unique
               <br />
               and <em className="font-light italic u-accent">practical.</em>
@@ -354,7 +365,7 @@ export default function CartelasLandingBackup() {
             <p className="u-eyebrow !text-[#C295D9]/80">
               Organization creates possibilities.
             </p>
-            <h2 className="u-display mt-6 text-5xl leading-[1.05] md:text-6xl">
+            <h2 className="u-display mt-6 text-[clamp(1.9rem,4.6vw,3rem)] text-balance leading-[1.05]">
               Your wardrobe more
               <br />
               <em className="font-light italic u-accent">functional than ever.</em>

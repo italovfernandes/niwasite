@@ -45,7 +45,7 @@ export default function Home() {
         />
         <div className="u-container relative">
           <Reveal className="max-w-2xl">
-            <h2 className="u-display text-5xl leading-[1.03] md:text-7xl">
+            <h2 className="u-display text-[clamp(2.3rem,5vw,4.5rem)] leading-[1.03] ">
               Practical, easy
               <br />and <em className="font-light italic u-accent">yours.</em>
             </h2>

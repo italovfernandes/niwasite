@@ -5,7 +5,7 @@ import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 import { PRODUCTS, COLLECTIONS } from "@/lib/catalog";
 
-const SUGESTOES = ["Color Fans", "Collections", "Dossier", "Consultation", "Winter"];
+const SUGESTOES = ["Color Fans", "Collections", "Dossier", "Signature", "Winter"];
 
 export default function BuscaPage() {
   const [q, setQ] = useState("");

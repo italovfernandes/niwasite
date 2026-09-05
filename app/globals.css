@@ -124,6 +124,9 @@
     font-weight: 300;
     line-height: 0.98;
     letter-spacing: -0.015em;
+    /* quebra de linha harmônica em todos os títulos (o browser ignora em
+       blocos muito longos, então parágrafos display não são afetados). */
+    text-wrap: balance;
   }
 
   /* Acento de título (itálico) — troca de tom conforme o contraste do fundo.

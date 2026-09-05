@@ -35,7 +35,7 @@ function HeroContent({
       >
         <div className="max-w-xl">
           <p className="u-eyebrow !text-[#C295D9]/85">Niwa Dossiers</p>
-          <h1 className="u-display mt-6 text-5xl leading-[1.02] text-paper md:text-7xl">
+          <h1 className="u-display mt-6 text-[clamp(2.3rem,5vw,4.5rem)] leading-[1.02] text-paper ">
             Your freedom
             <br />
             for <em className="font-light italic u-accent">$119.</em>
@@ -45,7 +45,7 @@ function HeroContent({
             live alongside your color fan.
           </p>
           <Link
-            href="/produto/guia-metodo-4-estacoes"
+            href="/loja?c=guias"
             className="group mt-9 inline-flex items-center gap-2.5 rounded-xs bg-paper px-8 py-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-marsala transition-colors hover:bg-[#C295D9] hover:text-plum"
           >
             I want my dossier

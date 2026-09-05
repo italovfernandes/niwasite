@@ -155,7 +155,7 @@ export default function CartelasJourneyBackup() {
           style={{ transform: "translateY(-50%)" }}
           className="absolute inset-x-0 top-1/2 z-20 px-6 text-center text-white"
         >
-          <div className="mx-auto max-w-2xl font-display text-2xl font-light leading-[1.4] sm:text-3xl md:text-[2.4rem] md:leading-[1.35]">
+          <div className="mx-auto max-w-2xl font-display text-[clamp(1.4rem,4.8vw,2.4rem)] font-light leading-[1.4]">
             {PHRASES.map((ph, i) => (
               <span
                 key={i}
@@ -181,15 +181,16 @@ export default function CartelasJourneyBackup() {
         </div>
       </div>
 
-      {/* nuvens — costura 50/50 na divisa hero/jornada */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-30 -translate-y-1/2">
+      {/* nuvens — costura 50/50 na divisa hero/jornada (maiores no mobile, p/
+          cobrir o leque que mergulha nelas) */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-30 flex -translate-y-1/2 justify-center">
         <Image
           src="/cartelas-hero/clouds.png"
           alt=""
           width={1440}
           height={626}
-          sizes="100vw"
-          className="h-auto w-full"
+          sizes="(max-width: 768px) 150vw, 100vw"
+          className="h-auto w-[150%] max-w-none md:w-full"
         />
       </div>
     </section>
@@ -198,7 +199,7 @@ export default function CartelasJourneyBackup() {
 
 function Filosofia() {
   return (
-    <div className="mx-auto max-w-2xl font-display text-2xl font-light leading-[1.4] sm:text-3xl md:text-[2.4rem] md:leading-[1.35]">
+    <div className="mx-auto max-w-2xl font-display text-[clamp(1.4rem,4.8vw,2.4rem)] font-light leading-[1.4]">
       <p>
         You don't dress better{" "}
         <em className="italic">by the number of clothes you own,</em> but by the
@@ -215,7 +216,7 @@ function Filosofia() {
 
 function DeAdeus() {
   return (
-    <h2 className="u-display text-5xl md:text-6xl">
+    <h2 className="u-display text-[clamp(1.9rem,4.6vw,3rem)] text-balance">
       Say goodbye to the stress
       <br />
       of <em className="font-light italic u-accent">getting dressed.</em>

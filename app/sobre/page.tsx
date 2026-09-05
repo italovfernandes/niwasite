@@ -34,7 +34,7 @@ export default function SobrePage() {
         <div aria-hidden className="absolute inset-0 bg-black/45" />
         <Reveal className="relative max-w-3xl">
           <p className="u-eyebrow !text-[#C295D9]/80">About Niwa</p>
-          <h1 className="u-display mt-6 text-5xl leading-[1.03] sm:text-6xl md:text-7xl">
+          <h1 className="u-display mt-6 text-[clamp(2.3rem,5vw,4.5rem)] leading-[1.03] ">
             Woman.
             <br />
             We listened to{" "}
