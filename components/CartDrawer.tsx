@@ -84,7 +84,7 @@ export default function CartDrawer() {
               The right colors start with the right tools.
             </p>
             <Link
-              href="/loja"
+              href="/shop"
               onClick={handleClose}
               className="mt-1 rounded-xs border border-ink px-6 py-3 text-[0.7rem] font-medium uppercase tracking-[0.2em] text-ink transition-colors hover:bg-ink hover:text-paper"
             >
@@ -98,7 +98,7 @@ export default function CartDrawer() {
               {items.map((item) => (
                 <li key={item.slug} className="flex gap-5 py-6">
                   <Link
-                    href={`/produto/${item.slug}`}
+                    href={`/product/${item.slug}`}
                     onClick={handleClose}
                     className="relative aspect-[4/5] w-[4.5rem] shrink-0 overflow-hidden rounded-xs bg-paper-deep"
                   >
@@ -113,7 +113,7 @@ export default function CartDrawer() {
                   <div className="flex min-w-0 flex-1 flex-col">
                     <div className="flex items-start justify-between gap-3">
                       <Link
-                        href={`/produto/${item.slug}`}
+                        href={`/product/${item.slug}`}
                         onClick={handleClose}
                         className="u-display min-w-0 text-[1.05rem] leading-tight text-ink u-link"
                       >

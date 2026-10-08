@@ -43,7 +43,7 @@ export default async function LojaPage({
       <div className="mt-8 flex flex-wrap items-center gap-2 border-b border-line pb-5">
         {FILTERS.map((f) => {
           const isActive = f.id === active;
-          const href = f.id === "todos" ? "/loja" : `/loja?c=${f.id}`;
+          const href = f.id === "todos" ? "/shop" : `/shop?c=${f.id}`;
           return (
             <Link
               key={f.id}

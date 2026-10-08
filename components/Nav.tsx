@@ -7,9 +7,9 @@ import { useCart } from "@/lib/cart";
 
 const LINKS = [
   { href: "/", label: "Home" },
-  { href: "/loja", label: "Shop" },
-  { href: "/produto/cartela-sazonal-12-subtons", label: "Color Fans" },
-  { href: "/guias", label: "Dossiers" },
+  { href: "/shop", label: "Shop" },
+  { href: "/color-fans", label: "Color Fans" },
+  { href: "/dossiers", label: "Dossiers" },
   { href: "/partnership", label: "Partnership" },
   { href: "/reviews", label: "Reviews" },
 ];
@@ -154,7 +154,7 @@ export default function Nav() {
               <IconSearch />
             </span>
             {/* perfil só no desktop — no mobile a conta fica no menu hambúrguer */}
-            <Link href="/conta" aria-label="My account" className="hidden transition-opacity hover:opacity-70 md:block">
+            <Link href="/account" aria-label="My account" className="hidden transition-opacity hover:opacity-70 md:block">
               <IconUser />
             </Link>
             <button
@@ -210,7 +210,7 @@ export default function Nav() {
             </Link>
           ))}
           <Link
-            href="/conta"
+            href="/account"
             onClick={() => setMenuOpen(false)}
             className="py-4 font-display text-xl text-ink"
           >

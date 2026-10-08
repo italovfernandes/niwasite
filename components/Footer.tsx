@@ -44,13 +44,13 @@ export default function Footer() {
             <ul className="mt-4 space-y-2.5 text-sm text-paper/75">
               {COLLECTIONS.map((c) => (
                 <li key={c.id}>
-                  <Link href={`/loja?c=${c.id}`} className="u-link hover:text-paper">
+                  <Link href={`/shop?c=${c.id}`} className="u-link hover:text-paper">
                     {c.name}
                   </Link>
                 </li>
               ))}
               <li>
-                <Link href="/loja" className="u-link hover:text-paper">
+                <Link href="/shop" className="u-link hover:text-paper">
                   View all
                 </Link>
               </li>
@@ -60,7 +60,7 @@ export default function Footer() {
             <p className="u-eyebrow !text-paper/50">Niwa</p>
             <ul className="mt-4 space-y-2.5 text-sm text-paper/75">
               <li>
-                <Link href="/sobre" className="u-link hover:text-paper">
+                <Link href="/about" className="u-link hover:text-paper">
                   About Niwa
                 </Link>
               </li>
@@ -76,7 +76,7 @@ export default function Footer() {
             <ul className="mt-4 space-y-2.5 text-sm text-paper/75">
               <li>
                 <Link
-                  href="/atendimento/envios"
+                  href="/support/shipping"
                   className="u-link hover:text-paper"
                 >
                   Shipping & delivery
@@ -84,7 +84,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/atendimento/trocas"
+                  href="/support/returns"
                   className="u-link hover:text-paper"
                 >
                   Exchanges & returns
@@ -92,7 +92,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/atendimento/contato"
+                  href="/support/accountct"
                   className="u-link hover:text-paper"
                 >
                   Talk to Niwa
@@ -144,8 +144,16 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 border-t border-paper/15 pt-6 text-[0.7rem] uppercase tracking-[0.18em] text-paper/45 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 border-t border-paper/15 pt-6 text-[0.7rem] uppercase tracking-[0.18em] text-paper/45 sm:flex-row sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} Niwa · Personal Color House</span>
+          <div className="flex items-center gap-5">
+            <Link href="/privacy" className="u-link hover:text-paper">
+              Privacy
+            </Link>
+            <Link href="/terms" className="u-link hover:text-paper">
+              Terms
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

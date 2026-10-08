@@ -109,7 +109,7 @@ export default function BuscaPage() {
             explore the whole shop.
           </p>
           <Link
-            href="/loja"
+            href="/shop"
             className="group mt-6 inline-flex items-center gap-2.5 rounded-xs bg-marsala px-8 py-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-paper transition-[background-color,transform] duration-300 hover:bg-marsala-deep active:scale-[0.98]"
           >
             View the shop

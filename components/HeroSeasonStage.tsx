@@ -46,7 +46,7 @@ const SLIDES = SEASON_ORDER.map((id) => {
     video: `/estacoes/${s.id}.mp4`,
     poster: `/estacoes/${s.id}.jpg`,
     phrase: PHRASES[s.id],
-    href: `/loja?c=ferramentas`,
+    href: `/shop?c=ferramentas`,
   };
 });
 
@@ -138,7 +138,7 @@ function HeroHeadline() {
         Color fans and style dossiers to elevate your self-esteem.
       </p>
       <Link
-        href="/loja"
+        href="/shop"
         className="mt-8 inline-block rounded-xs bg-marsala px-8 py-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-paper transition-colors hover:bg-marsala-deep"
       >
         View the fans

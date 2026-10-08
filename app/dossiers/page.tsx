@@ -203,7 +203,7 @@ export default function GuiasPage() {
               <em className="font-light italic u-accent">listen to your heart.</em>
             </h2>
             <Link
-              href="/loja?c=guias"
+              href="/shop?c=guias"
               className="mt-10 inline-block rounded-xs bg-paper px-10 py-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-marsala transition-colors hover:bg-[#C295D9] hover:text-plum"
             >
               Buy my dossier

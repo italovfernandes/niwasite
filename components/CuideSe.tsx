@@ -57,7 +57,7 @@ export default function CuideSe() {
           know yourself.
         </p>
         <Link
-          href="/loja?c=guias"
+          href="/shop?c=guias"
           className="mt-7 inline-block rounded-xs bg-paper px-8 py-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-marsala transition-colors hover:bg-marsala hover:text-white"
         >
           Learn more

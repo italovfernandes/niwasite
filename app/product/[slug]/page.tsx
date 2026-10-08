@@ -6,12 +6,13 @@ import Reveal from "@/components/Reveal";
 import ProductArt from "@/components/ProductArt";
 import ProductCard from "@/components/ProductCard";
 import AddToCartButton from "@/components/AddToCartButton";
+import SignatureSelector from "@/components/SignatureSelector";
 import CartelasLanding from "@/components/backup/CartelasLandingBackup";
 import {
   PRODUCTS,
-  SEASONS,
   collectionById,
   formatBRL,
+  isSoldOut,
   productBySlug,
   seasonById,
 } from "@/lib/catalog";
@@ -21,7 +22,7 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata(
-  props: PageProps<"/produto/[slug]">
+  props: PageProps<"/product/[slug]">
 ): Promise<Metadata> {
   const { slug } = await props.params;
   const product = productBySlug(slug);
@@ -29,7 +30,7 @@ export async function generateMetadata(
   return { title: product.name, description: product.excerpt };
 }
 
-export default async function ProductPage(props: PageProps<"/produto/[slug]">) {
+export default async function ProductPage(props: PageProps<"/product/[slug]">) {
   const { slug } = await props.params;
   const product = productBySlug(slug);
   if (!product) notFound();
@@ -40,11 +41,6 @@ export default async function ProductPage(props: PageProps<"/produto/[slug]">) {
   const collection = collectionById(product.collection);
   // cartela individual → mostra as 3 cartelas da sua estação (irmãs)
   const season = product.season ? seasonById(product.season) : undefined;
-  // combo com todas as cartelas → mostra todas as cartelas das 4 estações
-  const isComboCartelas =
-    product.slug === "complete-collection" ||
-    product.slug === "cartela-sazonal-12-subtons";
-  const allCartelas = SEASONS.flatMap((s) => s.cartelas);
   const related = PRODUCTS.filter(
     (p) => p.collection === product.collection && p.slug !== product.slug
   ).slice(0, 4);
@@ -69,12 +65,12 @@ export default async function ProductPage(props: PageProps<"/produto/[slug]">) {
         <div className="flex items-center px-6 py-14 md:min-h-screen md:px-14 lg:px-24">
           <div className="w-full max-w-md">
             <nav className="flex items-center gap-2 text-[0.58rem] uppercase tracking-[0.2em] text-ink-mute">
-              <Link href="/loja" className="u-link hover:text-ink">
+              <Link href="/shop" className="u-link hover:text-ink">
                 Shop
               </Link>
               <span>/</span>
               <Link
-                href={`/loja?c=${collection.id}`}
+                href={`/shop?c=${collection.id}`}
                 className="u-link hover:text-ink"
               >
                 {collection.name}
@@ -104,6 +100,10 @@ export default async function ProductPage(props: PageProps<"/produto/[slug]">) {
               {product.excerpt}
             </p>
 
+            {product.slug === "signature" ? (
+              <SignatureSelector product={product} />
+            ) : (
+             <>
             {/* cartelas — só quando o produto é sobre cartelas (estação ou combo) */}
             {season ? (
               <div className="mt-6">
@@ -113,14 +113,20 @@ export default async function ProductPage(props: PageProps<"/produto/[slug]">) {
                 <div className="mt-2.5 flex flex-wrap gap-2">
                   {season.cartelas.map((c) => {
                     const current = c.slug === product.slug;
+                    const sold = isSoldOut(c.slug);
                     return (
                       <Link
                         key={c.slug}
-                        href={`/produto/${c.slug}`}
-                        title={c.name}
+                        href={`/product/${c.slug}`}
+                        title={sold ? `${c.name} — sold out` : c.name}
                         aria-current={current ? "page" : undefined}
-                        className={`relative aspect-square w-16 overflow-hidden rounded-md ring-1 transition-[transform,box-shadow] hover:-translate-y-0.5 ${
-                          current ? "ring-2 ring-marsala" : "ring-line hover:ring-ink"
+                        aria-label={sold ? `${c.name} — sold out` : undefined}
+                        className={`relative block aspect-square w-16 overflow-hidden rounded-md transition-transform hover:-translate-y-0.5 ${
+                          sold
+                            ? "border-2 border-dashed border-ink-mute/45"
+                            : current
+                              ? "ring-2 ring-marsala"
+                              : "ring-1 ring-line hover:ring-ink"
                         }`}
                       >
                         <Image
@@ -128,46 +134,43 @@ export default async function ProductPage(props: PageProps<"/produto/[slug]">) {
                           alt={c.name}
                           fill
                           sizes="64px"
-                          className="object-cover"
+                          className={`object-cover ${
+                            sold ? "opacity-45 saturate-0" : ""
+                          }`}
                         />
+                        {sold && (
+                          <span
+                            aria-hidden
+                            className="absolute inset-0 bg-paper/45"
+                          />
+                        )}
                       </Link>
                     );
                   })}
                 </div>
               </div>
-            ) : isComboCartelas ? (
-              <div className="mt-6">
-                <p className="text-[0.56rem] uppercase tracking-[0.24em] text-ink-mute">
-                  The color fans included
-                </p>
-                <div className="mt-2.5 flex flex-wrap gap-2">
-                  {allCartelas.map((c) => (
-                    <Link
-                      key={c.slug}
-                      href={`/produto/${c.slug}`}
-                      title={c.name}
-                      className="relative aspect-square w-14 overflow-hidden rounded-md ring-1 ring-line transition-[transform,box-shadow] hover:-translate-y-0.5 hover:ring-ink"
-                    >
-                      <Image
-                        src={c.src}
-                        alt={c.name}
-                        fill
-                        sizes="56px"
-                        className="object-cover"
-                      />
-                    </Link>
-                  ))}
-                </div>
-              </div>
             ) : null}
 
             {/* CTA */}
-            <div className="mt-8">
-              <AddToCartButton product={product} className="w-full" />
-              <p className="mt-3 text-[0.58rem] uppercase tracking-[0.18em] text-ink-mute">
-                Shipping calculated at checkout
-              </p>
-            </div>
+            {product.soldOut ? (
+              <div className="mt-8 flex items-center gap-3 rounded-sm border border-line bg-paper-deep/60 px-4 py-4">
+                <span className="shrink-0 rounded-full bg-ink px-2.5 py-1 text-[0.5rem] font-medium uppercase tracking-[0.16em] text-paper">
+                  Sold out
+                </span>
+                <p className="text-sm text-ink-soft">
+                  This color fan is currently unavailable.
+                </p>
+              </div>
+            ) : (
+              <div className="mt-8">
+                <AddToCartButton product={product} className="w-full" />
+                <p className="mt-3 text-[0.58rem] uppercase tracking-[0.18em] text-ink-mute">
+                  Shipping calculated at checkout
+                </p>
+              </div>
+            )}
+             </>
+            )}
 
             {/* detalhes — accordions enxutos */}
             <div className="mt-9">

@@ -124,7 +124,7 @@ export default function TresPassos() {
           className="absolute left-1/2 top-[68%] -translate-x-1/2"
         >
           <Link
-            href="/loja"
+            href="/shop"
             className="inline-block rounded-xs bg-paper px-7 py-3.5 text-[0.68rem] font-medium uppercase tracking-[0.22em] text-marsala transition-colors hover:bg-marsala hover:text-paper"
           >
             Learn more

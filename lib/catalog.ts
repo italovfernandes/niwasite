@@ -46,6 +46,7 @@ export interface Product {
   season?: SeasonId;
   landing?: "cartelas"; // when set, its PDP renders the rich Cartelas landing
   image?: string; // override do art padrão (/capas/{slug}.jpg)
+  soldOut?: boolean; // esgotado — desabilita a compra e mostra o selo
   excerpt: string;
   description: string[];
   features: string[];
@@ -227,6 +228,12 @@ const CARTELA_EXCERPTS: Record<string, string> = {
   "cartela-deep-winter": "Deep, dramatic Winter — intense, vibrant darks.",
 };
 
+// slugs atualmente esgotados (demo do estado "sold out")
+const SOLD_OUT = new Set<string>(["cartela-deep-winter"]);
+
+// consulta pública do estado "sold out" por slug (usada pelos seletores de cartela)
+export const isSoldOut = (slug: string): boolean => SOLD_OUT.has(slug);
+
 // 12 cartelas individuais — geradas a partir das 3 cartelas de cada estação.
 // Cada uma tem slug/PDP próprio e capa em /capas/{slug}.jpg
 const CARTELA_PRODUCTS: Product[] = SEASONS.flatMap((season) =>
@@ -237,6 +244,7 @@ const CARTELA_PRODUCTS: Product[] = SEASONS.flatMap((season) =>
     format: "Physical" as const,
     price: CARTELA_PRICE,
     season: season.id,
+    soldOut: SOLD_OUT.has(c.slug),
     excerpt: CARTELA_EXCERPTS[c.slug] ?? `A color fan from the ${season.name} season.`,
     description: [
       CARTELA_EXCERPTS[c.slug] ?? "",
@@ -284,7 +292,6 @@ export const PRODUCTS: Product[] = [
     format: "Physical",
     price: 599.88,
     badge: "Best seller",
-    landing: "cartelas",
     excerpt:
       "The 12 color fans of all four seasons together — the entire Niwa color language in a single set.",
     description: [

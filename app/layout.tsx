@@ -6,6 +6,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CartDrawer from "@/components/CartDrawer";
 import BackToTop from "@/components/BackToTop";
+import EmailPopup from "@/components/EmailPopup";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -45,6 +46,7 @@ export default function RootLayout({
           <Footer />
           <CartDrawer />
           <BackToTop />
+          <EmailPopup />
         </CartProvider>
       </body>
     </html>

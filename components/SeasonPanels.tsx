@@ -127,7 +127,7 @@ export default function SeasonPanels() {
                       {season.cartelas.map((c) => (
                         <Link
                           key={c.slug}
-                          href={`/produto/${c.slug}`}
+                          href={`/product/${c.slug}`}
                           title={c.name}
                           className="relative aspect-square w-20 overflow-hidden rounded-md ring-1 ring-white/25 transition-transform hover:-translate-y-0.5 hover:ring-white/70 sm:w-24"
                         >
@@ -148,7 +148,7 @@ export default function SeasonPanels() {
               {/* ação — botão primário, permanece no rodapé mesmo com o hover expandido */}
               <div className="mt-6">
                 <Link
-                  href="/loja?c=ferramentas"
+                  href="/shop?c=ferramentas"
                   className="inline-block rounded-xs bg-paper px-6 py-3 text-[0.6rem] font-medium uppercase tracking-[0.22em] text-marsala transition-colors hover:bg-marsala hover:text-paper"
                 >
                   View the fans

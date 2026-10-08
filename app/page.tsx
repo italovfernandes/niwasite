@@ -54,7 +54,7 @@ export default function Home() {
               doubt a color again.
             </p>
             <Link
-              href="/produto/cartela-sazonal-12-subtons"
+              href="/color-fans"
               className="mt-9 inline-block rounded-xs bg-paper px-9 py-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-marsala transition-colors hover:bg-marsala hover:text-paper"
             >
               Discover

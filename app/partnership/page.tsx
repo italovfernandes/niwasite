@@ -150,7 +150,7 @@ export default function PartnershipPage() {
                     {o.retorno}
                   </p>
                   <Link
-                    href="/atendimento/contato"
+                    href="/support/accountct"
                     className={`mt-7 inline-block rounded-xs px-8 py-3.5 text-[0.68rem] font-medium uppercase tracking-[0.22em] transition-colors ${
                       o.destaque
                         ? "bg-paper text-marsala hover:bg-[#C295D9] hover:text-plum"

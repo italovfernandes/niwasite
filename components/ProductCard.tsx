@@ -36,40 +36,63 @@ function CheckIcon() {
   );
 }
 
+function MiniSpinner() {
+  return (
+    <span
+      aria-hidden
+      className="inline-block h-[18px] w-[18px] animate-spin rounded-full border-2 border-ink-mute/30 border-t-marsala"
+    />
+  );
+}
+
 export default function ProductCard({ product }: { product: Product }) {
   const { add } = useCart();
-  const [added, setAdded] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "added">("idle");
+  const soldOut = product.soldOut;
 
   function handleAdd() {
-    add(
-      {
-        slug: product.slug,
-        name: product.name,
-        price: product.price,
-        format: product.format,
-      },
-      1
-    );
-    setAdded(true);
-    window.setTimeout(() => setAdded(false), 1400);
+    if (soldOut || status !== "idle") return;
+    setStatus("loading");
+    window.setTimeout(() => {
+      add(
+        {
+          slug: product.slug,
+          name: product.name,
+          price: product.price,
+          format: product.format,
+        },
+        1
+      );
+      setStatus("added");
+      window.setTimeout(() => setStatus("idle"), 1400);
+    }, 500);
   }
 
   return (
     <article className="group flex flex-col">
       <Link
-        href={`/produto/${product.slug}`}
+        href={`/product/${product.slug}`}
         className="relative block aspect-[4/5] overflow-hidden focus-visible:outline-marsala"
       >
-        <div className="absolute inset-0 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]">
+        <div
+          className={`absolute inset-0 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03] ${
+            soldOut ? "opacity-70 grayscale-[0.25]" : ""
+          }`}
+        >
           <ProductArt product={product} className="h-full w-full" />
         </div>
+        {soldOut && (
+          <span className="absolute left-3 top-3 rounded-full bg-paper/95 px-3 py-1 text-[0.52rem] font-medium uppercase tracking-[0.2em] text-ink">
+            Sold out
+          </span>
+        )}
       </Link>
 
       <div className="mt-3 flex items-start justify-between gap-3">
         <div className="min-w-0">
           <h3 className="text-[0.8rem] leading-snug text-ink">
             <Link
-              href={`/produto/${product.slug}`}
+              href={`/product/${product.slug}`}
               className="u-link decoration-transparent"
             >
               {product.name}
@@ -85,18 +108,35 @@ export default function ProductCard({ product }: { product: Product }) {
           </p>
         </div>
 
-        <button
-          type="button"
-          onClick={handleAdd}
-          aria-label={`Add ${product.name} to cart`}
-          className={`shrink-0 pt-0.5 transition-[color,transform] duration-300 ease-out hover:-translate-y-0.5 active:scale-90 ${
-            added ? "text-marsala" : "text-ink-soft hover:text-marsala"
-          }`}
-        >
-          <span className={added ? "anim-pop inline-block" : "inline-block"}>
-            {added ? <CheckIcon /> : <BagPlusIcon />}
+        {soldOut ? (
+          <span
+            className="shrink-0 pt-0.5 text-[0.52rem] font-medium uppercase tracking-[0.16em] text-ink-mute"
+            aria-label={`${product.name} is sold out`}
+          >
+            Sold out
           </span>
-        </button>
+        ) : (
+          <button
+            type="button"
+            onClick={handleAdd}
+            disabled={status !== "idle"}
+            aria-busy={status === "loading"}
+            aria-label={`Add ${product.name} to cart`}
+            className={`shrink-0 pt-0.5 transition-[color,transform] duration-300 ease-out hover:-translate-y-0.5 active:scale-90 disabled:cursor-wait ${
+              status === "added" ? "text-marsala" : "text-ink-soft hover:text-marsala"
+            }`}
+          >
+            <span className={status === "added" ? "anim-pop inline-block" : "inline-block"}>
+              {status === "loading" ? (
+                <MiniSpinner />
+              ) : status === "added" ? (
+                <CheckIcon />
+              ) : (
+                <BagPlusIcon />
+              )}
+            </span>
+          </button>
+        )}
       </div>
     </article>
   );

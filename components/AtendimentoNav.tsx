@@ -4,9 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const TABS = [
-  { href: "/atendimento/envios", label: "Shipping and timelines" },
-  { href: "/atendimento/trocas", label: "Returns and refunds" },
-  { href: "/atendimento/contato", label: "Talk to Niwa" },
+  { href: "/support/shipping", label: "Shipping and timelines" },
+  { href: "/support/returns", label: "Returns and refunds" },
+  { href: "/support/accountct", label: "Talk to Niwa" },
 ];
 
 export default function AtendimentoNav() {

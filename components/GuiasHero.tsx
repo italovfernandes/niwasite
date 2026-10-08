@@ -45,7 +45,7 @@ function HeroContent({
             live alongside your color fan.
           </p>
           <Link
-            href="/loja?c=guias"
+            href="/shop?c=guias"
             className="group mt-9 inline-flex items-center gap-2.5 rounded-xs bg-paper px-8 py-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-marsala transition-colors hover:bg-[#C295D9] hover:text-plum"
           >
             I want my dossier

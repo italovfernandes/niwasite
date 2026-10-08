@@ -97,7 +97,7 @@ export default function GuiaEstilo() {
           </div>
 
           <Link
-            href="/guias"
+            href="/dossiers"
             className="group mt-11 inline-flex items-center gap-2.5 rounded-xs bg-paper px-7 py-4 text-sm font-medium text-marsala transition-colors hover:bg-marsala hover:text-paper"
           >
             Discover our dossiers
